@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx45ltpnar43i"]
+
+[ext_resource type="Script" path="res://actors/player/player.gd" id="1_d7vyd"]
+[ext_resource type="Texture2D" uid="uid://dnlacnllav5i" path="res://assets/textures/chunk.png" id="2_oyfec"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
+size = Vector2(22, 31)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_d7vyd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_oyfec")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_aya8m")
