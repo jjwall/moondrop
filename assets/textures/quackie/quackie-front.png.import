@@ -2,20 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<< HEAD
-uid="uid://bu4l1xqmu06iw"
-=======
-uid="uid://heo2nlkg2t4a"
->>>>>>> d27bf98 (quackie)
-path="res://.godot/imported/quackie-angles.png-fb7a98b84c166f617ac27b1e5e201376.ctex"
+uid="uid://bd8isatamuie2"
+path="res://.godot/imported/quackie-front.png-b4098c7ad04f52fed4105ba4aadc8868.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/quackie-angles.png"
-dest_files=["res://.godot/imported/quackie-angles.png-fb7a98b84c166f617ac27b1e5e201376.ctex"]
+source_file="res://assets/textures/quackie/quackie-front.png"
+dest_files=["res://.godot/imported/quackie-front.png-b4098c7ad04f52fed4105ba4aadc8868.ctex"]
 
 [params]
 
