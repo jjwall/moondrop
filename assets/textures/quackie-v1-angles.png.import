@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwcp5m2eb0c8i"
-path="res://.godot/imported/quackie-angles.png-fb7a98b84c166f617ac27b1e5e201376.ctex"
+uid="uid://bg2yo1kaejwxq"
+path="res://.godot/imported/quackie-v1-angles.png-ab0a194f9d0878d600c9ddf883ecab3e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/quackie-angles.png"
-dest_files=["res://.godot/imported/quackie-angles.png-fb7a98b84c166f617ac27b1e5e201376.ctex"]
+source_file="res://assets/textures/quackie-v1-angles.png"
+dest_files=["res://.godot/imported/quackie-v1-angles.png-ab0a194f9d0878d600c9ddf883ecab3e.ctex"]
 
 [params]
 
