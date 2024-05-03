@@ -9,27 +9,33 @@ func _ready():
 	_goto("idle_front")
 
 func _always_process(_delta):
-	pass
-
-func _always_physics_process(delta):
 	if Input.is_action_just_pressed("ui_left"):
 		_goto("walk_left")
-	elif Input.is_action_just_pressed("ui_right"):
+	if Input.is_action_just_released("ui_left"):
+		_goto("idle_left")
+	if Input.is_action_just_pressed("ui_right"):
 		_goto("walk_right")
-	elif Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_just_released("ui_right"):
+		_goto("idle_right")
+	if Input.is_action_just_pressed("ui_down"):
 		_goto("walk_front")
-	elif Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_released("ui_down"):
+		_goto("idle_front")
+	if Input.is_action_just_pressed("ui_up"):
 		_goto("walk_back")
+	if Input.is_action_just_released("ui_up"):
+		_goto("idle_back")
 	#else:
 		#move_toward(velocity.x, 0, SPEED)
-		
+
+func _always_physics_process(delta):		
 	velocity += direction * SPEED
 	
 	move_and_slide()
 
 #region State idle_front
 func _state_idle_front_enter():
-	print("hi")
+	direction = Vector2(0, 0)
 	anim.play("idle_front")
 
 #func _state_idle_front_process(_delta):
@@ -46,7 +52,13 @@ func _state_idle_front_enter():
 func _state_walk_front_enter():
 	direction = Vector2(0, 1)
 	anim.play("walk_front")
-	#endregion
+#endregion
+
+#region State idle_back
+func _state_idle_back_enter():
+	direction = Vector2(0, 0)
+	anim.play("idle_back")
+#endregion
 
 #region State walk_back
 func _state_walk_back_enter():
@@ -54,11 +66,25 @@ func _state_walk_back_enter():
 	anim.play("walk_back")
 #endregion
 
+#region State idle_right
+func _state_idle_right_enter():
+	direction = Vector2(0, 0)
+	anim.play("idle_side")
+	anim.flip_h = true
+#endregion
+
 #region State walk_right
 func _state_walk_right_enter():
 	direction = Vector2(1, 0)
 	anim.play("walk_side")
 	anim.flip_h = true
+#endregion
+
+#region State idle_left
+func _state_idle_left_enter():
+	direction = Vector2(0, 0)
+	anim.play("idle_side")
+	anim.flip_h = false
 #endregion
 
 #region State walk_left
