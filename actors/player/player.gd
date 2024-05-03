@@ -2,106 +2,83 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 var anim: AnimatedSprite2D
-var direction = Vector2(0, 0)
+var direction := Vector2.ZERO
+var prev_direction := Vector2(0, 1)
 
 func _ready():
 	anim = $AnimatedSprite2D
-	_goto("idle_front")
+	_goto("idle")
 
 func _always_process(_delta):
-	if Input.is_action_just_pressed("ui_left"):
-		_goto("walk_left")
-	#if Input.is_action_just_released("ui_left"):
-		#_goto("idle_left")
-	if Input.is_action_just_pressed("ui_right"):
-		_goto("walk_right")
-	#if Input.is_action_just_released("ui_right"):
-		#_goto("idle_right")
-	if Input.is_action_just_pressed("ui_down"):
-		_goto("walk_front")
-	#if Input.is_action_just_released("ui_down"):
-		#_goto("idle_front")
-	if Input.is_action_just_pressed("ui_up"):
-		_goto("walk_back")
-	#if Input.is_action_just_released("ui_up"):
-		#_goto("idle_back")
-	#else:
-		#move_toward(velocity.x, 0, SPEED)
+	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
+	
+	if direction == Vector2(0,0):
+		_goto("idle")
+	else:
+		_goto("walk")
 
-func _always_physics_process(_delta):		
-	var direction := Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
+func _always_physics_process(_delta):
 	velocity = direction * SPEED
 	
 	move_and_slide()
 
-#region State idle_front
-func _state_idle_front_enter():
-	direction = Vector2(0, 0)
-	anim.play("idle_front")
+#region State idle
+func _state_idle_enter():
+	match prev_direction:
+		Vector2.DOWN:
+			anim.play("idle_front")
+		Vector2.UP:
+			anim.play("idle_back")
+		Vector2.RIGHT:
+			anim.play("idle_side")
+		Vector2.LEFT:
+			anim.play("idle_side")
+		Vector2(-1, 1):
+			anim.play("idle_side")
+		Vector2(1, 1):
+			anim.play("idle_side")
+		Vector2(-1, -1):
+			anim.play("idle_side")
+		Vector2(1, -1):
+			anim.play("idle_side")
 
-#func _state_idle_front_process(_delta):
-	#print("hellooo")
-##
-#func _state_idle_front_physics_process(_delta):
-	#print("hiiiii")
-#
-#func _state_idle_front_exit():
-	#print("helloooo")
+func _state_idle_process(_delta):
+	pass
+
+func _state_idle_physics_process(_delta):
+	pass
+
+func _state_idle_exit():
+	pass
 #endregion
 
-#region State walk_front
-func _state_walk_front_enter():
-	anim.play("walk_front")
+#region State walk
+func _state_walk_enter():
+	match direction:
+		Vector2.DOWN:
+			anim.play("walk_front")
+		Vector2.UP:
+			anim.play("walk_back")
+		Vector2.RIGHT:
+			anim.play("walk_side")
+			anim.flip_h = true
+		Vector2.LEFT:
+			anim.play("walk_side")
+			anim.flip_h = false
+		Vector2(-1, 1):
+			anim.play("walk_side")
+			anim.flip_h = false
+		Vector2(1, 1):
+			anim.play("walk_side")
+			anim.flip_h = true
+		Vector2(-1, -1):
+			anim.play("walk_side")
+			anim.flip_h = false
+		Vector2(1, -1):
+			anim.play("walk_side")
+			anim.flip_h = true
 	
-func _state_walk_front_process(_delta):
-	if Input.is_action_just_released("ui_down") and (not Input.is_action_pressed("ui_left") or not Input.is_action_pressed("ui_right")):
-		_goto("idle_front")
-#endregion
-
-#region State idle_back
-func _state_idle_back_enter():
-	anim.play("idle_back")
-#endregion
-
-#region State walk_back
-func _state_walk_back_enter():
-	anim.play("walk_back")
-
-func _state_walk_back_process(_delta):
-	if Input.is_action_just_released("ui_up") and (not Input.is_action_pressed("ui_left") or not Input.is_action_pressed("ui_right")):
-		_goto("idle_back")
-#endregion
-
-#region State idle_right
-func _state_idle_right_enter():
-	anim.play("idle_side")
-	anim.flip_h = true
-#endregion
-
-#region State walk_right
-func _state_walk_right_enter():
-	anim.play("walk_side")
-	anim.flip_h = true
-
-func _state_walk_right_process(_delta):
-	if Input.is_action_just_released("ui_right") and (not Input.is_action_pressed("ui_up") or not Input.is_action_pressed("ui_down")):
-		_goto("idle_right")
-#endregion
-
-#region State idle_left
-func _state_idle_left_enter():
-	anim.play("idle_side")
-	anim.flip_h = false
-#endregion
-
-#region State walk_left
-func _state_walk_left_enter():
-	anim.play("walk_side")
-	anim.flip_h = false
-
-func _state_walk_left_process(_delta):
-	if Input.is_action_just_released("ui_left") and (not Input.is_action_pressed("ui_up") or not Input.is_action_pressed("ui_down")):
-		_goto("idle_left")
+	prev_direction = direction
 #endregion
 
 #region State machine core
