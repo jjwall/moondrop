@@ -2,35 +2,24 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 var anim: AnimatedSprite2D
+var direction = Vector2(0, 0)
 
 func _ready():
 	anim = $AnimatedSprite2D
 	_goto("idle_front")
-	print("HEEEEYHY")
 
 func _always_process(_delta):
 	pass
 
 func _always_physics_process(delta):
-	var direction = Vector2(0, 0)
 	if Input.is_action_just_pressed("ui_left"):
-		direction = Vector2(-1, 0)
-		anim.play("walk_side")
-		anim.flip_h = false
-		#_goto("walk_front")
+		_goto("walk_left")
 	elif Input.is_action_just_pressed("ui_right"):
-		direction = Vector2(1, 0)
-		anim.play("walk_side")
-		anim.flip_h = true
-		#_goto("walk_side")
+		_goto("walk_right")
 	elif Input.is_action_just_pressed("ui_down"):
-		direction = Vector2(0, 1)
-		anim.play("walk_front")
-		#_goto("walk_front")
+		_goto("walk_front")
 	elif Input.is_action_just_pressed("ui_up"):
-		direction = Vector2(0, -1)
-		anim.play("walk_back")
-		#_goto("walk_back")
+		_goto("walk_back")
 	#else:
 		#move_toward(velocity.x, 0, SPEED)
 		
@@ -43,31 +32,41 @@ func _state_idle_front_enter():
 	print("hi")
 	anim.play("idle_front")
 
-func _state_idle_front_process(_delta):
-	print("hellooo")
+#func _state_idle_front_process(_delta):
+	#print("hellooo")
+##
+#func _state_idle_front_physics_process(_delta):
+	#print("hiiiii")
 #
-func _state_idle_front_physics_process(_delta):
-	print("hiiiii")
-
-func _state_idle_front_exit():
-	print("helloooo")
-	#endregion
+#func _state_idle_front_exit():
+	#print("helloooo")
+#endregion
 
 #region State walk_front
 func _state_walk_front_enter():
-	print("hello???")
+	direction = Vector2(0, 1)
 	anim.play("walk_front")
-
-#func _state_idle_front_process(delta):
-	#print("hellooo")
-#
-#func _state_idle_physics_process(delta):
-	#print("hiiiii")
-
-#func _state_idle_exit():
-	#print("helloooo")
 	#endregion
 
+#region State walk_back
+func _state_walk_back_enter():
+	direction = Vector2(0, -1)
+	anim.play("walk_back")
+#endregion
+
+#region State walk_right
+func _state_walk_right_enter():
+	direction = Vector2(1, 0)
+	anim.play("walk_side")
+	anim.flip_h = true
+#endregion
+
+#region State walk_left
+func _state_walk_left_enter():
+	direction = Vector2(-1, 0)
+	anim.play("walk_side")
+	anim.flip_h = false
+#endregion
 
 #region State machine core
 # do not touch please
@@ -77,23 +76,23 @@ func __opt_func(n: StringName) -> Callable:
 	return Callable(self, n) if self.has_method(n) else Callable()
 func _add_state(state_name: String) -> void:
 	_states[state_name] = {
-		process = __opt_func("_state" + state_name + "_process"),
-		physics_process = __opt_func("_state" + state_name + "_physics_process"),
-		enter = __opt_func("_state" + state_name + "_enter"),
-		exit = __opt_func("_state" + state_name + "_exit") }
-	if _states[state_name].values().count(Callable()) < 4:
+		process = __opt_func("_state_" + state_name + "_process"),
+		physics_process = __opt_func("_state_" + state_name + "_physics_process"),
+		enter = __opt_func("_state_" + state_name + "_enter"),
+		exit = __opt_func("_state_" + state_name + "_exit") }
+	if _states[state_name].values().count(Callable()) == 4:
 		push_warning("State %s has no state functions! Typo?" % [state_name])
 		breakpoint
 func _goto(state_name: StringName) -> void:
-	if _current_state and _states[_current_state].exit: _states[_current_state].exit()
+	if _current_state and _states[_current_state].get("exit", Callable()): _states[_current_state].exit.call()
 	_current_state = state_name
 	if not _current_state: return
 	if not _current_state in _states: _add_state(_current_state)
-	if _current_state and _states[_current_state].enter: _states[_current_state].enter()
+	if _current_state and _states[_current_state].get("enter", Callable()): _states[_current_state].enter.call()
 func _process(delta: float) -> void:
 	if &"_always_process" in self: (self as Variant)._always_process(delta)
-	if _current_state and _states[_current_state].process: _states[_current_state].process(delta)
+	if _current_state and _states[_current_state].get("process", Callable()): _states[_current_state].process.call(delta)
 func _physics_process(delta: float) -> void:
 	if &"_always_physics_process" in self: (self as Variant)._always_physics_process(delta)
-	if _current_state and _states[_current_state].process: _states[_current_state].physics_process(delta)
+	if _current_state and _states[_current_state].get("physics_process", Callable()): _states[_current_state].physics_process.call(delta)
 #endregion
