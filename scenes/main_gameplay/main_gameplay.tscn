@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3rvm3rw6opg"]
+[gd_scene load_steps=9 format=3 uid="uid://c3rvm3rw6opg"]
 
 [ext_resource type="Script" path="res://node_types/camera_shake.gd" id="1_lrklj"]
 [ext_resource type="Script" path="res://scenes/main_gameplay/main_gameplay.gd" id="1_wt4mr"]
+[ext_resource type="PackedScene" uid="uid://c6vum4bb8ihji" path="res://objects/map/map.tscn" id="2_8k160"]
 [ext_resource type="PackedScene" uid="uid://cx45ltpnar43i" path="res://actors/player/player.tscn" id="3_j1nau"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fenso"]
@@ -35,6 +36,10 @@ shape = SubResource("WorldBoundaryShape2D_6mfka")
 [node name="BottomWall" type="CollisionShape2D" parent="Walls"]
 position = Vector2(486, 719)
 shape = SubResource("WorldBoundaryShape2D_4kntg")
+
+[node name="Map" parent="Walls" instance=ExtResource("2_8k160")]
+position = Vector2(480, 359)
+scale = Vector2(3, 3)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(480, 360)
