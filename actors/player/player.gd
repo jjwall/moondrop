@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED = 150.0
 var anim: AnimatedSprite2D
 var direction := Vector2.ZERO
 var prev_direction := Vector2(0, 1)
@@ -26,21 +26,21 @@ func _always_physics_process(_delta):
 func _state_idle_enter():
 	match prev_direction:
 		Vector2.DOWN:
-			anim.play("idle_front")
+			anim.play("idle_south")
 		Vector2.UP:
-			anim.play("idle_back")
+			anim.play("idle_north")
 		Vector2.RIGHT:
-			anim.play("idle_side")
+			anim.play("idle_east")
 		Vector2.LEFT:
-			anim.play("idle_side")
+			anim.play("idle_west")
 		Vector2(-1, 1):
-			anim.play("idle_side")
+			anim.play("idle_southwest")
 		Vector2(1, 1):
-			anim.play("idle_side")
+			anim.play("idle_southeast")
 		Vector2(-1, -1):
-			anim.play("idle_side")
+			anim.play("idle_northwest")
 		Vector2(1, -1):
-			anim.play("idle_side")
+			anim.play("idle_northeast")
 
 func _state_idle_process(_delta):
 	pass
@@ -56,27 +56,21 @@ func _state_idle_exit():
 func _state_walk_enter():
 	match direction:
 		Vector2.DOWN:
-			anim.play("walk_front")
+			anim.play("walk_south")
 		Vector2.UP:
-			anim.play("walk_back")
+			anim.play("walk_north")
 		Vector2.RIGHT:
-			anim.play("walk_side")
-			anim.flip_h = true
+			anim.play("walk_east")
 		Vector2.LEFT:
-			anim.play("walk_side")
-			anim.flip_h = false
+			anim.play("walk_west")
 		Vector2(-1, 1):
-			anim.play("walk_side")
-			anim.flip_h = false
+			anim.play("walk_southwest")
 		Vector2(1, 1):
-			anim.play("walk_side")
-			anim.flip_h = true
+			anim.play("walk_southeast")
 		Vector2(-1, -1):
-			anim.play("walk_side")
-			anim.flip_h = false
+			anim.play("walk_northwest")
 		Vector2(1, -1):
-			anim.play("walk_side")
-			anim.flip_h = true
+			anim.play("walk_northeast")
 	
 	prev_direction = direction
 #endregion
