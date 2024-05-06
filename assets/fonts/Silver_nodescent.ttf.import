@@ -3,18 +3,19 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dv4y6a2mw7r2y"
-path="res://.godot/imported/Silver_nodescent.ttf-de90d4c3abc6a27af49fcc8209b9b5fa.fontdata"
+path="res://.godot/imported/Silver_nodescent.ttf-0126ab0c6e3e95fd8e6a8d9afaee6a5c.fontdata"
 
 [deps]
 
-source_file="res://fonts/Silver_nodescent.ttf"
-dest_files=["res://.godot/imported/Silver_nodescent.ttf-de90d4c3abc6a27af49fcc8209b9b5fa.fontdata"]
+source_file="res://assets/fonts/Silver_nodescent.ttf"
+dest_files=["res://.godot/imported/Silver_nodescent.ttf-0126ab0c6e3e95fd8e6a8d9afaee6a5c.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=0
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

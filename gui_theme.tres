@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://cy6gwsvlnrel7"]
 
-[ext_resource type="FontFile" uid="uid://dv4y6a2mw7r2y" path="res://fonts/Silver_nodescent.ttf" id="1_pi0t0"]
+[ext_resource type="FontFile" uid="uid://dv4y6a2mw7r2y" path="res://assets/fonts/Silver_nodescent.ttf" id="1_pi0t0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_js7gm"]
 content_margin_left = 20.0
