@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://node_types/camera_shake.gd" id="1_lrklj"]
 [ext_resource type="Script" path="res://scenes/main_gameplay/main_gameplay.gd" id="1_wt4mr"]
-[ext_resource type="PackedScene" uid="uid://c6vum4bb8ihji" path="res://objects/map/map.tscn" id="2_8k160"]
+[ext_resource type="PackedScene" uid="uid://bje3v5otj2v6d" path="res://objects/maps/b_island/b_island.tscn" id="2_klphv"]
 [ext_resource type="PackedScene" uid="uid://cx45ltpnar43i" path="res://actors/player/player.tscn" id="3_j1nau"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fenso"]
@@ -18,6 +18,10 @@ normal = Vector2(0, 1)
 
 [node name="MainGameplay" type="Node2D"]
 script = ExtResource("1_wt4mr")
+
+[node name="BIsland" parent="." instance=ExtResource("2_klphv")]
+position = Vector2(483, 363)
+scale = Vector2(3, 3)
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
@@ -36,10 +40,6 @@ shape = SubResource("WorldBoundaryShape2D_6mfka")
 [node name="BottomWall" type="CollisionShape2D" parent="Walls"]
 position = Vector2(486, 719)
 shape = SubResource("WorldBoundaryShape2D_4kntg")
-
-[node name="Map" parent="Walls" instance=ExtResource("2_8k160")]
-position = Vector2(480, 359)
-scale = Vector2(3, 3)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(480, 360)

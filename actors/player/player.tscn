@@ -380,4 +380,4 @@ shape = SubResource("RectangleShape2D_aya8m")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mt824")
 animation = &"walk_west"
-frame_progress = 0.15539
+frame_progress = 0.415607
