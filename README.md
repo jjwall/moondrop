@@ -4,7 +4,7 @@ Apples' Godot Jam Template
 This project template is designed to get a jam game project up and running as quickly as possible.
 It includes several commonly-implemented scripts and tweaked project settings.
 
-Quick Overview
+Quick Overview (Nice!)
 --------------
 
 > [!NOTE]
