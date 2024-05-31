@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3rvm3rw6opg"]
+[gd_scene load_steps=11 format=3 uid="uid://c3rvm3rw6opg"]
 
 [ext_resource type="Script" path="res://node_types/camera_shake.gd" id="1_lrklj"]
 [ext_resource type="Script" path="res://scenes/main_gameplay/main_gameplay.gd" id="1_wt4mr"]
 [ext_resource type="PackedScene" uid="uid://bje3v5otj2v6d" path="res://objects/maps/b_island/b_island.tscn" id="2_klphv"]
 [ext_resource type="PackedScene" uid="uid://c2bmfu7agagkx" path="res://objects/water/water.scn" id="2_up2o6"]
 [ext_resource type="PackedScene" uid="uid://cx45ltpnar43i" path="res://actors/player/player.tscn" id="3_j1nau"]
+[ext_resource type="PackedScene" uid="uid://bc0pfq7sj6k7e" path="res://actors/fish/fish.tscn" id="5_llcp5"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fenso"]
 normal = Vector2(1, 0)
@@ -49,6 +50,9 @@ position = Vector2(480, 360)
 
 [node name="CameraShake" type="Node" parent="Camera2D"]
 script = ExtResource("1_lrklj")
+
+[node name="Fish" parent="." instance=ExtResource("5_llcp5")]
+position = Vector2(86, 65)
 
 [node name="Player" parent="." instance=ExtResource("3_j1nau")]
 position = Vector2(480, 354)
