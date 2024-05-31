@@ -52,7 +52,7 @@ position = Vector2(480, 360)
 script = ExtResource("1_lrklj")
 
 [node name="Fish" parent="." instance=ExtResource("5_llcp5")]
-position = Vector2(86, 65)
+position = Vector2(249, 652)
 
 [node name="Player" parent="." instance=ExtResource("3_j1nau")]
 position = Vector2(480, 354)

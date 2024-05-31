@@ -7,6 +7,7 @@
 size = Vector2(9, 4.5)
 
 [node name="Fish" type="RigidBody2D"]
+rotation = 1.5708
 gravity_scale = 0.0
 script = ExtResource("1_lna4b")
 

@@ -1,10 +1,38 @@
-[gd_scene load_steps=45 format=3 uid="uid://cx45ltpnar43i"]
+[gd_scene load_steps=52 format=3 uid="uid://cx45ltpnar43i"]
 
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
 size = Vector2(15.6667, 9.91667)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fphvf"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(0, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18crt"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(64, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql7kr"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(128, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18yt6"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(192, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl3v7"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(256, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7f7pv"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(320, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mgwo"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(384, 576, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j0d8e"]
 atlas = ExtResource("2_tov0l")
@@ -168,6 +196,32 @@ region = Rect2(192, 192, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mt824"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fphvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18crt")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ql7kr")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_18yt6")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_dl3v7")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_7f7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mgwo")
+}],
+"loop": false,
+"name": &"fish_south",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j0d8e")
@@ -379,5 +433,7 @@ shape = SubResource("RectangleShape2D_aya8m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mt824")
-animation = &"walk_west"
-frame_progress = 0.446774
+animation = &"fish_south"
+autoplay = "fish_south"
+frame = 6
+frame_progress = 1.0

@@ -31,7 +31,8 @@ layout_mode = 2
 [node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/Title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 72
-text = "Moondrop Grottos"
+text = "Pelican Island
+"
 
 [node name="MenuButtonContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
