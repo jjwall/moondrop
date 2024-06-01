@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="2_o45ge"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/delayer.gd" id="2_t5ak3"]
 [ext_resource type="PackedScene" uid="uid://blxl5x2ecie1v" path="res://ai/actions/rotate_action.tscn" id="3_cdi3n"]
-[ext_resource type="PackedScene" uid="uid://bplft160al6ja" path="res://ai/actions/pick_pos.tscn" id="3_idxc8"]
+[ext_resource type="PackedScene" uid="uid://bplft160al6ja" path="res://ai/actions/pick_pos_action.tscn" id="3_idxc8"]
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@38261")
+blackboard = NodePath("@Node@40130")
 actor = NodePath("..")
 
 [node name="DelayDecorator" type="Node" parent="."]
@@ -18,6 +18,6 @@ wait_time = 3.0
 [node name="SequenceComposite" type="Node" parent="DelayDecorator"]
 script = ExtResource("2_o45ge")
 
-[node name="PickPos" parent="DelayDecorator/SequenceComposite" instance=ExtResource("3_idxc8")]
+[node name="PickPosAction" parent="DelayDecorator/SequenceComposite" instance=ExtResource("3_idxc8")]
 
 [node name="RotateAction" parent="DelayDecorator/SequenceComposite" instance=ExtResource("3_cdi3n")]
