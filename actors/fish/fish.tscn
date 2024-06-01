@@ -5,10 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://drekughywf4mx" path="res://actors/fish/fish_behavior.tscn" id="3_e1k38"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfym0"]
-size = Vector2(9, 4.5)
+size = Vector2(3, 9)
 
 [node name="Fish" type="RigidBody2D"]
-rotation = 1.5708
 gravity_scale = 0.0
 script = ExtResource("1_lna4b")
 
@@ -18,9 +17,9 @@ scale = Vector2(3, 3)
 texture = ExtResource("1_7ijxi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -24.75)
+position = Vector2(24.5, 1.5)
 shape = SubResource("RectangleShape2D_qfym0")
 
 [node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_e1k38")]
-blackboard = NodePath("@Node@37578")
+blackboard = NodePath("@Node@43869")
 actor = NodePath("..")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfesb221558ph"]
+
+[ext_resource type="Script" path="res://ai/actions/move_pos_action.gd" id="1_wjklw"]
+
+[node name="MovePosAction" type="Node"]
+script = ExtResource("1_wjklw")
