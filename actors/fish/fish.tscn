@@ -1,25 +1,30 @@
 [gd_scene load_steps=5 format=3 uid="uid://bc0pfq7sj6k7e"]
 
 [ext_resource type="Texture2D" uid="uid://d3lw0luf7013e" path="res://assets/textures/fish/fishshadow1.png" id="1_7ijxi"]
-[ext_resource type="Script" path="res://actors/fish/fish.gd" id="1_lna4b"]
 [ext_resource type="PackedScene" uid="uid://drekughywf4mx" path="res://actors/fish/fish_behavior.tscn" id="3_e1k38"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfym0"]
 size = Vector2(3, 9)
 
-[node name="Fish" type="RigidBody2D"]
-gravity_scale = 0.0
-script = ExtResource("1_lna4b")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2tsx"]
+size = Vector2(24, 21)
+
+[node name="Fish" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 0)
 scale = Vector2(3, 3)
 texture = ExtResource("1_7ijxi")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="MouthHitBox" type="CollisionShape2D" parent="."]
 position = Vector2(24.5, 1.5)
 shape = SubResource("RectangleShape2D_qfym0")
+debug_color = Color(0.294207, 0.620864, 0.300171, 0.42)
 
 [node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_e1k38")]
-blackboard = NodePath("@Node@43869")
-actor = NodePath("..")
+blackboard = NodePath("@Node@51052")
+actor = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 1.5)
+shape = SubResource("RectangleShape2D_v2tsx")
