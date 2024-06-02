@@ -2,7 +2,7 @@ extends ActionLeaf
 
 @export var radius: float = 75
 
-func tick(actor, blackboard):
+func tick(actor: Node, blackboard: Blackboard) -> int:
 	var new_pos = get_random_pos_within_radius(actor.position.x, actor.position.y, radius)
 	var new_angle = get_angle_between_positions(actor.position, new_pos)
 	blackboard.set_value("new_pos", new_pos)

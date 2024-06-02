@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc0pfq7sj6k7e"]
+[gd_scene load_steps=6 format=3 uid="uid://bc0pfq7sj6k7e"]
 
 [ext_resource type="Texture2D" uid="uid://d3lw0luf7013e" path="res://assets/textures/fish/fishshadow1.png" id="1_7ijxi"]
 [ext_resource type="PackedScene" uid="uid://drekughywf4mx" path="res://actors/fish/fish_behavior.tscn" id="3_e1k38"]
@@ -9,7 +9,14 @@ size = Vector2(3, 9)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v2tsx"]
 size = Vector2(24, 21)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hrfi2"]
+radius = 35.0
+
 [node name="Fish" type="CharacterBody2D"]
+
+[node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_e1k38")]
+blackboard = NodePath("@Node@21201")
+actor = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 0)
@@ -21,10 +28,13 @@ position = Vector2(24.5, 1.5)
 shape = SubResource("RectangleShape2D_qfym0")
 debug_color = Color(0.294207, 0.620864, 0.300171, 0.42)
 
-[node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_e1k38")]
-blackboard = NodePath("@Node@17497")
-actor = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BodyHitBox" type="CollisionShape2D" parent="."]
 position = Vector2(5, 1.5)
 shape = SubResource("RectangleShape2D_v2tsx")
+
+[node name="LureSeekingRadius" type="Area2D" parent="."]
+position = Vector2(58, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LureSeekingRadius"]
+shape = SubResource("CircleShape2D_hrfi2")
+debug_color = Color(0.866717, 0.342489, 0.248447, 0.42)

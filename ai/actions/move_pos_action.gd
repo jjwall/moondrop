@@ -2,7 +2,7 @@ extends ActionLeaf
 
 @export var move_speed = 75
 
-func tick(actor, blackboard):
+func tick(actor: Node, blackboard: Blackboard) -> int:
 	var target_pos = blackboard.get_value("new_pos")
 	var delta = get_physics_process_delta_time()
 	
