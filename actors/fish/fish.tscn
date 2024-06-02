@@ -22,8 +22,8 @@ shape = SubResource("RectangleShape2D_qfym0")
 debug_color = Color(0.294207, 0.620864, 0.300171, 0.42)
 
 [node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_e1k38")]
-blackboard = NodePath("@Node@51052")
-actor = NodePath("")
+blackboard = NodePath("@Node@17497")
+actor = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, 1.5)

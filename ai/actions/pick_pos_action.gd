@@ -1,6 +1,6 @@
 extends ActionLeaf
 
-@export var radius: float = 50
+@export var radius: float = 75
 
 func tick(actor, blackboard):
 	var new_pos = get_random_pos_within_radius(actor.position.x, actor.position.y, radius)

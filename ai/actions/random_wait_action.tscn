@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://v65e6r038e2d"]
+
+[ext_resource type="Script" path="res://ai/actions/random_wait_action.gd" id="1_gd5em"]
+
+[node name="RandomWaitAction" type="Node"]
+script = ExtResource("1_gd5em")

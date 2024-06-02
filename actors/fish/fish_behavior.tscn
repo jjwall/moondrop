@@ -1,31 +1,37 @@
-[gd_scene load_steps=8 format=3 uid="uid://drekughywf4mx"]
+[gd_scene load_steps=9 format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="2_o45ge"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/delayer.gd" id="2_t5ak3"]
 [ext_resource type="PackedScene" uid="uid://blxl5x2ecie1v" path="res://ai/actions/rotate_action.tscn" id="3_cdi3n"]
 [ext_resource type="PackedScene" uid="uid://bplft160al6ja" path="res://ai/actions/pick_pos_action.tscn" id="3_idxc8"]
+[ext_resource type="PackedScene" uid="uid://v65e6r038e2d" path="res://ai/actions/random_wait_action.tscn" id="4_pc2f7"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="6_8kapi"]
 [ext_resource type="PackedScene" uid="uid://bfesb221558ph" path="res://ai/actions/move_pos_action.tscn" id="6_revx4"]
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@56005")
+blackboard = NodePath("@Node@19087")
 actor = NodePath("..")
 
-[node name="DelayDecorator" type="Node" parent="."]
-script = ExtResource("2_t5ak3")
-wait_time = 3.0
+[node name="SelectorReactiveComposite" type="Node" parent="."]
+script = ExtResource("2_aj8pj")
 
-[node name="SequenceComposite" type="Node" parent="DelayDecorator"]
+[node name="WanderSequence" type="Node" parent="SelectorReactiveComposite"]
 script = ExtResource("2_o45ge")
 
-[node name="PickPosAction" parent="DelayDecorator/SequenceComposite" instance=ExtResource("3_idxc8")]
+[node name="RandomWaitAction" parent="SelectorReactiveComposite/WanderSequence" instance=ExtResource("4_pc2f7")]
 
-[node name="RotateAction" parent="DelayDecorator/SequenceComposite" instance=ExtResource("3_cdi3n")]
+[node name="PickPosAction" parent="SelectorReactiveComposite/WanderSequence" instance=ExtResource("3_idxc8")]
 
-[node name="TimeLimiterDecorator" type="Node" parent="DelayDecorator/SequenceComposite"]
+[node name="RotateAction" parent="SelectorReactiveComposite/WanderSequence" instance=ExtResource("3_cdi3n")]
+
+[node name="RandomWaitAction2" parent="SelectorReactiveComposite/WanderSequence" instance=ExtResource("4_pc2f7")]
+min_wait_time = 0.0
+max_wait_time = 2.0
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence"]
 script = ExtResource("6_8kapi")
-wait_time = 4.0
+wait_time = 2.0
 
-[node name="MovePosAction" parent="DelayDecorator/SequenceComposite/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+[node name="MovePosAction" parent="SelectorReactiveComposite/WanderSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
