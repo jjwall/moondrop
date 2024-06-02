@@ -13,8 +13,8 @@
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@32498")
-actor = NodePath("")
+blackboard = NodePath("@Node@74509")
+actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
 script = ExtResource("2_aj8pj")
@@ -24,7 +24,10 @@ script = ExtResource("3_vtv8s")
 
 [node name="DetectLureAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("4_6jbqm")]
 
-[node name="DetectLureAction2" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("4_6jbqm")]
+[node name="RotateAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("3_cdi3n")]
+
+[node name="MovePosAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("6_revx4")]
+acceptance_radius = 28
 
 [node name="WanderSequence" type="Node" parent="SelectorReactiveComposite"]
 script = ExtResource("2_o45ge")

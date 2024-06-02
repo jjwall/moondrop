@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://06ws025jp3p2"]
+
+[ext_resource type="Texture2D" uid="uid://b0k5y83hj40f5" path="res://assets/textures/objects/lure.png" id="1_qi8ce"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0jrn"]
+radius = 6.08276
+
+[node name="Lure" type="CharacterBody2D" groups=["Lures"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_qi8ce")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r0jrn")
