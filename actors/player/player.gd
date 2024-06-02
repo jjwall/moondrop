@@ -5,30 +5,53 @@ var anim: AnimatedSprite2D
 var direction := Vector2.ZERO
 var prev_direction := Vector2(0, 1)
 
+var lure_scene = preload("res://objects/lure/lure.tscn")
+var lure = null
+
 func _ready():
 	anim = $AnimatedSprite2D
 	_goto("idle")
 
 func _always_process(_delta):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		_goto("fish")
-	
-	if direction == Vector2(0,0) and _current_state != "fish":
-		_goto("idle")
-	else:
-		_goto("walk")
 
 func _always_physics_process(_delta):
 	velocity = direction * SPEED
 	
 	move_and_slide()
+	
+func cast_lure():
+	if lure != null:
+		lure.queue_free()
+		lure == null
+	
+	var new_lure = lure_scene.instantiate()
+	var lure_pos = self.global_position
+	lure_pos += prev_direction * 150
+	new_lure.set_position(lure_pos)
+	print(new_lure)
+	self.get_parent().add_child(new_lure)
+
+	lure = new_lure
 
 #region State fish
 func _state_fish_enter():
 	# match direction ...
 	anim.play("fish_south")
+	
+	cast_lure()
+
+func _state_fish_process(_delta):
+	if direction != Vector2(0,0):
+		_goto("walk")
+
+func _state_fish_physics_process(_delta):
+	pass
+
+func _state_fish_exit():
+	if lure != null:
+		lure.queue_free()
+		lure = null
 
 #region State idle
 func _state_idle_enter():
@@ -51,7 +74,10 @@ func _state_idle_enter():
 			anim.play("idle_northeast")
 
 func _state_idle_process(_delta):
-	pass
+	if Input.is_action_just_pressed("ui_accept"):
+		_goto("fish")
+	elif direction != Vector2(0,0):
+		_goto("walk")
 
 func _state_idle_physics_process(_delta):
 	pass
@@ -62,25 +88,39 @@ func _state_idle_exit():
 
 #region State walk
 func _state_walk_enter():
-	match direction:
-		Vector2.DOWN:
-			anim.play("walk_south")
-		Vector2.UP:
-			anim.play("walk_north")
-		Vector2.RIGHT:
-			anim.play("walk_east")
-		Vector2.LEFT:
-			anim.play("walk_west")
-		Vector2(-1, 1):
-			anim.play("walk_southwest")
-		Vector2(1, 1):
-			anim.play("walk_southeast")
-		Vector2(-1, -1):
-			anim.play("walk_northwest")
-		Vector2(1, -1):
-			anim.play("walk_northeast")
+	pass
+
+func _state_walk_process(_delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		_goto("fish")
+	elif direction == Vector2(0,0):
+		_goto("idle")
+	else:
+		match direction:
+			Vector2.DOWN:
+				anim.play("walk_south")
+			Vector2.UP:
+				anim.play("walk_north")
+			Vector2.RIGHT:
+				anim.play("walk_east")
+			Vector2.LEFT:
+				anim.play("walk_west")
+			Vector2(-1, 1):
+				anim.play("walk_southwest")
+			Vector2(1, 1):
+				anim.play("walk_southeast")
+			Vector2(-1, -1):
+				anim.play("walk_northwest")
+			Vector2(1, -1):
+				anim.play("walk_northeast")
 	
-	prev_direction = direction
+		prev_direction = direction
+
+func _state_walk_physics_process(_delta):
+	pass
+
+func _state_walk_exit():
+	pass
 #endregion
 
 #region State machine core
