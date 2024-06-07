@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://drekughywf4mx"]
+[gd_scene load_steps=12 format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
@@ -10,11 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://v65e6r038e2d" path="res://ai/actions/random_wait_action.tscn" id="4_pc2f7"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="6_8kapi"]
 [ext_resource type="PackedScene" uid="uid://bfesb221558ph" path="res://ai/actions/move_pos_action.tscn" id="6_revx4"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/repeater.gd" id="7_pc5pj"]
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@74509")
-actor = NodePath("..")
+blackboard = NodePath("@Node@17490")
+actor = NodePath("")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
 script = ExtResource("2_aj8pj")
@@ -28,6 +29,12 @@ script = ExtResource("3_vtv8s")
 
 [node name="MovePosAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("6_revx4")]
 acceptance_radius = 28
+
+[node name="RepeaterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence"]
+script = ExtResource("7_pc5pj")
+
+[node name="NiblingSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/RepeaterDecorator"]
+script = ExtResource("2_o45ge")
 
 [node name="WanderSequence" type="Node" parent="SelectorReactiveComposite"]
 script = ExtResource("2_o45ge")

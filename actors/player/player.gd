@@ -91,9 +91,7 @@ func _state_walk_enter():
 	pass
 
 func _state_walk_process(_delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		_goto("fish")
-	elif direction == Vector2(0,0):
+	if direction == Vector2(0,0):
 		_goto("idle")
 	else:
 		match direction:
