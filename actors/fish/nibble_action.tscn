@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://breiu2uh870cp"]
+
+[ext_resource type="Script" path="res://actors/fish/nibble_action.gd" id="1_kufve"]
+
+[node name="NibbleAction" type="Node2D"]
+script = ExtResource("1_kufve")

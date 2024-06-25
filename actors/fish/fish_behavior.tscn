@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://drekughywf4mx"]
+[gd_scene load_steps=14 format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
@@ -10,12 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://v65e6r038e2d" path="res://ai/actions/random_wait_action.tscn" id="4_pc2f7"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="6_8kapi"]
 [ext_resource type="PackedScene" uid="uid://bfesb221558ph" path="res://ai/actions/move_pos_action.tscn" id="6_revx4"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/repeater.gd" id="7_pc5pj"]
+[ext_resource type="PackedScene" uid="uid://b1gdlx47kn2fj" path="res://ai/decorators/random_repeater_decorator.tscn" id="7_loq4j"]
+[ext_resource type="PackedScene" uid="uid://breiu2uh870cp" path="res://actors/fish/nibble_action.tscn" id="9_k4oex"]
+[ext_resource type="PackedScene" uid="uid://d4i1lvtw0l3a5" path="res://actors/fish/bite_action.tscn" id="11_wkedo"]
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@17490")
-actor = NodePath("")
+blackboard = NodePath("@Node@40748")
+actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
 script = ExtResource("2_aj8pj")
@@ -30,11 +32,16 @@ script = ExtResource("3_vtv8s")
 [node name="MovePosAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("6_revx4")]
 acceptance_radius = 28
 
-[node name="RepeaterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence"]
-script = ExtResource("7_pc5pj")
+[node name="RandomRepeaterDecorator" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("7_loq4j")]
 
-[node name="NiblingSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/RepeaterDecorator"]
+[node name="NibblingSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/RandomRepeaterDecorator"]
 script = ExtResource("2_o45ge")
+
+[node name="NibbleAction" parent="SelectorReactiveComposite/SeekLureSequence/RandomRepeaterDecorator/NibblingSequence" instance=ExtResource("9_k4oex")]
+
+[node name="RandomWaitAction" parent="SelectorReactiveComposite/SeekLureSequence/RandomRepeaterDecorator/NibblingSequence" instance=ExtResource("4_pc2f7")]
+
+[node name="BiteAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("11_wkedo")]
 
 [node name="WanderSequence" type="Node" parent="SelectorReactiveComposite"]
 script = ExtResource("2_o45ge")
