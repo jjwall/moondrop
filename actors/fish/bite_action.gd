@@ -2,8 +2,9 @@ extends ActionLeaf
 
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
-	actor.queue_free()
-	return SUCCESS
+	print("bite!!!")
+	#actor.queue_free()
+	return RUNNING
 	#if blackboard.get_value("detected_lure", null) == null:
 		#return FAILURE
 	#else:
