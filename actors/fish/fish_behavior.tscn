@@ -11,8 +11,8 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="6_8kapi"]
 [ext_resource type="PackedScene" uid="uid://bfesb221558ph" path="res://ai/actions/move_to_pos_action.tscn" id="6_revx4"]
 [ext_resource type="PackedScene" uid="uid://b1gdlx47kn2fj" path="res://ai/decorators/random_repeater_decorator.tscn" id="7_loq4j"]
-[ext_resource type="PackedScene" uid="uid://breiu2uh870cp" path="res://actors/fish/nibble_action.tscn" id="9_k4oex"]
 [ext_resource type="PackedScene" uid="uid://dx8j6jvq3fqhg" path="res://actors/fish/check_lure_action.tscn" id="10_w1t08"]
+[ext_resource type="PackedScene" uid="uid://breiu2uh870cp" path="res://ai/actions/move_away_from_pos_action.tscn" id="11_un5y5"]
 [ext_resource type="PackedScene" uid="uid://d4i1lvtw0l3a5" path="res://actors/fish/bite_action.tscn" id="11_wkedo"]
 [ext_resource type="PackedScene" uid="uid://dhq0v12rleu0g" path="res://ai/actions/fade_out_action.tscn" id="12_bigfc"]
 [ext_resource type="PackedScene" uid="uid://xj54lny7jrdl" path="res://ai/actions/rotate_180_action.tscn" id="12_gub5k"]
@@ -21,8 +21,8 @@
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@20407")
-actor = NodePath("")
+blackboard = NodePath("@Node@21346")
+actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
 script = ExtResource("2_aj8pj")
@@ -54,7 +54,7 @@ script = ExtResource("2_o45ge")
 
 [node name="CheckLureAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/NibblingSequence" instance=ExtResource("10_w1t08")]
 
-[node name="NibbleAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/NibblingSequence" instance=ExtResource("9_k4oex")]
+[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/NibblingSequence" instance=ExtResource("11_un5y5")]
 
 [node name="CheckLureAction2" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/NibblingSequence" instance=ExtResource("10_w1t08")]
 

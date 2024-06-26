@@ -12,14 +12,10 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	var direction = (target_pos - actor.position).normalized() * -1
 	var distance_to_target = actor.position.distance_to(target_pos)
 	actor.velocity = move_speed * direction
-	
-	#if blackboard.get_value("lure_objects").size() == 0:
-		#return FAILURE
 
 	# Move away from the target
 	if distance_to_target < acceptance_radius:
 		actor.move_and_slide()
 		return RUNNING
 	else:
-		#actor.velocity = Vector2.ZERO
 		return SUCCESS
