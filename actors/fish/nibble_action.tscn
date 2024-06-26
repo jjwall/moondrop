@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://actors/fish/nibble_action.gd" id="1_kufve"]
 
-[node name="NibbleAction" type="Node2D"]
+[node name="NibbleAction" type="Node"]
 script = ExtResource("1_kufve")
