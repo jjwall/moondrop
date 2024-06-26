@@ -2,7 +2,7 @@
 ## When the number of maximum ticks is reached, it will return a `SUCCESS` status code.
 ## If the child returns `FAILURE`, the repeater will return `FAILURE` immediately.
 @tool
-@icon("../../icons/repeater.svg")
+@icon("../../addons/beehave/icons/repeater.svg")
 
 class_name RandomRepeaterDecorator extends Decorator
 

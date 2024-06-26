@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3plwryv53hpx"]
+
+[ext_resource type="Script" path="res://actors/fish/check_lure_decorator.gd" id="1_11xyd"]
+
+[node name="CheckLureDecorator" type="Node"]
+script = ExtResource("1_11xyd")
