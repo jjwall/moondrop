@@ -1,6 +1,6 @@
 extends ActionLeaf
 
-
+# TODO: implement...
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	print("bite!!!")
 	#actor.queue_free()

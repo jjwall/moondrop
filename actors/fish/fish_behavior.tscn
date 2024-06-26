@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://drekughywf4mx"]
+[gd_scene load_steps=18 format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
@@ -14,11 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://breiu2uh870cp" path="res://actors/fish/nibble_action.tscn" id="9_k4oex"]
 [ext_resource type="PackedScene" uid="uid://d4i1lvtw0l3a5" path="res://actors/fish/bite_action.tscn" id="11_wkedo"]
 [ext_resource type="PackedScene" uid="uid://dhq0v12rleu0g" path="res://ai/actions/fade_out_action.tscn" id="12_bigfc"]
+[ext_resource type="PackedScene" uid="uid://xj54lny7jrdl" path="res://ai/actions/rotate_180_action.tscn" id="12_gub5k"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/simple_parallel.gd" id="13_ubyc7"]
+[ext_resource type="PackedScene" uid="uid://drc8t3buwmk8r" path="res://ai/actions/move_indefinitely_action.tscn" id="16_hslch"]
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@117372")
-actor = NodePath("")
+blackboard = NodePath("@Node@138373")
+actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
 script = ExtResource("2_aj8pj")
@@ -36,7 +39,11 @@ script = ExtResource("2_o45ge")
 
 [node name="RotateAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("3_cdi3n")]
 
-[node name="MovePosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("6_revx4")]
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
+script = ExtResource("6_8kapi")
+wait_time = 2.0
+
+[node name="MovePosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
 acceptance_radius = 28
 
 [node name="RandomRepeaterDecorator" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("7_loq4j")]
@@ -50,7 +57,11 @@ script = ExtResource("2_o45ge")
 min_wait_time = 0.0
 max_wait_time = 1.0
 
-[node name="MovePosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/NibblingSequence" instance=ExtResource("6_revx4")]
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/NibblingSequence"]
+script = ExtResource("6_8kapi")
+wait_time = 2.0
+
+[node name="MovePosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/NibblingSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
 acceptance_radius = 28
 
 [node name="BiteAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("11_wkedo")]
@@ -58,7 +69,15 @@ acceptance_radius = 28
 [node name="RunAwaySequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite"]
 script = ExtResource("2_o45ge")
 
-[node name="FadeOutAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("12_bigfc")]
+[node name="Rotate180Action" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("12_gub5k")]
+
+[node name="SimpleParallelComposite" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence"]
+script = ExtResource("13_ubyc7")
+
+[node name="MoveIndefinitelyAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence/SimpleParallelComposite" instance=ExtResource("16_hslch")]
+move_speed = 125
+
+[node name="FadeOutAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence/SimpleParallelComposite" instance=ExtResource("12_bigfc")]
 
 [node name="WanderSequence" type="Node" parent="SelectorReactiveComposite"]
 script = ExtResource("2_o45ge")

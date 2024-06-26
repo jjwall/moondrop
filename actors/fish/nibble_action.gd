@@ -3,6 +3,7 @@ extends ActionLeaf
 @export var move_speed = 25
 @export var acceptance_radius = 50
 
+# This action causes the actor to move away from a target pos (new_pos in blackboard).f
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var target_pos = blackboard.get_value("new_pos")
 	var delta = get_physics_process_delta_time()
@@ -22,19 +23,3 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	else:
 		#actor.velocity = Vector2.ZERO
 		return SUCCESS
-
-
-
-
-#func tick(actor: Node, blackboard: Blackboard) -> int:
-	#print("hello :D")
-	#return SUCCESS
-
-
-
-
-
-		#if blackboard.get_value("detected_lure", null) == null:
-			#var detected_lure = blackboard.get_value("lure_objects").pick_random()
-			#blackboard.set_value("detected_lure", detected_lure)
-			#blackboard.set_value("new_pos", detected_lure.global_position)
