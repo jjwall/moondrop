@@ -11,7 +11,7 @@ func get_random_pos_within_radius(pos_x: float, pos_y: float, radius: float) -> 
 	# Random angle in radians
 	var angle = randf() * PI * 2
 	# Random distance from the center within the radius
-	var distance = randf() * radius
+	var distance = randf_range(0.5, 1) * radius
 	# Calculate the new x and y positions
 	var random_x = pos_x + cos(angle) * distance
 	var random_y = pos_y + sin(angle) * distance
