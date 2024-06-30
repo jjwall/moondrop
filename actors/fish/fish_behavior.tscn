@@ -28,8 +28,8 @@
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@67444")
-actor = NodePath("..")
+blackboard = NodePath("@Node@69013")
+actor = NodePath("")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
 script = ExtResource("2_aj8pj")
@@ -45,6 +45,8 @@ script = ExtResource("3_8ydfy")
 [node name="AttemptBiteSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite"]
 script = ExtResource("2_o45ge")
 
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("22_epr68")]
+
 [node name="RotateAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("3_cdi3n")]
 
 [node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
@@ -59,6 +61,8 @@ acceptance_radius = 28
 [node name="Nibble" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator"]
 script = ExtResource("10_juh2t")
 
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble" instance=ExtResource("22_epr68")]
+
 [node name="CheckLureAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble" instance=ExtResource("10_uw7fl")]
 
 [node name="NibblingSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble"]
@@ -69,6 +73,8 @@ script = ExtResource("2_o45ge")
 [node name="RandomWaitAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("4_pc2f7")]
 min_wait_time = 0.0
 max_wait_time = 1.0
+
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("21_bbyls")]
 
 [node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence"]
 script = ExtResource("6_8kapi")
