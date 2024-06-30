@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var player_ref
 
 func play_bit_anim():
 	$AnimatedSprite2D.play("bit")

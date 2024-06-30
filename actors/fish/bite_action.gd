@@ -2,11 +2,14 @@ extends ActionLeaf
 
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
+	var lure = blackboard.get_value("detected_lure")
+	
 	if blackboard.get_value("lure_objects").size() == 0:
 		return FAILURE
 		
 	if Input.is_action_just_pressed("ui_accept"):
-		print("catch!!!")
+		if lure:
+			lure.player_ref._goto("reel")
 		return SUCCESS
 	else:
 		return RUNNING

@@ -18,7 +18,8 @@ func _always_process(_delta):
 func _always_physics_process(_delta):
 	velocity = direction * SPEED
 	
-	move_and_slide()
+	if _current_state != "reel":
+		move_and_slide()
 	
 func cast_lure():
 	if lure != null:
@@ -29,10 +30,15 @@ func cast_lure():
 	var lure_pos = self.global_position
 	lure_pos += prev_direction * 150
 	new_lure.set_position(lure_pos)
-	print(new_lure)
+	new_lure.player_ref = self
 	self.get_parent().add_child(new_lure)
 
 	lure = new_lure
+
+func remove_lure():
+	if lure != null:
+		lure.queue_free()
+		lure = null
 
 #region State fish
 func _state_fish_enter():
@@ -43,15 +49,32 @@ func _state_fish_enter():
 
 func _state_fish_process(_delta):
 	if direction != Vector2(0,0):
+		remove_lure()
 		_goto("walk")
 
 func _state_fish_physics_process(_delta):
 	pass
 
 func _state_fish_exit():
-	if lure != null:
-		lure.queue_free()
-		lure = null
+	pass
+
+#endregion
+
+#region State reel
+func _state_reel_enter():
+	# match direction ...
+	anim.play("reel_south")
+
+func _state_reel_process(_delta):
+	pass
+
+func _state_reel_physics_process(_delta):
+	pass
+
+func _state_reel_exit():
+	remove_lure()
+
+#endregion
 
 #region State idle
 func _state_idle_enter():

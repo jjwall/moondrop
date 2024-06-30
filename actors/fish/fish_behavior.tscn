@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://drekughywf4mx"]
+[gd_scene load_steps=30 format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
@@ -28,10 +28,11 @@
 [ext_resource type="PackedScene" uid="uid://cd7ll6kge7ijw" path="res://actors/fish/play_swim_fast_anim_action.tscn" id="21_bbyls"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="22_efvys"]
 [ext_resource type="PackedScene" uid="uid://dm7sea8xdkm42" path="res://actors/fish/play_swim_slow_anim_action.tscn" id="22_epr68"]
+[ext_resource type="PackedScene" uid="uid://qsbli4jqhao5" path="res://actors/fish/successful_catch_action.tscn" id="22_p77jx"]
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@110235")
+blackboard = NodePath("@Node@129933")
 actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
@@ -102,7 +103,16 @@ wait_time = 1.0
 
 [node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("21_bbyls")]
 
-[node name="StruggleAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("15_3f3g4")]
+[node name="TEMPORARY_AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
+script = ExtResource("22_efvys")
+
+[node name="TEMPORARY_TimeToStruggleDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TEMPORARY_AlwaysSucceedDecorator"]
+script = ExtResource("6_8kapi")
+wait_time = 2.0
+
+[node name="StruggleAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TEMPORARY_AlwaysSucceedDecorator/TEMPORARY_TimeToStruggleDecorator" instance=ExtResource("15_3f3g4")]
+
+[node name="SuccessfulCatchAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("22_p77jx")]
 
 [node name="RunAwaySequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite"]
 script = ExtResource("2_o45ge")
