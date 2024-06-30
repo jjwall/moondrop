@@ -1,9 +1,78 @@
-[gd_scene load_steps=8 format=3 uid="uid://bc0pfq7sj6k7e"]
+[gd_scene load_steps=17 format=3 uid="uid://bc0pfq7sj6k7e"]
 
-[ext_resource type="Texture2D" uid="uid://d3lw0luf7013e" path="res://assets/textures/fish/fishshadow1.png" id="1_7ijxi"]
 [ext_resource type="Script" path="res://actors/fish/fish.gd" id="1_wsogg"]
 [ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="2_ai5bb"]
 [ext_resource type="PackedScene" uid="uid://drekughywf4mx" path="res://actors/fish/fish_behavior.tscn" id="3_e1k38"]
+[ext_resource type="Texture2D" uid="uid://dehb7qo6gnhtn" path="res://assets/textures/fish/fishshadow-animated.png" id="4_4csm4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo7ck"]
+atlas = ExtResource("4_4csm4")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u72p1"]
+atlas = ExtResource("4_4csm4")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7hvm"]
+atlas = ExtResource("4_4csm4")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ld8d"]
+atlas = ExtResource("4_4csm4")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myxb7"]
+atlas = ExtResource("4_4csm4")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbu2s"]
+atlas = ExtResource("4_4csm4")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64qfr"]
+atlas = ExtResource("4_4csm4")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1kv0"]
+atlas = ExtResource("4_4csm4")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xpauj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo7ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u72p1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7hvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ld8d")
+}],
+"loop": true,
+"name": &"swim_fast",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myxb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbu2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64qfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1kv0")
+}],
+"loop": true,
+"name": &"swim_slow",
+"speed": 3.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfym0"]
 size = Vector2(3, 9)
@@ -24,10 +93,13 @@ script = ExtResource("2_ai5bb")
 blackboard = NodePath("../Blackboard")
 actor = NodePath("..")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-6, -1)
 scale = Vector2(3, 3)
-texture = ExtResource("1_7ijxi")
+sprite_frames = SubResource("SpriteFrames_xpauj")
+animation = &"swim_slow"
+autoplay = "swim_slow"
+frame_progress = 0.729708
 
 [node name="MouthHitBox" type="CollisionShape2D" parent="."]
 position = Vector2(19.5, 0.5)
