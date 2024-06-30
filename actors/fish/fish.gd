@@ -7,7 +7,6 @@ func _physics_process(_delta: float) -> void:
 	blackboard.set_value("lure_objects", bodies)
 
 func play_swim_slow_anim():
-	print("hello?")
 	$AnimatedSprite2D.play("swim_slow")
 	
 func play_swim_fast_anim():

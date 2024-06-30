@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf27b68hrflc1"]
+
+[ext_resource type="Script" path="res://actors/fish/struggle_action.gd" id="1_76fo8"]
+
+[node name="StruggleAction" type="Node"]
+script = ExtResource("1_76fo8")

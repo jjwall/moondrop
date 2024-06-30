@@ -5,8 +5,8 @@ extends ActionLeaf
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	print("bite!!!")
 	#actor.queue_free()
-	return RUNNING
-	#return SUCCESS
+	#return RUNNING
+	return SUCCESS
 	
 	#if blackboard.get_value("detected_lure", null) == null:
 		#return FAILURE
