@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://drekughywf4mx"]
+[gd_scene load_steps=25 format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
@@ -21,10 +21,13 @@
 [ext_resource type="PackedScene" uid="uid://drc8t3buwmk8r" path="res://ai/actions/move_indefinitely_action.tscn" id="16_hslch"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_random.gd" id="18_6oy5m"]
 [ext_resource type="PackedScene" uid="uid://d3lhbw66nb0ly" path="res://ai/actions/pick_pos_in_front_action.tscn" id="19_fuqww"]
+[ext_resource type="PackedScene" uid="uid://cd7ll6kge7ijw" path="res://actors/fish/play_swim_fast_anim_action.tscn" id="21_bbyls"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="22_efvys"]
+[ext_resource type="PackedScene" uid="uid://dm7sea8xdkm42" path="res://actors/fish/play_swim_slow_anim_action.tscn" id="22_epr68"]
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@52858")
+blackboard = NodePath("@Node@58291")
 actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
@@ -101,12 +104,19 @@ script = ExtResource("2_o45ge")
 
 [node name="PickPosInFrontAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("19_fuqww")]
 
-[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence"]
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("21_bbyls")]
+
+[node name="AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence"]
+script = ExtResource("22_efvys")
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/AlwaysSucceedDecorator"]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
 
-[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/AlwaysSucceedDecorator/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
 attack_target = false
+
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("22_epr68")]
 
 [node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("11_un5y5")]
 
@@ -125,12 +135,19 @@ max_wait_time = 5.0
 min_wait_time = 0.0
 max_wait_time = 2.0
 
-[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence"]
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("21_bbyls")]
+
+[node name="AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence"]
+script = ExtResource("22_efvys")
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/AlwaysSucceedDecorator"]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
 
-[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/AlwaysSucceedDecorator/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
 attack_target = false
+
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("22_epr68")]
 
 [node name="TimeLimiterDecorator2" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence"]
 script = ExtResource("6_8kapi")
