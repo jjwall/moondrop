@@ -1,6 +1,7 @@
 extends ActionLeaf
 
 # TODO: implement...
+# TODO: Study animal crossing fish behaviors for tracking movement.
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	print("bite!!!")
 	#actor.queue_free()

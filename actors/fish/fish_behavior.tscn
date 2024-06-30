@@ -24,7 +24,7 @@
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@32757")
+blackboard = NodePath("@Node@39430")
 actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
@@ -106,8 +106,7 @@ script = ExtResource("6_8kapi")
 wait_time = 2.0
 
 [node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
-move_speed = 50
-acceptance_radius = 20
+attack_target = false
 
 [node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("11_un5y5")]
 
@@ -131,5 +130,6 @@ script = ExtResource("6_8kapi")
 wait_time = 2.0
 
 [node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+attack_target = false
 
 [node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("11_un5y5")]
