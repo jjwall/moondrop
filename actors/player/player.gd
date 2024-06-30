@@ -55,7 +55,7 @@ func _state_fish_process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		if !lure.fish_hooked:
 			remove_lure()
-			_goto("idle")
+			_goto("idle") # TODO: add cancel cast animation
 
 func _state_fish_physics_process(_delta):
 	pass
