@@ -1,7 +1,7 @@
 extends ActionLeaf
 
 var angle = 0
-var follow_distance = 50
+var follow_distance = 35
 
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
@@ -13,7 +13,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	#if lure == null:
 		#return FAILURE
 		
-	angle += delta * 2.5
+	angle += delta * 4.5
 	actor.position = lure_pos + (Vector2.RIGHT).rotated(angle) * follow_distance
 	actor.look_at(lure_pos)
 	actor.rotation = actor.rotation - PI/2

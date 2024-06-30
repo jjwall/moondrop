@@ -28,8 +28,8 @@
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@64205")
-actor = NodePath("")
+blackboard = NodePath("@Node@67444")
+actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
 script = ExtResource("2_aj8pj")
@@ -78,6 +78,8 @@ wait_time = 2.0
 acceptance_radius = 28
 
 [node name="BiteAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("11_wkedo")]
+
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("21_bbyls")]
 
 [node name="StruggleAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("15_3f3g4")]
 
