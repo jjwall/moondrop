@@ -3,6 +3,8 @@ extends ActionLeaf
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var lure = blackboard.get_value("detected_lure")
+	if lure:
+		lure.fish_hooked = true
 	
 	if blackboard.get_value("lure_objects").size() == 0:
 		return FAILURE
