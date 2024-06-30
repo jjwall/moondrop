@@ -56,12 +56,12 @@ position = Vector2(649, 619)
 [node name="Fish3" parent="." instance=ExtResource("5_llcp5")]
 position = Vector2(118, 52)
 
+[node name="Fish4" parent="." instance=ExtResource("5_llcp5")]
+position = Vector2(691, 54)
+
 [node name="BIsland" parent="." instance=ExtResource("2_klphv")]
 position = Vector2(483, 363)
 scale = Vector2(3, 3)
-
-[node name="Fish4" parent="." instance=ExtResource("5_llcp5")]
-position = Vector2(691, 54)
 
 [node name="Player" parent="." instance=ExtResource("3_j1nau")]
 position = Vector2(480, 354)
