@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://drekughywf4mx"]
+[gd_scene load_steps=29 format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
@@ -19,8 +19,11 @@
 [ext_resource type="PackedScene" uid="uid://xj54lny7jrdl" path="res://ai/actions/rotate_180_action.tscn" id="12_gub5k"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/simple_parallel.gd" id="13_ubyc7"]
 [ext_resource type="PackedScene" uid="uid://cf27b68hrflc1" path="res://actors/fish/struggle_action.tscn" id="15_3f3g4"]
+[ext_resource type="PackedScene" uid="uid://bd0hc0nahnwtu" path="res://actors/fish/play_nibbled_lure_anim_action.tscn" id="16_4oace"]
+[ext_resource type="PackedScene" uid="uid://c2f5m5sa3hu1t" path="res://actors/fish/play_bite_lure_anim_action.tscn" id="16_6d1nn"]
 [ext_resource type="PackedScene" uid="uid://drc8t3buwmk8r" path="res://ai/actions/move_indefinitely_action.tscn" id="16_hslch"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_random.gd" id="18_6oy5m"]
+[ext_resource type="PackedScene" uid="uid://ipvdh8fvr8n7" path="res://actors/fish/play_catching_lure_anim_action.tscn" id="19_43dxp"]
 [ext_resource type="PackedScene" uid="uid://d3lhbw66nb0ly" path="res://ai/actions/pick_pos_in_front_action.tscn" id="19_fuqww"]
 [ext_resource type="PackedScene" uid="uid://cd7ll6kge7ijw" path="res://actors/fish/play_swim_fast_anim_action.tscn" id="21_bbyls"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="22_efvys"]
@@ -28,7 +31,7 @@
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@74690")
+blackboard = NodePath("@Node@110235")
 actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
@@ -56,6 +59,8 @@ wait_time = 2.0
 [node name="MoveToPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
 acceptance_radius = 28
 
+[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("16_4oace")]
+
 [node name="RandomRepeaterDecorator" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("7_loq4j")]
 
 [node name="Nibble" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator"]
@@ -76,6 +81,8 @@ max_wait_time = 1.0
 
 [node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("21_bbyls")]
 
+[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("16_4oace")]
+
 [node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence"]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
@@ -83,11 +90,15 @@ wait_time = 2.0
 [node name="MoveToPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
 acceptance_radius = 28
 
+[node name="PlayBiteLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("16_6d1nn")]
+
 [node name="TimeToCatchDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
 script = ExtResource("6_8kapi")
 wait_time = 1.0
 
 [node name="BiteAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TimeToCatchDecorator" instance=ExtResource("11_wkedo")]
+
+[node name="PlayCatchingLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("19_43dxp")]
 
 [node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("21_bbyls")]
 
@@ -95,6 +106,8 @@ wait_time = 1.0
 
 [node name="RunAwaySequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite"]
 script = ExtResource("2_o45ge")
+
+[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("16_4oace")]
 
 [node name="Rotate180Action" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("12_gub5k")]
 
