@@ -9,9 +9,9 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	if blackboard.get_value("lure_objects").size() == 0:
 		return FAILURE
 		
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept"): #TODO: decouple. This should happen in player script.
 		if lure:
-			lure.player_ref._goto("reel")
+			lure.player_ref._goto("reel") #TODO: decouple. This should happen in player script.
 		return SUCCESS
 	else:
 		return RUNNING

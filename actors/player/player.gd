@@ -10,7 +10,12 @@ var lure = null
 
 func _ready():
 	anim = $AnimatedSprite2D
+	anim.connect("animation_finished", Callable(self, "on_animation_finished"))
 	_goto("idle")
+
+func on_animation_finished():
+	if anim.animation == "cancel_cast_south": # or other directions
+		_goto("idle")
 
 func _always_process(_delta):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
@@ -55,7 +60,10 @@ func _state_fish_process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		if !lure.fish_hooked:
 			remove_lure()
-			_goto("idle") # TODO: add cancel cast animation
+			# match direction ...
+			anim.play("cancel_cast_south")
+			# Goes to idle state once this animation is over.
+			# Note: See on_animation_finished()
 
 func _state_fish_physics_process(_delta):
 	pass

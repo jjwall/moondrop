@@ -32,7 +32,7 @@
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@141522")
+blackboard = NodePath("@Node@142508")
 actor = NodePath("")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
