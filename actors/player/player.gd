@@ -32,8 +32,9 @@ func cast_lure():
 		lure == null
 	
 	var new_lure = lure_scene.instantiate()
-	var lure_pos = self.global_position
-	lure_pos += prev_direction * 150
+	var lure_pos = Vector2(self.global_position.x, self.global_position.y) # self.global_position
+	new_lure.target = lure_pos + (prev_direction * 150)
+	#lure_pos += prev_direction * 150
 	new_lure.set_position(lure_pos)
 	new_lure.player_ref = self
 	self.get_parent().add_child(new_lure)
