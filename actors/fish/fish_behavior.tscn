@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://drekughywf4mx"]
+[gd_scene load_steps=31 format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
@@ -29,11 +29,12 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="22_efvys"]
 [ext_resource type="PackedScene" uid="uid://dm7sea8xdkm42" path="res://actors/fish/play_swim_slow_anim_action.tscn" id="22_epr68"]
 [ext_resource type="PackedScene" uid="uid://qsbli4jqhao5" path="res://actors/fish/successful_catch_action.tscn" id="22_p77jx"]
+[ext_resource type="PackedScene" uid="uid://d28eqlupbi7rr" path="res://actors/fish/unhook_fish_action.tscn" id="23_rguf2"]
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@142508")
-actor = NodePath("")
+blackboard = NodePath("@Node@32264")
+actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
 script = ExtResource("2_aj8pj")
@@ -116,6 +117,8 @@ wait_time = 2.0
 
 [node name="RunAwaySequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite"]
 script = ExtResource("2_o45ge")
+
+[node name="UnhookFishAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("23_rguf2")]
 
 [node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("16_4oace")]
 
