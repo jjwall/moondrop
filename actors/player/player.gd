@@ -75,6 +75,9 @@ func _state_fish_process(_delta):
 				anim.play("cancel_cast_south")
 				# Goes to idle state once this animation is over.
 				# Note: See on_animation_finished()
+			else: # sucessful catch!
+				_goto("reel")
+				lure.player_input_press()
 
 func _state_fish_physics_process(_delta):
 	pass

@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 var player_ref
 var fish_hooked = false
+var fish_successful_catch = false
 
 # var fish_ref ...
 
@@ -34,6 +35,12 @@ func _ready():
 	target += Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)) * 32.0
 	prep_lure(global_position, target)
 	cast()
+
+func player_input_press():
+	if fish_hooked:
+		fish_successful_catch = true
+	else:
+		print("cancel cast")
 
 func prep_lure(start_target, end_target):
 	var start = start_target
@@ -119,11 +126,3 @@ func play_plop_in_water_anim():
 
 func play_idle_anim():
 	anim.play("idle")
-
-
-
-
-func player_input_press():
-	pass
-	# if fish_hooked do blah
-	# if not, scare fish away
