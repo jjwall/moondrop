@@ -41,10 +41,14 @@ func cast_lure():
 
 	lure = new_lure
 
-func remove_lure():
+func remove_lure(cancel_cast: bool):
 	if lure != null:
-		lure.queue_free()
-		lure = null
+		if cancel_cast:
+			lure.cancel_cast()
+			lure = null
+		else:
+			lure.queue_free()
+			lure = null
 
 #region State fish
 func _state_fish_enter():
@@ -55,13 +59,13 @@ func _state_fish_enter():
 
 func _state_fish_process(_delta):
 	if direction != Vector2(0,0):
-		remove_lure()
+		remove_lure(false)
 		_goto("walk")
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_instance_valid(lure):
 			if !lure.fish_hooked:
-				remove_lure()
+				remove_lure(true)
 				# match direction ...
 				anim.play("cancel_cast_south")
 				# Goes to idle state once this animation is over.
@@ -87,7 +91,9 @@ func _state_reel_physics_process(_delta):
 	pass
 
 func _state_reel_exit():
-	remove_lure()
+	# TODO: Change lure anim (call on_catch).
+	# TODO: Should include fish sprite for catching.
+	remove_lure(true)
 
 #endregion
 

@@ -24,19 +24,25 @@ var lure_t := 0.0
 
 var lure_flying := false
 var lure_cast_speed := 1.0
+var casting = true
 
 func _ready():
-	collision.disabled = true
+	casting = true
 	lure_cast_speed *= randf_range(0.9,1.1)
-	
 	#target = Vector2(0,0)
 	target += Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)) * 32.0
-	var start = global_position
-	var end = target
+	prep_lure(global_position, target)
+	cast()
+
+func prep_lure(start_target, end_target):
+	var start = start_target
+	var end = end_target
 	var initial_y_vel: float = -2.0
 	var offset_y: float = 0.0
 	
 	var points = PackedVector2Array()
+	lure_t = 0.0
+	collision.disabled = true
 	
 	var n = 100
 	for i in range(0,n+1):
@@ -51,8 +57,6 @@ func _ready():
 	points.append(end)
 	
 	lure_path = points
-	
-	cast()
 
 func _process(delta):
 	if not lure_flying:
@@ -61,10 +65,14 @@ func _process(delta):
 	lure_t += delta * lure_cast_speed
 	
 	if lure_t >= 1.0:
+		if casting:
+			on_cast_end()
+		else:
+			on_cancel_cast_end()
 		#ball.visible = false
-		lure_flying = false
-		collision.disabled = false
-		play_plop_in_water_anim()
+		#lure_flying = false
+		#collision.disabled = false
+		#play_plop_in_water_anim()
 		#explode_fx.global_position = target
 		#explode_fx.emitting = true
 		#$Timer.start(1.0)
@@ -75,6 +83,25 @@ func _process(delta):
 		var b = lure_path[int(i)+1]
 		var x = lerp(a, b, i-int(i))
 		self.global_position = x
+
+func on_cast_end():
+	lure_flying = false
+	collision.disabled = false
+	play_plop_in_water_anim()
+
+func on_cancel_cast_end():
+	lure_flying = false
+	self.queue_free()
+
+func cast():
+	#blast_fx.emitting = true
+	lure_flying = true
+	#ball.visible = true
+
+func cancel_cast():
+	casting = false
+	prep_lure(global_position, player_ref.global_position)
+	cast()
 
 func play_bit_anim():
 	$AnimatedSprite2D.play("bit")
@@ -87,11 +114,6 @@ func play_catching_anim():
 	
 func play_plop_in_water_anim():
 	$AnimatedSprite2D.play("plop")
-
-func cast():
-	#blast_fx.emitting = true
-	lure_flying = true
-	#ball.visible = true
 
 
 
