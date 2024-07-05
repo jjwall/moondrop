@@ -42,8 +42,8 @@ func cast_lure():
 	lure = new_lure
 
 func remove_lure(cancel_cast: bool):
-	if lure != null:
-		if cancel_cast:
+	if is_instance_valid(lure) and lure != null:
+		if cancel_cast: # Reel a better word here?
 			lure.cancel_cast()
 			lure = null
 		else:

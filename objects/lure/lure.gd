@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var collision = $CollisionShape2D
+@onready var anim = $AnimatedSprite2D
 
 var player_ref
 var fish_hooked = false
@@ -100,22 +101,24 @@ func cast():
 
 func cancel_cast():
 	casting = false
+	play_idle_anim()
 	prep_lure(global_position, player_ref.global_position)
 	cast()
 
 func play_bit_anim():
-	$AnimatedSprite2D.play("bit")
+	anim.play("bit")
 
 func play_nibbled_anim():
-	$AnimatedSprite2D.play("nibbled")
+	anim.play("nibbled")
 
 func play_catching_anim():
-	$AnimatedSprite2D.play("catching")
+	anim.play("catching")
 	
 func play_plop_in_water_anim():
-	$AnimatedSprite2D.play("plop")
+	anim.play("plop")
 
-
+func play_idle_anim():
+	anim.play("idle")
 
 
 
