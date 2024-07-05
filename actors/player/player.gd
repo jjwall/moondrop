@@ -27,7 +27,7 @@ func _always_physics_process(_delta):
 		move_and_slide()
 	
 func cast_lure():
-	if lure != null:
+	if is_instance_valid(lure) and lure != null:
 		lure.queue_free()
 		lure == null
 	
@@ -37,9 +37,14 @@ func cast_lure():
 	#lure_pos += prev_direction * 150
 	new_lure.set_position(lure_pos)
 	new_lure.player_ref = self
-	self.get_parent().add_child(new_lure)
-
-	lure = new_lure
+	
+	# Set delay to match up with casting animation.
+	await get_tree().create_timer(0.5).timeout
+	
+	# If player hasn't canceled cast anim by moving, spawn lure.
+	if _current_state == "fish":
+		self.get_parent().add_child(new_lure)
+		lure = new_lure
 
 func remove_lure(cancel_cast: bool):
 	if is_instance_valid(lure) and lure != null:
@@ -91,7 +96,6 @@ func _state_reel_physics_process(_delta):
 	pass
 
 func _state_reel_exit():
-	# TODO: Change lure anim (call on_catch).
 	# TODO: Should include fish sprite for catching.
 	remove_lure(true)
 
