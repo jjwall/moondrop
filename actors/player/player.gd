@@ -59,12 +59,13 @@ func _state_fish_process(_delta):
 		_goto("walk")
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		if !lure.fish_hooked:
-			remove_lure()
-			# match direction ...
-			anim.play("cancel_cast_south")
-			# Goes to idle state once this animation is over.
-			# Note: See on_animation_finished()
+		if is_instance_valid(lure):
+			if !lure.fish_hooked:
+				remove_lure()
+				# match direction ...
+				anim.play("cancel_cast_south")
+				# Goes to idle state once this animation is over.
+				# Note: See on_animation_finished()
 
 func _state_fish_physics_process(_delta):
 	pass

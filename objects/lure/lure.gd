@@ -65,7 +65,7 @@ func _process(delta):
 		#ball.visible = false
 		ball_flying = false
 		collision.disabled = false
-		play_nibbled_anim() # TODO: Add land_in_water_anim()
+		play_plop_in_water_anim()
 		#explode_fx.global_position = target
 		#explode_fx.emitting = true
 		#$Timer.start(1.0)
@@ -85,6 +85,9 @@ func play_nibbled_anim():
 
 func play_catching_anim():
 	$AnimatedSprite2D.play("catching")
+	
+func play_plop_in_water_anim():
+	$AnimatedSprite2D.play("plop")
 
 func blast():
 	#blast_fx.emitting = true
