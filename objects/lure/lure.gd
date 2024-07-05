@@ -16,19 +16,18 @@ var fish_hooked = false
 # is_instance_valid(fish_ref)
 
 var target := Vector2()
-var ball_path: PackedVector2Array
-var ball_t := 0.0
+var lure_path: PackedVector2Array
+var lure_t := 0.0
 #@onready var ball = $Ball
 #@onready var explode_fx = $ExplodeFX
 #@onready var blast_fx = $BlastFX
 
-var ball_flying := false
-var ball_speed := 1.0
+var lure_flying := false
+var lure_cast_speed := 1.0
 
 func _ready():
-	#ball.visible = false
 	collision.disabled = true
-	ball_speed *= randf_range(0.9,1.1)
+	lure_cast_speed *= randf_range(0.9,1.1)
 	
 	#target = Vector2(0,0)
 	target += Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)) * 32.0
@@ -51,19 +50,19 @@ func _ready():
 	
 	points.append(end)
 	
-	ball_path = points
+	lure_path = points
 	
-	blast()
+	cast()
 
 func _process(delta):
-	if not ball_flying:
+	if not lure_flying:
 		return
 	
-	ball_t += delta * ball_speed
+	lure_t += delta * lure_cast_speed
 	
-	if ball_t >= 1.0:
+	if lure_t >= 1.0:
 		#ball.visible = false
-		ball_flying = false
+		lure_flying = false
 		collision.disabled = false
 		play_plop_in_water_anim()
 		#explode_fx.global_position = target
@@ -71,9 +70,9 @@ func _process(delta):
 		#$Timer.start(1.0)
 		#get_node('/root/gameplay/Boss').health -= damage
 	else:
-		var i = ball_t * float(ball_path.size()-1)
-		var a = ball_path[int(i)]
-		var b = ball_path[int(i)+1]
+		var i = lure_t * float(lure_path.size()-1)
+		var a = lure_path[int(i)]
+		var b = lure_path[int(i)+1]
 		var x = lerp(a, b, i-int(i))
 		self.global_position = x
 
@@ -89,9 +88,9 @@ func play_catching_anim():
 func play_plop_in_water_anim():
 	$AnimatedSprite2D.play("plop")
 
-func blast():
+func cast():
 	#blast_fx.emitting = true
-	ball_flying = true
+	lure_flying = true
 	#ball.visible = true
 
 
