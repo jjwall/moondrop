@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 var player_ref
 var fish_hooked = false
-var fish_successful_catch = false
+var fish_caught = false
 
 # var fish_ref ...
 
@@ -38,7 +38,7 @@ func _ready():
 
 func player_input_press():
 	if fish_hooked:
-		fish_successful_catch = true
+		fish_caught = true
 	else:
 		print("cancel cast")
 

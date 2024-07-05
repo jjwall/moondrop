@@ -69,7 +69,7 @@ func _state_fish_process(_delta):
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_instance_valid(lure):
-			if !lure.fish_hooked:
+			if !lure.fish_hooked: # cancel cast
 				remove_lure(true)
 				# match direction ...
 				anim.play("cancel_cast_south")
