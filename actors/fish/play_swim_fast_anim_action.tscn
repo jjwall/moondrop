@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd7ll6kge7ijw"]
+
+[ext_resource type="Script" path="res://actors/fish/play_swim_fast_anim_action.gd" id="1_8r5or"]
+
+[node name="PlaySwimFastAnimAction" type="Node"]
+script = ExtResource("1_8r5or")

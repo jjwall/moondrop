@@ -2,6 +2,7 @@ extends ActionLeaf
 
 @export var rotation_speed = 3
 
+# This action rotates actor towards target pos (new pos) over time.
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var target_rotation = get_angle_between_positions(actor.position, blackboard.get_value("new_pos"))
 	var delta = get_physics_process_delta_time()

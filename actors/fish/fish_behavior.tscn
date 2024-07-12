@@ -1,65 +1,197 @@
-[gd_scene load_steps=14 format=3 uid="uid://drekughywf4mx"]
+[gd_scene load_steps=31 format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="2_o45ge"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="3_8ydfy"]
 [ext_resource type="PackedScene" uid="uid://blxl5x2ecie1v" path="res://ai/actions/rotate_action.tscn" id="3_cdi3n"]
 [ext_resource type="PackedScene" uid="uid://bplft160al6ja" path="res://ai/actions/pick_pos_action.tscn" id="3_idxc8"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="3_vtv8s"]
 [ext_resource type="PackedScene" uid="uid://bbx85j11wpvpj" path="res://actors/fish/detect_lure_action.tscn" id="4_6jbqm"]
 [ext_resource type="PackedScene" uid="uid://v65e6r038e2d" path="res://ai/actions/random_wait_action.tscn" id="4_pc2f7"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="6_8kapi"]
-[ext_resource type="PackedScene" uid="uid://bfesb221558ph" path="res://ai/actions/move_pos_action.tscn" id="6_revx4"]
+[ext_resource type="PackedScene" uid="uid://bfesb221558ph" path="res://ai/actions/move_to_pos_action.tscn" id="6_revx4"]
 [ext_resource type="PackedScene" uid="uid://b1gdlx47kn2fj" path="res://ai/decorators/random_repeater_decorator.tscn" id="7_loq4j"]
-[ext_resource type="PackedScene" uid="uid://breiu2uh870cp" path="res://actors/fish/nibble_action.tscn" id="9_k4oex"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="10_juh2t"]
+[ext_resource type="PackedScene" uid="uid://dx8j6jvq3fqhg" path="res://actors/fish/check_lure_action.tscn" id="10_uw7fl"]
+[ext_resource type="PackedScene" uid="uid://breiu2uh870cp" path="res://ai/actions/move_away_from_pos_action.tscn" id="11_un5y5"]
 [ext_resource type="PackedScene" uid="uid://d4i1lvtw0l3a5" path="res://actors/fish/bite_action.tscn" id="11_wkedo"]
+[ext_resource type="PackedScene" uid="uid://dhq0v12rleu0g" path="res://ai/actions/fade_out_action.tscn" id="12_bigfc"]
+[ext_resource type="PackedScene" uid="uid://xj54lny7jrdl" path="res://ai/actions/rotate_180_action.tscn" id="12_gub5k"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/simple_parallel.gd" id="13_ubyc7"]
+[ext_resource type="PackedScene" uid="uid://cf27b68hrflc1" path="res://actors/fish/struggle_action.tscn" id="15_3f3g4"]
+[ext_resource type="PackedScene" uid="uid://bd0hc0nahnwtu" path="res://actors/fish/play_nibbled_lure_anim_action.tscn" id="16_4oace"]
+[ext_resource type="PackedScene" uid="uid://c2f5m5sa3hu1t" path="res://actors/fish/play_bite_lure_anim_action.tscn" id="16_6d1nn"]
+[ext_resource type="PackedScene" uid="uid://drc8t3buwmk8r" path="res://ai/actions/move_indefinitely_action.tscn" id="16_hslch"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_random.gd" id="18_6oy5m"]
+[ext_resource type="PackedScene" uid="uid://ipvdh8fvr8n7" path="res://actors/fish/play_catching_lure_anim_action.tscn" id="19_43dxp"]
+[ext_resource type="PackedScene" uid="uid://d3lhbw66nb0ly" path="res://ai/actions/pick_pos_in_front_action.tscn" id="19_fuqww"]
+[ext_resource type="PackedScene" uid="uid://cd7ll6kge7ijw" path="res://actors/fish/play_swim_fast_anim_action.tscn" id="21_bbyls"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="22_efvys"]
+[ext_resource type="PackedScene" uid="uid://dm7sea8xdkm42" path="res://actors/fish/play_swim_slow_anim_action.tscn" id="22_epr68"]
+[ext_resource type="PackedScene" uid="uid://qsbli4jqhao5" path="res://actors/fish/successful_catch_action.tscn" id="22_p77jx"]
+[ext_resource type="PackedScene" uid="uid://d28eqlupbi7rr" path="res://actors/fish/unhook_fish_action.tscn" id="23_rguf2"]
 
 [node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@40748")
+blackboard = NodePath("@Node@46726")
 actor = NodePath("..")
 
 [node name="SelectorReactiveComposite" type="Node" parent="."]
 script = ExtResource("2_aj8pj")
 
 [node name="SeekLureSequence" type="Node" parent="SelectorReactiveComposite"]
-script = ExtResource("3_vtv8s")
+script = ExtResource("2_o45ge")
 
 [node name="DetectLureAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("4_6jbqm")]
 
-[node name="RotateAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("3_cdi3n")]
+[node name="SelectorComposite" type="Node" parent="SelectorReactiveComposite/SeekLureSequence"]
+script = ExtResource("3_8ydfy")
 
-[node name="MovePosAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("6_revx4")]
-acceptance_radius = 28
-
-[node name="RandomRepeaterDecorator" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("7_loq4j")]
-
-[node name="NibblingSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/RandomRepeaterDecorator"]
+[node name="AttemptBiteSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite"]
 script = ExtResource("2_o45ge")
 
-[node name="NibbleAction" parent="SelectorReactiveComposite/SeekLureSequence/RandomRepeaterDecorator/NibblingSequence" instance=ExtResource("9_k4oex")]
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("22_epr68")]
 
-[node name="RandomWaitAction" parent="SelectorReactiveComposite/SeekLureSequence/RandomRepeaterDecorator/NibblingSequence" instance=ExtResource("4_pc2f7")]
+[node name="RotateAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("3_cdi3n")]
 
-[node name="BiteAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("11_wkedo")]
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
+script = ExtResource("6_8kapi")
+wait_time = 2.0
+
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+acceptance_radius = 28
+
+[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("16_4oace")]
+
+[node name="RandomRepeaterDecorator" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("7_loq4j")]
+
+[node name="Nibble" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator"]
+script = ExtResource("10_juh2t")
+
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble" instance=ExtResource("22_epr68")]
+
+[node name="CheckLureAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble" instance=ExtResource("10_uw7fl")]
+
+[node name="NibblingSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble"]
+script = ExtResource("2_o45ge")
+
+[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("11_un5y5")]
+
+[node name="RandomWaitAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("4_pc2f7")]
+min_wait_time = 0.0
+max_wait_time = 1.0
+
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("21_bbyls")]
+
+[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("16_4oace")]
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence"]
+script = ExtResource("6_8kapi")
+wait_time = 2.0
+
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+acceptance_radius = 28
+
+[node name="PlayBiteLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("16_6d1nn")]
+
+[node name="TimeToCatchDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
+script = ExtResource("6_8kapi")
+wait_time = 1.0
+
+[node name="BiteAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TimeToCatchDecorator" instance=ExtResource("11_wkedo")]
+
+[node name="PlayCatchingLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("19_43dxp")]
+
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("21_bbyls")]
+
+[node name="TEMPORARY_AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
+script = ExtResource("22_efvys")
+
+[node name="TEMPORARY_TimeToStruggleDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TEMPORARY_AlwaysSucceedDecorator"]
+script = ExtResource("6_8kapi")
+wait_time = 2.0
+
+[node name="StruggleAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TEMPORARY_AlwaysSucceedDecorator/TEMPORARY_TimeToStruggleDecorator" instance=ExtResource("15_3f3g4")]
+
+[node name="SuccessfulCatchAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("22_p77jx")]
+
+[node name="RunAwaySequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite"]
+script = ExtResource("2_o45ge")
+
+[node name="UnhookFishAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("23_rguf2")]
+
+[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("16_4oace")]
+
+[node name="Rotate180Action" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("12_gub5k")]
+
+[node name="SimpleParallelComposite" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence"]
+script = ExtResource("13_ubyc7")
+
+[node name="MoveIndefinitelyAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence/SimpleParallelComposite" instance=ExtResource("16_hslch")]
+move_speed = 125
+
+[node name="FadeOutAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence/SimpleParallelComposite" instance=ExtResource("12_bigfc")]
 
 [node name="WanderSequence" type="Node" parent="SelectorReactiveComposite"]
 script = ExtResource("2_o45ge")
 
-[node name="RandomWaitAction" parent="SelectorReactiveComposite/WanderSequence" instance=ExtResource("4_pc2f7")]
-min_wait_time = 2.0
-max_wait_time = 5.0
+[node name="SelectorRandomComposite" type="Node" parent="SelectorReactiveComposite/WanderSequence"]
+script = ExtResource("18_6oy5m")
 
-[node name="PickPosAction" parent="SelectorReactiveComposite/WanderSequence" instance=ExtResource("3_idxc8")]
+[node name="MoveForwardAndBackSequence" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite"]
+script = ExtResource("2_o45ge")
 
-[node name="RotateAction" parent="SelectorReactiveComposite/WanderSequence" instance=ExtResource("3_cdi3n")]
+[node name="RandomWaitAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("4_pc2f7")]
 
-[node name="RandomWaitAction2" parent="SelectorReactiveComposite/WanderSequence" instance=ExtResource("4_pc2f7")]
-min_wait_time = 0.0
-max_wait_time = 2.0
+[node name="PickPosInFrontAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("19_fuqww")]
 
-[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence"]
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("21_bbyls")]
+
+[node name="AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence"]
+script = ExtResource("22_efvys")
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/AlwaysSucceedDecorator"]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
 
-[node name="MovePosAction" parent="SelectorReactiveComposite/WanderSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/AlwaysSucceedDecorator/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+attack_target = false
+
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("22_epr68")]
+
+[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("11_un5y5")]
+
+[node name="RotateAndMoveSequence" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite"]
+script = ExtResource("2_o45ge")
+
+[node name="RandomWaitAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("4_pc2f7")]
+min_wait_time = 2.0
+max_wait_time = 5.0
+
+[node name="PickPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("3_idxc8")]
+
+[node name="RotateAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("3_cdi3n")]
+
+[node name="RandomWaitAction2" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("4_pc2f7")]
+min_wait_time = 0.0
+max_wait_time = 2.0
+
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("21_bbyls")]
+
+[node name="AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence"]
+script = ExtResource("22_efvys")
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/AlwaysSucceedDecorator"]
+script = ExtResource("6_8kapi")
+wait_time = 2.0
+
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/AlwaysSucceedDecorator/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+attack_target = false
+
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("22_epr68")]
+
+[node name="TimeLimiterDecorator2" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence"]
+script = ExtResource("6_8kapi")
+wait_time = 2.0
+
+[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/TimeLimiterDecorator2" instance=ExtResource("11_un5y5")]

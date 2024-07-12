@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drc8t3buwmk8r"]
+
+[ext_resource type="Script" path="res://ai/actions/move_indefinitely_action.gd" id="1_7hhhf"]
+
+[node name="MoveIndefinitelyAction" type="Node"]
+script = ExtResource("1_7hhhf")

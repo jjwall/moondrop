@@ -1,10 +1,22 @@
-[gd_scene load_steps=52 format=3 uid="uid://cx45ltpnar43i"]
+[gd_scene load_steps=59 format=3 uid="uid://cx45ltpnar43i"]
 
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
 size = Vector2(15.6667, 9.91667)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcmt8"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(0, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1eun"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(64, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuupc"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(128, 576, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fphvf"]
 atlas = ExtResource("2_tov0l")
@@ -65,6 +77,22 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwbuy"]
 atlas = ExtResource("2_tov0l")
 region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2w2s"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(128, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqfwo"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(64, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqo25"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(0, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0mri"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(64, 576, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sk3ah"]
 atlas = ExtResource("2_tov0l")
@@ -198,6 +226,20 @@ region = Rect2(192, 192, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_pcmt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1eun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuupc")
+}],
+"loop": false,
+"name": &"cancel_cast_south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fphvf")
 }, {
 "duration": 1.0,
@@ -285,6 +327,23 @@ animations = [{
 "loop": true,
 "name": &"idle_west",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2w2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqfwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqo25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0mri")
+}],
+"loop": true,
+"name": &"reel_south",
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -433,7 +492,7 @@ shape = SubResource("RectangleShape2D_aya8m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mt824")
-animation = &"fish_south"
-autoplay = "fish_south"
-frame = 6
+animation = &"cancel_cast_south"
+autoplay = "idle_south"
+frame = 2
 frame_progress = 1.0

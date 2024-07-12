@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://xj54lny7jrdl"]
+
+[ext_resource type="Script" path="res://ai/actions/rotate_180_action.gd" id="1_gy1yu"]
+
+[node name="Rotate180Action" type="Node"]
+script = ExtResource("1_gy1yu")

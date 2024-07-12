@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://ai/decorators/random_repeater_decorator.gd" id="1_2t0m0"]
 
-[node name="RandomRepeaterDecorator" type="Node2D"]
+[node name="RandomRepeaterDecorator" type="Node"]
 script = ExtResource("1_2t0m0")

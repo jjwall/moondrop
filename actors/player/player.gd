@@ -10,7 +10,12 @@ var lure = null
 
 func _ready():
 	anim = $AnimatedSprite2D
+	anim.connect("animation_finished", Callable(self, "on_animation_finished"))
 	_goto("idle")
+
+func on_animation_finished():
+	if anim.animation == "cancel_cast_south": # or other directions
+		_goto("idle")
 
 func _always_process(_delta):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
@@ -18,21 +23,37 @@ func _always_process(_delta):
 func _always_physics_process(_delta):
 	velocity = direction * SPEED
 	
-	move_and_slide()
+	if _current_state != "reel":
+		move_and_slide()
 	
 func cast_lure():
-	if lure != null:
+	if is_instance_valid(lure) and lure != null:
 		lure.queue_free()
 		lure == null
 	
 	var new_lure = lure_scene.instantiate()
-	var lure_pos = self.global_position
-	lure_pos += prev_direction * 150
+	var lure_pos = Vector2(self.global_position.x, self.global_position.y) # self.global_position
+	new_lure.target = lure_pos + (prev_direction * 150)
+	#lure_pos += prev_direction * 150
 	new_lure.set_position(lure_pos)
-	print(new_lure)
-	self.get_parent().add_child(new_lure)
+	new_lure.player_ref = self
+	
+	# Set delay to match up with casting animation.
+	await get_tree().create_timer(0.5).timeout
+	
+	# If player hasn't canceled cast anim by moving, spawn lure.
+	if _current_state == "fish":
+		self.get_parent().add_child(new_lure)
+		lure = new_lure
 
-	lure = new_lure
+func remove_lure(cancel_cast: bool):
+	if is_instance_valid(lure) and lure != null:
+		if cancel_cast: # Reel a better word here?
+			lure.cancel_cast()
+			lure = null
+		else:
+			lure.queue_free()
+			lure = null
 
 #region State fish
 func _state_fish_enter():
@@ -43,15 +64,45 @@ func _state_fish_enter():
 
 func _state_fish_process(_delta):
 	if direction != Vector2(0,0):
+		remove_lure(false)
 		_goto("walk")
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		if is_instance_valid(lure):
+			if !lure.fish_hooked: # cancel cast
+				remove_lure(true)
+				# match direction ...
+				anim.play("cancel_cast_south")
+				# Goes to idle state once this animation is over.
+				# Note: See on_animation_finished()
+			else: # sucessful catch!
+				_goto("reel")
+				lure.player_input_press()
 
 func _state_fish_physics_process(_delta):
 	pass
 
 func _state_fish_exit():
-	if lure != null:
-		lure.queue_free()
-		lure = null
+	pass
+
+#endregion
+
+#region State reel
+func _state_reel_enter():
+	# match direction ...
+	anim.play("reel_south")
+
+func _state_reel_process(_delta):
+	pass
+
+func _state_reel_physics_process(_delta):
+	pass
+
+func _state_reel_exit():
+	# TODO: Should include fish sprite for catching.
+	remove_lure(true)
+
+#endregion
 
 #region State idle
 func _state_idle_enter():
