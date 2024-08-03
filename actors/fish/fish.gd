@@ -1,6 +1,9 @@
 extends CharacterBody2D
+
 @onready var blackboard: Blackboard = $Blackboard
 @onready var lure_seeking_radius: Area2D = $LureSeekingRadius
+
+@export var fish_type_scene = preload("res://objects/fish_types/clown_fish/clown_fish.tscn")
 
 func _physics_process(_delta: float) -> void:
 	var bodies = lure_seeking_radius.get_overlapping_bodies().filter(func (x): return x.is_in_group("Lures")) 
