@@ -6,7 +6,7 @@ extends Node2D
 var fish_scene = preload("res://actors/fish/fish.tscn")
 
 @export var max_fish_count = 4
-var current_fish_count = 0
+
 var area: CollisionShape2D
 var origin_x: float
 var origin_y: float
@@ -25,7 +25,6 @@ func _ready() -> void:
 	origin_y = area.global_position.y - area.shape.size.y / 2
 	extent_x = area.global_position.x + area.shape.size.x / 2
 	extent_y = area.global_position.y + area.shape.size.y / 2
-	#spawn_fish()
 
 func spawn_fish() -> Node2D:
 	# Get random position within the spawn area.
@@ -35,15 +34,13 @@ func spawn_fish() -> Node2D:
 	var new_pos = Vector2(x, y)
 	var new_fish = fish_scene.instantiate()
 	new_fish.set_position(new_pos)
-	#utils.main_node.call_deferred("add child", bullet)
-	self.get_parent().call_deferred("add_child", new_fish)
+	self.get_parent().add_fish_to_group(new_fish)
 	
 	return new_fish
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
 
 func attempt_to_spawn_fish():
 	# Remove any fish entries that have already been caught or ran away,

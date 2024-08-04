@@ -15,7 +15,6 @@ shape = SubResource("RectangleShape2D_x4v67")
 debug_color = Color(0.230644, 0.622023, 0.409269, 0.42)
 
 [node name="FishSpawnTimer" type="Timer" parent="."]
-wait_time = 15.0
 autostart = true
 
 [connection signal="timeout" from="FishSpawnTimer" to="." method="_on_fish_spawn_timer_timeout"]
