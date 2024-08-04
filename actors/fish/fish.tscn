@@ -89,8 +89,9 @@ script = ExtResource("1_wsogg")
 [node name="Blackboard" type="Node" parent="."]
 script = ExtResource("2_ai5bb")
 
-[node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard") instance=ExtResource("3_e1k38")]
+[node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_e1k38")]
 blackboard = NodePath("../Blackboard")
+actor = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-6, -1)
