@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://vyrgsh4bwl2p"]
+
+[ext_resource type="Texture2D" uid="uid://ds44rb2tprps5" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Sea_and_Food.png" id="1_vnwg1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwosg"]
+atlas = ExtResource("1_vnwg1")
+region = Rect2(128, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_psx4n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwosg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Mackerel" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_psx4n")

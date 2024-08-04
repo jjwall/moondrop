@@ -14,5 +14,12 @@ var commmon_fish_types := [
 		"message": "I was feeling pretty crabby... No wonder I caught this little guy!",
 		"min_weight": 1.25,
 		"max_weight": 12.72,
-	}
+	},
+	{
+		"name": "Mackerel",
+		"scene": preload("res://objects/fish_types/mackerel/mackerel.tscn"),
+		"message": "Holy mackerel!!! I caught myself a mackerel!",
+		"min_weight": 2.22,
+		"max_weight": 4.89,
+	},
 ]
