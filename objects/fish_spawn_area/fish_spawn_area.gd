@@ -33,10 +33,18 @@ func spawn_fish() -> Node2D:
 	
 	var new_pos = Vector2(x, y)
 	var new_fish = fish_scene.instantiate()
+	
+	# Set random common fish type.
+	new_fish.fish_type_data = get_random_common_fish_type()
+	
 	new_fish.set_position(new_pos)
 	self.get_parent().add_fish_to_group(new_fish)
 	
 	return new_fish
+
+func get_random_common_fish_type() -> Dictionary:
+	var index = randi_range(0, RefData.commmon_fish_types.size() - 1)
+	return RefData.commmon_fish_types[index]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
