@@ -42,10 +42,21 @@ func spawn_fish() -> Node2D:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if fish_list.size() < max_fish_count:
-		var fish = spawn_fish()
-		fish_list.append(fish)
+	pass
+
+
+func attempt_to_spawn_fish():
+	# Remove any fish entries that have already been caught or ran away,
+	check_and_remove_invalid_fish_entries()
 	
+	# Spawn a fish at random time intervals for the same of immersion.
+	var random_spawn_chance = randi_range(1, 3)
+	if random_spawn_chance == 3:
+		if fish_list.size() < max_fish_count:
+			var fish = spawn_fish()
+			fish_list.append(fish)
+
+func check_and_remove_invalid_fish_entries():
 	var index_to_remove = -1
 	for i in fish_list.size():
 		if !is_instance_valid(fish_list[i]):
@@ -54,3 +65,6 @@ func _process(delta: float) -> void:
 	
 	if index_to_remove > -1:
 		fish_list.remove_at(index_to_remove)
+
+func _on_fish_spawn_timer_timeout() -> void:
+	attempt_to_spawn_fish()
