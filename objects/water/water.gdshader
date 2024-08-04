@@ -6,7 +6,11 @@ uniform float aspect_ratio = 0.5;
 uniform vec2 offset_scale = vec2(2.0, 2.0);
 
 void fragment() {
-	vec2 tiled_uvs = UV * tiled_factor;
+	//vec2 tiled_uvs = UV * tiled_factor;
+	//vec2 tiled_uvs = floor(UV * tiled_factor / SCREEN_PIXEL_SIZE / 3.0) * SCREEN_PIXEL_SIZE * 3.0;
+	vec2 s = 1.0 / (3.0) / TEXTURE_PIXEL_SIZE;
+    vec2 tiled_uvs = floor(UV * s  * tiled_factor) / s;
+	
 	tiled_uvs.y *= aspect_ratio;
 	
 	vec2 waves_uv_offset;

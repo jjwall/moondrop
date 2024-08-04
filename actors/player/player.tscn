@@ -3,9 +3,6 @@
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
-size = Vector2(15.6667, 9.91667)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcmt8"]
 atlas = ExtResource("2_tov0l")
 region = Rect2(0, 576, 64, 64)
@@ -482,17 +479,20 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
+size = Vector2(39, 17)
+
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(3, 3)
 script = ExtResource("1_d7vyd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.16667, 14.2917)
-shape = SubResource("RectangleShape2D_aya8m")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mt824")
 animation = &"cancel_cast_south"
 autoplay = "idle_south"
 frame = 2
 frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 45.5)
+shape = SubResource("RectangleShape2D_aya8m")
