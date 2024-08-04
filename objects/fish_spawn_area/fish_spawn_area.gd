@@ -45,3 +45,12 @@ func _process(delta: float) -> void:
 	if fish_list.size() < max_fish_count:
 		var fish = spawn_fish()
 		fish_list.append(fish)
+	
+	var index_to_remove = -1
+	for i in fish_list.size():
+		if !is_instance_valid(fish_list[i]):
+			print("Not Valid!!!")
+			index_to_remove = i
+	
+	if index_to_remove > -1:
+		fish_list.remove_at(index_to_remove)
