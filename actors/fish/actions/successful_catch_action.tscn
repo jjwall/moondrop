@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://qsbli4jqhao5"]
 
-[ext_resource type="Script" path="res://actors/fish/successful_catch_action.gd" id="1_jaa71"]
+[ext_resource type="Script" path="res://actors/fish/actions/successful_catch_action.gd" id="1_jaa71"]
 
 [node name="SuccessfulCatchAction" type="Node"]
 script = ExtResource("1_jaa71")
