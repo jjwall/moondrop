@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3rvm3rw6opg"]
+[gd_scene load_steps=13 format=3 uid="uid://c3rvm3rw6opg"]
 
 [ext_resource type="Script" path="res://node_types/camera_shake.gd" id="1_lrklj"]
 [ext_resource type="Script" path="res://scenes/main_gameplay/main_gameplay.gd" id="1_wt4mr"]
 [ext_resource type="PackedScene" uid="uid://bje3v5otj2v6d" path="res://objects/maps/b_island/b_island.tscn" id="2_klphv"]
 [ext_resource type="PackedScene" uid="uid://c2bmfu7agagkx" path="res://objects/water/water.scn" id="2_up2o6"]
 [ext_resource type="PackedScene" uid="uid://cx45ltpnar43i" path="res://actors/player/player.tscn" id="3_j1nau"]
-[ext_resource type="PackedScene" uid="uid://bc0pfq7sj6k7e" path="res://actors/fish/fish.tscn" id="5_llcp5"]
 [ext_resource type="PackedScene" uid="uid://by7y6swpe6hsp" path="res://objects/fish_spawn_area/fish_spawn_area.tscn" id="7_dyrfq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fenso"]
@@ -18,6 +17,12 @@ normal = Vector2(-1, 0)
 normal = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4kntg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6r5v"]
+size = Vector2(850, 75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvb2x"]
+size = Vector2(850, 100)
 
 [node name="MainGameplay" type="Node2D"]
 script = ExtResource("1_wt4mr")
@@ -48,14 +53,23 @@ position = Vector2(480, 360)
 [node name="CameraShake" type="Node" parent="Camera2D"]
 script = ExtResource("1_lrklj")
 
-[node name="Fish1" parent="." instance=ExtResource("5_llcp5")]
-position = Vector2(196, 51)
+[node name="FishSpawnAreaNorth" parent="." instance=ExtResource("7_dyrfq")]
+position = Vector2(457, 15)
+max_fish_count = 3
 
-[node name="Fish2" parent="." instance=ExtResource("5_llcp5")]
-position = Vector2(691, 54)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishSpawnAreaNorth"]
+position = Vector2(29, 32)
+shape = SubResource("RectangleShape2D_k6r5v")
+debug_color = Color(0.914022, 0.124769, 0.64701, 0.42)
 
 [node name="FishSpawnAreaSouth" parent="." instance=ExtResource("7_dyrfq")]
 position = Vector2(481, 649)
+fish_spawner_wait_time = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishSpawnAreaSouth"]
+position = Vector2(4, 1.5)
+shape = SubResource("RectangleShape2D_xvb2x")
+debug_color = Color(0.780532, 0.291189, 0.81456, 0.42)
 
 [node name="FishGroup" type="Node2D" parent="."]
 

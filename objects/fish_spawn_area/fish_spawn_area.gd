@@ -1,13 +1,14 @@
-extends Node2D
-
-#@export var area_height = 125
-#@export var area_width = 850
+@tool
+extends Area2D
 
 var fish_scene = preload("res://actors/fish/fish.tscn")
 
 @export var max_fish_count = 4
+@export var fish_spawner_wait_time = 15
 
-var area: CollisionShape2D
+@onready var fish_spawner_timer = $FishSpawnerTimer
+
+var spawn_area: CollisionShape2D
 var origin_x: float
 var origin_y: float
 var extent_x: float
@@ -15,22 +16,23 @@ var extent_y: float
 
 var fish_list: Array[Node2D] = []
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	area = $Area2D/CollisionShape2D
-	#area.size.x = area_width
-	#area.size.y = area_width
-	origin_x = area.global_position.x - area.shape.size.x / 2
-	origin_y = area.global_position.y - area.shape.size.y / 2
-	extent_x = area.global_position.x + area.shape.size.x / 2
-	extent_y = area.global_position.y + area.shape.size.y / 2
+	if not Engine.is_editor_hint():
+		fish_spawner_timer.wait_time = fish_spawner_wait_time
+		fish_spawner_timer.start()
+		
+		spawn_area = self.find_children("*", "CollisionShape2D")[0]
+		origin_x = spawn_area.global_position.x - spawn_area.shape.size.x / 2
+		origin_y = spawn_area.global_position.y - spawn_area.shape.size.y / 2
+		extent_x = spawn_area.global_position.x + spawn_area.shape.size.x / 2
+		extent_y = spawn_area.global_position.y + spawn_area.shape.size.y / 2
 
 func spawn_fish() -> Node2D:
 	# Get random position within the spawn area.
 	var x = randf_range(origin_x, extent_x)
 	var y = randf_range(origin_y, extent_y)
-	
+
 	var new_pos = Vector2(x, y)
 	var new_fish = fish_scene.instantiate()
 	
@@ -46,9 +48,19 @@ func get_random_common_fish_type() -> Dictionary:
 	var index = randi_range(0, RefData.commmon_fish_types.size() - 1)
 	return RefData.commmon_fish_types[index]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		update_configuration_warnings()
+
+func _get_configuration_warnings():
+	var collision_shape_children = self.find_children("*", "CollisionShape2D")
+	
+	if collision_shape_children.size() < 1:
+		return ["Add a RectangleShape2D collision shape to define the spawn area's dimensions."]
+	elif collision_shape_children[0].shape is not RectangleShape2D:
+		return ["Collision shape should be a RectangleShape2D."]
+	else:
+		return []
 
 func attempt_to_spawn_fish():
 	# Remove any fish entries that have already been caught or ran away,
@@ -63,9 +75,9 @@ func attempt_to_spawn_fish():
 
 func check_and_remove_invalid_fish_entries():
 	var index_to_remove = -1
+	
 	for i in fish_list.size():
 		if !is_instance_valid(fish_list[i]):
-			print("Not Valid!!!")
 			index_to_remove = i
 	
 	if index_to_remove > -1:
