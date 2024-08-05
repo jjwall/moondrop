@@ -8,4 +8,3 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		lure.play_bit_anim()
 	
 	return SUCCESS
-

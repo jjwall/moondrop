@@ -5,6 +5,7 @@ var fish_scene = preload("res://actors/fish/fish.tscn")
 
 @export var max_fish_count = 4
 @export var fish_spawner_wait_time = 15
+@export_enum("Common", "Uncommon", "Rare") var fish_spawn_area_type: int
 
 @onready var fish_spawner_timer = $FishSpawnerTimer
 
@@ -37,16 +38,30 @@ func spawn_fish() -> Node2D:
 	var new_fish = fish_scene.instantiate()
 	
 	# Set random common fish type.
-	new_fish.fish_type_data = get_random_common_fish_type()
+	new_fish.fish_type_data = get_random_fish_type()
 	
 	new_fish.set_position(new_pos)
 	self.get_parent().add_fish_to_group(new_fish)
 	
 	return new_fish
 
-func get_random_common_fish_type() -> Dictionary:
-	var index = randi_range(0, RefData.commmon_fish_types.size() - 1)
-	return RefData.commmon_fish_types[index]
+# TODO: Add uncommon and rare fish types and add getters for them here.
+func get_random_fish_type() -> Dictionary:
+	if fish_spawn_area_type == 0:
+		var index = randi_range(0, RefData.commmon_fish_types.size() - 1)
+		return RefData.commmon_fish_types[index]
+	elif fish_spawn_area_type == 1:
+		assert(fish_spawn_area_type != 0, "Add uncommon fish types to ref data!")
+		print("*** Add uncommon fish types to ref data! ***")
+		print("*** CHANGE CODE IN get_random_fish_type() func in fish_spawn_area.gd")
+		var index = randi_range(0, RefData.commmon_fish_types.size() - 1)
+		return RefData.commmon_fish_types[index]
+	else:
+		assert(fish_spawn_area_type != 0, "Add rare fish types to ref data!")
+		print("*** Add rare fish types to ref data! ***")
+		print("*** CHANGE CODE IN get_random_fish_type() func in fish_spawn_area.gd")
+		var index = randi_range(0, RefData.commmon_fish_types.size() - 1)
+		return RefData.commmon_fish_types[index]
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
