@@ -49,15 +49,17 @@ func spawn_fish() -> Node2D:
 func get_random_fish_type() -> Dictionary:
 	if fish_spawn_area_type == 0:
 		var index = randi_range(0, RefData.commmon_fish_types.size() - 1)
+		# TODO set random weights here.
+		
 		return RefData.commmon_fish_types[index]
 	elif fish_spawn_area_type == 1:
-		assert(fish_spawn_area_type != 0, "Add uncommon fish types to ref data!")
+		assert(false, "Add uncommon fish types to ref data!")
 		print("*** Add uncommon fish types to ref data! ***")
 		print("*** CHANGE CODE IN get_random_fish_type() func in fish_spawn_area.gd")
 		var index = randi_range(0, RefData.commmon_fish_types.size() - 1)
 		return RefData.commmon_fish_types[index]
 	else:
-		assert(fish_spawn_area_type != 0, "Add rare fish types to ref data!")
+		assert(false, "Add rare fish types to ref data!")
 		print("*** Add rare fish types to ref data! ***")
 		print("*** CHANGE CODE IN get_random_fish_type() func in fish_spawn_area.gd")
 		var index = randi_range(0, RefData.commmon_fish_types.size() - 1)

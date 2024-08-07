@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cx45ltpnar43i"]
+[gd_scene load_steps=60 format=3 uid="uid://cx45ltpnar43i"]
 
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
@@ -42,6 +42,10 @@ region = Rect2(320, 576, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8mgwo"]
 atlas = ExtResource("2_tov0l")
 region = Rect2(384, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcabc"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(0, 640, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j0d8e"]
 atlas = ExtResource("2_tov0l")
@@ -259,6 +263,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"fish_south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcabc")
+}],
+"loop": true,
+"name": &"get_item",
 "speed": 5.0
 }, {
 "frames": [{
@@ -488,10 +500,8 @@ script = ExtResource("1_d7vyd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mt824")
-animation = &"cancel_cast_south"
+animation = &"get_item"
 autoplay = "idle_south"
-frame = 2
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 45.5)

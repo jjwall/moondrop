@@ -3,12 +3,11 @@ extends CharacterBody2D
 @onready var blackboard: Blackboard = $Blackboard
 @onready var lure_seeking_radius: Area2D = $LureSeekingRadius
 
-@export var fish_type_scene = preload("res://objects/fish_types/clown_fish/clown_fish.tscn")
 var fish_type_data: Dictionary
 
 func _ready():
-	if fish_type_data:
-		fish_type_scene = fish_type_data.scene
+	print(fish_type_data)
+	assert(fish_type_data != {}, "Set fish_type_data for fish instance")
 	
 	on_spawn()
 

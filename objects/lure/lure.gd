@@ -4,8 +4,10 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 
 var player_ref
+var caught_fish_type_data = {}
 var fish_hooked = false
 var fish_caught = false
+var yanking = false
 
 # var fish_ref ...
 
@@ -100,17 +102,23 @@ func on_cast_end():
 func on_cancel_cast_end():
 	lure_flying = false
 	self.queue_free()
+	
+	if fish_caught:
+		player_ref._goto("get_item")
 
 func cast():
 	#blast_fx.emitting = true
 	lure_flying = true
 	#ball.visible = true
 
-func cancel_cast():
+func yank():
 	casting = false
-	play_idle_anim()
-	prep_lure(global_position, player_ref.global_position)
-	cast()
+	
+	if not yanking:
+		yanking = true
+		play_idle_anim()
+		prep_lure(global_position, player_ref.global_position)
+		cast()
 
 func play_bit_anim():
 	anim.play("bit")
