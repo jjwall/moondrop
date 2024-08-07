@@ -1,19 +1,7 @@
-[gd_scene load_steps=60 format=3 uid="uid://cx45ltpnar43i"]
+[gd_scene load_steps=61 format=3 uid="uid://cx45ltpnar43i"]
 
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pcmt8"]
-atlas = ExtResource("2_tov0l")
-region = Rect2(0, 576, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f1eun"]
-atlas = ExtResource("2_tov0l")
-region = Rect2(64, 576, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vuupc"]
-atlas = ExtResource("2_tov0l")
-region = Rect2(128, 576, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fphvf"]
 atlas = ExtResource("2_tov0l")
@@ -223,22 +211,24 @@ region = Rect2(128, 192, 64, 64)
 atlas = ExtResource("2_tov0l")
 region = Rect2(192, 192, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcmt8"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(0, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1eun"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(64, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuupc"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(128, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lyny"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(0, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_mt824"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pcmt8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f1eun")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vuupc")
-}],
-"loop": false,
-"name": &"cancel_cast_south",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fphvf")
@@ -489,6 +479,23 @@ animations = [{
 "loop": true,
 "name": &"walk_west",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcmt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1eun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuupc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lyny")
+}],
+"loop": false,
+"name": &"yank_south",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
@@ -500,8 +507,10 @@ script = ExtResource("1_d7vyd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mt824")
-animation = &"get_item"
+animation = &"yank_south"
 autoplay = "idle_south"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 45.5)
