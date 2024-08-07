@@ -6,7 +6,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	
 	if lure:
 		# Switch to wait state triggers reel exit state,
-		lure.player_ref._goto("wait")
+		lure.player_ref.goto_wait_state()
 		
 		# Add fish type object as a child of the lure.
 		var fish_type = actor.fish_type_data.scene.instantiate()

@@ -101,9 +101,6 @@ func on_cast_end():
 func on_cancel_cast_end():
 	lure_flying = false
 	self.queue_free()
-	
-	if fish_caught:
-		player_ref._goto("get_item")
 
 func cast():
 	#blast_fx.emitting = true

@@ -99,10 +99,8 @@ func _state_reel_physics_process(_delta):
 	pass
 
 func _state_reel_exit():
-	print("yanking")
 	yank_lure()
 	await wait_for_lure_to_return()
-	print("line before get item")
 	_goto("get_item")
 #endregion
 
@@ -180,9 +178,8 @@ func _state_walk_exit():
 
 #region State get item
 func _state_get_item_enter():
-	print("get item")
 	anim.play("get_item")
-	#print(recent_caught_fish)
+	print(recent_caught_fish)
 
 func _state_get_item_process(_delta):
 	pass
@@ -194,9 +191,12 @@ func _state_get_item_exit():
 	pass
 #endregion
 
+func goto_wait_state():
+	_goto("wait")
+
 #region State wait
 func _state_wait_enter():
-	print("wait")
+	pass
 
 func _state_wait_process(_delta):
 	pass
