@@ -180,6 +180,9 @@ func _state_walk_exit():
 func _state_get_item_enter():
 	anim.play("get_item")
 	print(recent_caught_fish)
+	var caught_fish_to_display = recent_caught_fish.scene.instantiate()
+	caught_fish_to_display.position.y -= 75
+	self.add_child(caught_fish_to_display)
 
 func _state_get_item_process(_delta):
 	pass
