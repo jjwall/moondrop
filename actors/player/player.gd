@@ -99,6 +99,8 @@ func _state_reel_physics_process(_delta):
 	pass
 
 func _state_reel_exit():
+	# match direction ...
+	anim.play("cancel_cast_south")
 	yank_lure()
 	await wait_for_lure_to_return()
 	_goto("get_item")
@@ -178,8 +180,9 @@ func _state_walk_exit():
 
 #region State get item
 func _state_get_item_enter():
-	anim.play("get_item")
 	print(recent_caught_fish)
+	await get_tree().create_timer(1.0).timeout
+	anim.play("get_item")
 	var caught_fish_to_display = recent_caught_fish.scene.instantiate()
 	caught_fish_to_display.position.y -= 75
 	self.add_child(caught_fish_to_display)
