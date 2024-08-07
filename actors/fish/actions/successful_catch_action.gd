@@ -10,8 +10,10 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		
 		# Add fish type object as a child of the lure.
 		var fish_type = actor.fish_type_data.scene.instantiate()
-		lure.caught_fish_type_data = actor.fish_type_data
 		lure.add_child(fish_type)
+		
+		# Set recent caught fish data.
+		lure.player_ref.recent_caught_fish = actor.fish_type_data
 	
 	actor.queue_free()
 	return SUCCESS

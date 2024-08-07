@@ -6,7 +6,6 @@ extends CharacterBody2D
 var fish_type_data: Dictionary
 
 func _ready():
-	print(fish_type_data)
 	assert(fish_type_data != {}, "Set fish_type_data for fish instance")
 	
 	on_spawn()

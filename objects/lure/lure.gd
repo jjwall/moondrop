@@ -4,7 +4,6 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 
 var player_ref
-var caught_fish_type_data = {}
 var fish_hooked = false
 var fish_caught = false
 var yanking = false

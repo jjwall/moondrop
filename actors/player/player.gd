@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+#TODO Player script needs de-complication pass.
+
 const SPEED = 150.0
 var anim: AnimatedSprite2D
 var direction := Vector2.ZERO
@@ -7,29 +9,23 @@ var prev_direction := Vector2(0, 1)
 
 var lure_scene = preload("res://objects/lure/lure.tscn")
 var lure = null
+var recent_caught_fish = {}
 
 func _ready():
 	anim = $AnimatedSprite2D
-	#anim.connect("animation_finished", Callable(self, "on_animation_finished"))
 	_goto("idle")
 
 func wait_for_lure_to_return():
-	return lure.tree_exited
-
-#func on_animation_finished():
-	#if anim.animation == "cancel_cast_south": # or other directions
-		#await wait_for_lure_to_return()
-		#_goto("idle")
+	if is_instance_valid(lure):
+		return lure.tree_exited
+	else:
+		null
 
 func _always_process(_delta):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
 
 func _always_physics_process(_delta):
 	pass
-	#velocity = direction * SPEED
-	#
-	#if !movement_locked:
-		#move_and_slide()
 	
 func cast_lure():
 	if is_instance_valid(lure) and lure != null:
@@ -46,7 +42,7 @@ func cast_lure():
 	# Set delay to match up with casting animation.
 	await get_tree().create_timer(0.5).timeout
 	
-	# If player hasn't canceled cast anim by moving, spawn lure.
+	# If player hasn't canceled cast anim by moving, spawn lure. #TODO this still needed?
 	if _current_state == "fish":
 		self.get_parent().add_child(new_lure)
 		lure = new_lure
@@ -79,8 +75,6 @@ func _state_fish_process(_delta):
 				anim.play("cancel_cast_south")
 				await wait_for_lure_to_return()
 				_goto("idle")
-				# Goes to idle state once this animation is over.
-				# Note: See on_animation_finished()
 			else: # sucessful catch!
 				_goto("reel")
 				lure.player_input_press()
@@ -105,24 +99,11 @@ func _state_reel_physics_process(_delta):
 	pass
 
 func _state_reel_exit():
+	print("yanking")
 	yank_lure()
 	await wait_for_lure_to_return()
+	print("line before get item")
 	_goto("get_item")
-#endregion
-
-#region State wait
-func _state_wait_enter():
-	pass
-
-func _state_wait_process(_delta):
-	pass
-
-func _state_wait_physics_process(_delta):
-	pass
-
-func _state_wait_exit():
-	pass
-
 #endregion
 
 #region State idle
@@ -199,7 +180,9 @@ func _state_walk_exit():
 
 #region State get item
 func _state_get_item_enter():
+	print("get item")
 	anim.play("get_item")
+	#print(recent_caught_fish)
 
 func _state_get_item_process(_delta):
 	pass
@@ -208,6 +191,20 @@ func _state_get_item_physics_process(_delta):
 	pass
 
 func _state_get_item_exit():
+	pass
+#endregion
+
+#region State wait
+func _state_wait_enter():
+	print("wait")
+
+func _state_wait_process(_delta):
+	pass
+
+func _state_wait_physics_process(_delta):
+	pass
+
+func _state_wait_exit():
 	pass
 #endregion
 
