@@ -8,6 +8,7 @@ var direction := Vector2.ZERO
 var prev_direction := Vector2(0, 1)
 
 var lure_scene = preload("res://objects/lure/lure.tscn")
+var caught_fish_to_display = null
 var lure = null
 var recent_caught_fish = {}
 var yanking = false
@@ -186,12 +187,15 @@ func _state_get_item_enter():
 	print(recent_caught_fish)
 	await get_tree().create_timer(0.5).timeout
 	anim.play("get_item")
-	var caught_fish_to_display = recent_caught_fish.scene.instantiate()
+	caught_fish_to_display = recent_caught_fish.scene.instantiate()
 	caught_fish_to_display.position.y -= 75
 	self.add_child(caught_fish_to_display)
 
 func _state_get_item_process(_delta):
-	pass
+	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display):
+		caught_fish_to_display.queue_free()
+		caught_fish_to_display = null
+		_goto("idle")
 
 func _state_get_item_physics_process(_delta):
 	pass
