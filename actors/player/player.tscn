@@ -1,6 +1,6 @@
 [gd_scene load_steps=61 format=3 uid="uid://cx45ltpnar43i"]
 
-[ext_resource type="Script" path="res://actors/player/player.gd" id="1_d7vyd"]
+[ext_resource type="Script" uid="uid://cxpr5fuv5g25g" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fphvf"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://c3rvm3rw6opg"]
 
-[ext_resource type="Script" path="res://node_types/camera_shake.gd" id="1_lrklj"]
-[ext_resource type="Script" path="res://scenes/main_gameplay/main_gameplay.gd" id="1_wt4mr"]
+[ext_resource type="Script" uid="uid://cwfn12h87mdvh" path="res://node_types/camera_shake.gd" id="1_lrklj"]
+[ext_resource type="Script" uid="uid://5wamwc6fodk8" path="res://scenes/main_gameplay/main_gameplay.gd" id="1_wt4mr"]
 [ext_resource type="PackedScene" uid="uid://bje3v5otj2v6d" path="res://objects/maps/b_island/b_island.tscn" id="2_klphv"]
 [ext_resource type="PackedScene" uid="uid://c2bmfu7agagkx" path="res://objects/water/water.scn" id="2_up2o6"]
 [ext_resource type="PackedScene" uid="uid://cx45ltpnar43i" path="res://actors/player/player.tscn" id="3_j1nau"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2f5m5sa3hu1t"]
 
-[ext_resource type="Script" path="res://actors/fish/actions/play_bite_lure_anim_action.gd" id="1_ejrdl"]
+[ext_resource type="Script" uid="uid://bnkjjlknxtyp5" path="res://actors/fish/actions/play_bite_lure_anim_action.gd" id="1_ejrdl"]
 
 [node name="PlayBiteLureAnimAction" type="Node"]
 script = ExtResource("1_ejrdl")

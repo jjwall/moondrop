@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bplft160al6ja"]
 
-[ext_resource type="Script" path="res://ai/actions/pick_pos_action.gd" id="1_li8fv"]
+[ext_resource type="Script" uid="uid://dssualdruor16" path="res://ai/actions/pick_pos_action.gd" id="1_li8fv"]
 
 [node name="PickPosAction" type="Node"]
 script = ExtResource("1_li8fv")

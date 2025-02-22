@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dhq0v12rleu0g"]
 
-[ext_resource type="Script" path="res://ai/actions/fade_out_action.gd" id="1_xo60b"]
+[ext_resource type="Script" uid="uid://cybf40d84bhfo" path="res://ai/actions/fade_out_action.gd" id="1_xo60b"]
 
 [node name="FadeOutAction" type="Node"]
 script = ExtResource("1_xo60b")
