@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b1gdlx47kn2fj"]
 
-[ext_resource type="Script" path="res://ai/decorators/random_repeater_decorator.gd" id="1_2t0m0"]
+[ext_resource type="Script" uid="uid://bs0uoul4jp72f" path="res://ai/decorators/random_repeater_decorator.gd" id="1_2t0m0"]
 
 [node name="RandomRepeaterDecorator" type="Node"]
 script = ExtResource("1_2t0m0")

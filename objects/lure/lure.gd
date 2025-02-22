@@ -6,6 +6,7 @@ extends CharacterBody2D
 var player_ref
 var fish_hooked = false
 var fish_caught = false
+var yanking = false
 
 # var fish_ref ...
 
@@ -106,11 +107,14 @@ func cast():
 	lure_flying = true
 	#ball.visible = true
 
-func cancel_cast():
+func yank():
 	casting = false
-	play_idle_anim()
-	prep_lure(global_position, player_ref.global_position)
-	cast()
+	
+	if not yanking:
+		yanking = true
+		play_idle_anim()
+		prep_lure(global_position, player_ref.global_position)
+		cast()
 
 func play_bit_anim():
 	anim.play("bit")

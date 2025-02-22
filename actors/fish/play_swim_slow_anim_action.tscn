@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm7sea8xdkm42"]
-
-[ext_resource type="Script" path="res://actors/fish/play_swim_slow_anim_action.gd" id="1_ilthf"]
-
-[node name="PlaySwimSlowAnimAction" type="Node"]
-script = ExtResource("1_ilthf")

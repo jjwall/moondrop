@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c60eawv3jvb5j"]
 
-[ext_resource type="Script" path="res://autoload/scene_girl/default_loading_screen.gd" id="1_pn5vw"]
+[ext_resource type="Script" uid="uid://duiogy1hh26tp" path="res://autoload/scene_girl/default_loading_screen.gd" id="1_pn5vw"]
 
 [node name="DefaultLoadingScreen" type="CanvasLayer"]
 script = ExtResource("1_pn5vw")

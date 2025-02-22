@@ -1,30 +1,33 @@
 extends CharacterBody2D
 
+#TODO Player script needs de-complication pass.
+
 const SPEED = 150.0
 var anim: AnimatedSprite2D
 var direction := Vector2.ZERO
 var prev_direction := Vector2(0, 1)
 
 var lure_scene = preload("res://objects/lure/lure.tscn")
+var caught_fish_to_display = null
 var lure = null
+var recent_caught_fish = {}
+var yanking = false
 
 func _ready():
 	anim = $AnimatedSprite2D
-	anim.connect("animation_finished", Callable(self, "on_animation_finished"))
 	_goto("idle")
 
-func on_animation_finished():
-	if anim.animation == "cancel_cast_south": # or other directions
-		_goto("idle")
+func wait_for_lure_to_return():
+	if is_instance_valid(lure):
+		return lure.tree_exited
+	else:
+		null
 
 func _always_process(_delta):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
 
 func _always_physics_process(_delta):
-	velocity = direction * SPEED
-	
-	if _current_state != "reel":
-		move_and_slide()
+	pass
 	
 func cast_lure():
 	if is_instance_valid(lure) and lure != null:
@@ -41,19 +44,15 @@ func cast_lure():
 	# Set delay to match up with casting animation.
 	await get_tree().create_timer(0.5).timeout
 	
-	# If player hasn't canceled cast anim by moving, spawn lure.
+	# If player hasn't canceled cast anim by moving, spawn lure. #TODO this still needed?
 	if _current_state == "fish":
 		self.get_parent().add_child(new_lure)
 		lure = new_lure
 
-func remove_lure(cancel_cast: bool):
+func yank_lure():
 	if is_instance_valid(lure) and lure != null:
-		if cancel_cast: # Reel a better word here?
-			lure.cancel_cast()
-			lure = null
-		else:
-			lure.queue_free()
-			lure = null
+		lure.yank()
+		#lure = null
 
 #region State fish
 func _state_fish_enter():
@@ -63,18 +62,23 @@ func _state_fish_enter():
 	cast_lure()
 
 func _state_fish_process(_delta):
-	if direction != Vector2(0,0):
-		remove_lure(false)
-		_goto("walk")
+	if direction != Vector2(0,0) and not yanking:
+		yanking = true
+		yank_lure()
+		# match direction ...
+		anim.play("yank_south")
+		await wait_for_lure_to_return()
+		yanking = false
+		_goto("idle")
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_instance_valid(lure):
 			if !lure.fish_hooked: # cancel cast
-				remove_lure(true)
+				yank_lure()
 				# match direction ...
-				anim.play("cancel_cast_south")
-				# Goes to idle state once this animation is over.
-				# Note: See on_animation_finished()
+				anim.play("yank_south")
+				await wait_for_lure_to_return()
+				_goto("idle")
 			else: # sucessful catch!
 				_goto("reel")
 				lure.player_input_press()
@@ -99,9 +103,11 @@ func _state_reel_physics_process(_delta):
 	pass
 
 func _state_reel_exit():
-	# TODO: Should include fish sprite for catching.
-	remove_lure(true)
-
+	# match direction ...
+	anim.play("yank_south")
+	yank_lure()
+	await wait_for_lure_to_return()
+	_goto("get_item")
 #endregion
 
 #region State idle
@@ -166,9 +172,52 @@ func _state_walk_process(_delta):
 		prev_direction = direction
 
 func _state_walk_physics_process(_delta):
-	pass
+	velocity = direction * SPEED
+	move_and_slide()
+	
+	#if !movement_locked:
+		#move_and_slide()
 
 func _state_walk_exit():
+	pass
+#endregion
+
+#region State get item
+func _state_get_item_enter():
+	print(recent_caught_fish)
+	await get_tree().create_timer(0.5).timeout
+	anim.play("get_item")
+	caught_fish_to_display = recent_caught_fish.scene.instantiate()
+	caught_fish_to_display.position.y -= 75
+	self.add_child(caught_fish_to_display)
+
+func _state_get_item_process(_delta):
+	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display):
+		caught_fish_to_display.queue_free()
+		caught_fish_to_display = null
+		_goto("idle")
+
+func _state_get_item_physics_process(_delta):
+	pass
+
+func _state_get_item_exit():
+	pass
+#endregion
+
+func goto_wait_state():
+	_goto("wait")
+
+#region State wait
+func _state_wait_enter():
+	pass
+
+func _state_wait_process(_delta):
+	pass
+
+func _state_wait_physics_process(_delta):
+	pass
+
+func _state_wait_exit():
 	pass
 #endregion
 

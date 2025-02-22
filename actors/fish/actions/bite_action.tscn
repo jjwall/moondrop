@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4i1lvtw0l3a5"]
+
+[ext_resource type="Script" uid="uid://oayi5nyqh8yn" path="res://actors/fish/actions/bite_action.gd" id="1_r82ae"]
+
+[node name="BiteAction" type="Node"]
+script = ExtResource("1_r82ae")

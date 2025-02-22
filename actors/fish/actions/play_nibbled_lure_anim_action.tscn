@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd0hc0nahnwtu"]
+
+[ext_resource type="Script" uid="uid://yl1umwyhgrmc" path="res://actors/fish/actions/play_nibbled_lure_anim_action.gd" id="1_opetl"]
+
+[node name="PlayNibbledLureAnimAction" type="Node"]
+script = ExtResource("1_opetl")

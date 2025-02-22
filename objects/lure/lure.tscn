@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://06ws025jp3p2"]
 
-[ext_resource type="Script" path="res://objects/lure/lure.gd" id="1_y873i"]
+[ext_resource type="Script" uid="uid://d2ywnpuwmmdje" path="res://objects/lure/lure.gd" id="1_y873i"]
 [ext_resource type="Texture2D" uid="uid://dxdc5hi53phy" path="res://assets/textures/objects/lure-submerging.png" id="2_1cgld"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ucah"]

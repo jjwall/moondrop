@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://breiu2uh870cp"]
 
-[ext_resource type="Script" path="res://ai/actions/move_away_from_pos_action.gd" id="1_anp2k"]
+[ext_resource type="Script" uid="uid://d2f61yvqnwtdf" path="res://ai/actions/move_away_from_pos_action.gd" id="1_anp2k"]
 
 [node name="MoveAwayFromPosAction" type="Node"]
 script = ExtResource("1_anp2k")

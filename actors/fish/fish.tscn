@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://bc0pfq7sj6k7e"]
 
-[ext_resource type="Script" path="res://actors/fish/fish.gd" id="1_wsogg"]
-[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="2_ai5bb"]
+[ext_resource type="Script" uid="uid://d15mmvy2hqpnh" path="res://actors/fish/fish.gd" id="1_wsogg"]
+[ext_resource type="Script" uid="uid://dil4stoo2m5kk" path="res://addons/beehave/blackboard.gd" id="2_ai5bb"]
 [ext_resource type="PackedScene" uid="uid://drekughywf4mx" path="res://actors/fish/fish_behavior.tscn" id="3_e1k38"]
 [ext_resource type="Texture2D" uid="uid://dehb7qo6gnhtn" path="res://assets/textures/fish/fishshadow-animated.png" id="4_4csm4"]
 
@@ -89,9 +89,8 @@ script = ExtResource("1_wsogg")
 [node name="Blackboard" type="Node" parent="."]
 script = ExtResource("2_ai5bb")
 
-[node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_e1k38")]
+[node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard") instance=ExtResource("3_e1k38")]
 blackboard = NodePath("../Blackboard")
-actor = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-6, -1)
