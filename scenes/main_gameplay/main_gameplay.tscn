@@ -29,6 +29,30 @@ script = ExtResource("1_wt4mr")
 
 [node name="Water" parent="." unique_id=1366665200 instance=ExtResource("2_up2o6")]
 
+[node name="Water2" parent="." unique_id=1979463766 instance=ExtResource("2_up2o6")]
+position = Vector2(-960, 0)
+
+[node name="Water3" parent="." unique_id=1591168750 instance=ExtResource("2_up2o6")]
+position = Vector2(0, -720)
+
+[node name="Water4" parent="." unique_id=77757103 instance=ExtResource("2_up2o6")]
+position = Vector2(-960, -720)
+
+[node name="Water5" parent="." unique_id=936506987 instance=ExtResource("2_up2o6")]
+position = Vector2(960, -720)
+
+[node name="Water6" parent="." unique_id=1375560625 instance=ExtResource("2_up2o6")]
+position = Vector2(960, 0)
+
+[node name="Water7" parent="." unique_id=2003920340 instance=ExtResource("2_up2o6")]
+position = Vector2(960, 720)
+
+[node name="Water8" parent="." unique_id=1277424368 instance=ExtResource("2_up2o6")]
+position = Vector2(1, 719)
+
+[node name="Water9" parent="." unique_id=21197413 instance=ExtResource("2_up2o6")]
+position = Vector2(-959, 720)
+
 [node name="Walls" type="StaticBody2D" parent="." unique_id=851327041]
 
 [node name="LeftWall" type="CollisionShape2D" parent="Walls" unique_id=665122701]

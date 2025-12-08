@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var camera_shake: CameraShake = $Camera2D/CameraShake
+@onready var camera_shake: CameraShake = $Player/Camera2D/CameraShake
 var fish_group: Node2D
 
 func _ready() -> void:
