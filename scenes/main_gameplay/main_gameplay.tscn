@@ -47,12 +47,6 @@ shape = SubResource("WorldBoundaryShape2D_6mfka")
 position = Vector2(486, 719)
 shape = SubResource("WorldBoundaryShape2D_4kntg")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1460226458]
-position = Vector2(480, 360)
-
-[node name="CameraShake" type="Node" parent="Camera2D" unique_id=2027841240]
-script = ExtResource("1_lrklj")
-
 [node name="FishSpawnAreaNorth" parent="." unique_id=764436265 instance=ExtResource("7_dyrfq")]
 position = Vector2(457, 15)
 max_fish_count = 3
@@ -79,3 +73,9 @@ scale = Vector2(3, 3)
 
 [node name="Player" parent="." unique_id=588714259 instance=ExtResource("3_j1nau")]
 position = Vector2(480, 354)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1460226458]
+position = Vector2(0, 6)
+
+[node name="CameraShake" type="Node" parent="Player/Camera2D" unique_id=2027841240]
+script = ExtResource("1_lrklj")
