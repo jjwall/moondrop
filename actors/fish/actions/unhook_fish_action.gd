@@ -6,5 +6,6 @@ func tick(_actor: Node, blackboard: Blackboard) -> int:
 	
 	if lure:
 		lure.fish_hooked = false
+		lure.fish_interested = false
 		
 	return SUCCESS

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 
 var player_ref
+var fish_interested = false
 var fish_hooked = false
 var fish_caught = false
 var yanking = false
@@ -42,6 +43,8 @@ func player_input_press():
 		fish_caught = true
 	else:
 		print("cancel cast")
+	
+	fish_interested = false
 
 func prep_lure(start_target, end_target):
 	var start = start_target

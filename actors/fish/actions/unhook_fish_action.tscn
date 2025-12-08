@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d28eqlupbi7rr"]
+[gd_scene format=3 uid="uid://d28eqlupbi7rr"]
 
 [ext_resource type="Script" uid="uid://bwjwlarb0fpkd" path="res://actors/fish/actions/unhook_fish_action.gd" id="1_g3i6k"]
 
-[node name="UnhookFishAction" type="Node"]
+[node name="UnhookFishAction" type="Node" unique_id=1892046419]
 script = ExtResource("1_g3i6k")

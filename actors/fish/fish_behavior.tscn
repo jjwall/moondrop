@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://drekughywf4mx"]
+[gd_scene format=3 uid="uid://drekughywf4mx"]
 
 [ext_resource type="Script" uid="uid://bndmh5jujcok8" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_tmod3"]
 [ext_resource type="Script" uid="uid://fs2iw5caunpb" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="2_aj8pj"]
@@ -31,167 +31,167 @@
 [ext_resource type="PackedScene" uid="uid://qsbli4jqhao5" path="res://actors/fish/actions/successful_catch_action.tscn" id="22_p77jx"]
 [ext_resource type="PackedScene" uid="uid://d28eqlupbi7rr" path="res://actors/fish/actions/unhook_fish_action.tscn" id="23_rguf2"]
 
-[node name="FishBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
+[node name="FishBehavior" type="Node" unique_id=699668099 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_tmod3")
-blackboard = NodePath("@Node@21934")
+blackboard = NodePath("@Node@26966")
 actor = NodePath("..")
 
-[node name="SelectorReactiveComposite" type="Node" parent="."]
+[node name="SelectorReactiveComposite" type="Node" parent="." unique_id=901113772]
 script = ExtResource("2_aj8pj")
 
-[node name="SeekLureSequence" type="Node" parent="SelectorReactiveComposite"]
+[node name="SeekLureSequence" type="Node" parent="SelectorReactiveComposite" unique_id=1197683479]
 script = ExtResource("2_o45ge")
 
-[node name="DetectLureAction" parent="SelectorReactiveComposite/SeekLureSequence" instance=ExtResource("4_6jbqm")]
+[node name="DetectLureAction" parent="SelectorReactiveComposite/SeekLureSequence" unique_id=1354117622 instance=ExtResource("4_6jbqm")]
 
-[node name="SelectorComposite" type="Node" parent="SelectorReactiveComposite/SeekLureSequence"]
+[node name="SelectorComposite" type="Node" parent="SelectorReactiveComposite/SeekLureSequence" unique_id=1218170826]
 script = ExtResource("3_8ydfy")
 
-[node name="AttemptBiteSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite"]
+[node name="AttemptBiteSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite" unique_id=1630150830]
 script = ExtResource("2_o45ge")
 
-[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("22_epr68")]
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=1196108778 instance=ExtResource("22_epr68")]
 
-[node name="RotateAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("3_cdi3n")]
+[node name="RotateAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=162421946 instance=ExtResource("3_cdi3n")]
 
-[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=1347037206]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
 
-[node name="MoveToPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TimeLimiterDecorator" unique_id=493719185 instance=ExtResource("6_revx4")]
 acceptance_radius = 28
 
-[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("16_4oace")]
+[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=1147634834 instance=ExtResource("16_4oace")]
 
-[node name="RandomRepeaterDecorator" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("7_loq4j")]
+[node name="RandomRepeaterDecorator" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=825747530 instance=ExtResource("7_loq4j")]
 
-[node name="Nibble" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator"]
+[node name="Nibble" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator" unique_id=1613210708]
 script = ExtResource("10_juh2t")
 
-[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble" instance=ExtResource("22_epr68")]
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble" unique_id=88233812 instance=ExtResource("22_epr68")]
 
-[node name="CheckLureAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble" instance=ExtResource("10_uw7fl")]
+[node name="CheckLureAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble" unique_id=926289011 instance=ExtResource("10_uw7fl")]
 
-[node name="NibblingSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble"]
+[node name="NibblingSequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble" unique_id=971646134]
 script = ExtResource("2_o45ge")
 
-[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("11_un5y5")]
+[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" unique_id=764390294 instance=ExtResource("11_un5y5")]
 
-[node name="RandomWaitAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("4_pc2f7")]
+[node name="RandomWaitAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" unique_id=3948897 instance=ExtResource("4_pc2f7")]
 min_wait_time = 0.0
 max_wait_time = 1.0
 
-[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("21_bbyls")]
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" unique_id=23563681 instance=ExtResource("21_bbyls")]
 
-[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" instance=ExtResource("16_4oace")]
+[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" unique_id=2112068022 instance=ExtResource("16_4oace")]
 
-[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence"]
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence" unique_id=169098955]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
 
-[node name="MoveToPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/RandomRepeaterDecorator/Nibble/NibblingSequence/TimeLimiterDecorator" unique_id=1780041325 instance=ExtResource("6_revx4")]
 acceptance_radius = 28
 
-[node name="PlayBiteLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("16_6d1nn")]
+[node name="PlayBiteLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=32404795 instance=ExtResource("16_6d1nn")]
 
-[node name="TimeToCatchDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
+[node name="TimeToCatchDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=388888283]
 script = ExtResource("6_8kapi")
 wait_time = 1.0
 
-[node name="BiteAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TimeToCatchDecorator" instance=ExtResource("11_wkedo")]
+[node name="BiteAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TimeToCatchDecorator" unique_id=300476342 instance=ExtResource("11_wkedo")]
 
-[node name="PlayCatchingLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("19_43dxp")]
+[node name="PlayCatchingLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=1108355284 instance=ExtResource("19_43dxp")]
 
-[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("21_bbyls")]
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=755634130 instance=ExtResource("21_bbyls")]
 
-[node name="TEMPORARY_AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence"]
+[node name="TEMPORARY_AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=1739781462]
 script = ExtResource("22_efvys")
 
-[node name="TEMPORARY_TimeToStruggleDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TEMPORARY_AlwaysSucceedDecorator"]
+[node name="TEMPORARY_TimeToStruggleDecorator" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TEMPORARY_AlwaysSucceedDecorator" unique_id=910188030]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
 
-[node name="StruggleAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TEMPORARY_AlwaysSucceedDecorator/TEMPORARY_TimeToStruggleDecorator" instance=ExtResource("15_3f3g4")]
+[node name="StruggleAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence/TEMPORARY_AlwaysSucceedDecorator/TEMPORARY_TimeToStruggleDecorator" unique_id=1609457622 instance=ExtResource("15_3f3g4")]
 
-[node name="SuccessfulCatchAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" instance=ExtResource("22_p77jx")]
+[node name="SuccessfulCatchAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/AttemptBiteSequence" unique_id=1505021689 instance=ExtResource("22_p77jx")]
 
-[node name="RunAwaySequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite"]
+[node name="RunAwaySequence" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite" unique_id=1564032933]
 script = ExtResource("2_o45ge")
 
-[node name="UnhookFishAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("23_rguf2")]
+[node name="UnhookFishAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" unique_id=2071967434 instance=ExtResource("23_rguf2")]
 
-[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("16_4oace")]
+[node name="PlayNibbledLureAnimAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" unique_id=2031474887 instance=ExtResource("16_4oace")]
 
-[node name="Rotate180Action" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" instance=ExtResource("12_gub5k")]
+[node name="Rotate180Action" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" unique_id=509094250 instance=ExtResource("12_gub5k")]
 
-[node name="SimpleParallelComposite" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence"]
+[node name="SimpleParallelComposite" type="Node" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence" unique_id=975077133]
 script = ExtResource("13_ubyc7")
 
-[node name="MoveIndefinitelyAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence/SimpleParallelComposite" instance=ExtResource("16_hslch")]
+[node name="MoveIndefinitelyAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence/SimpleParallelComposite" unique_id=1564218427 instance=ExtResource("16_hslch")]
 move_speed = 125
 
-[node name="FadeOutAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence/SimpleParallelComposite" instance=ExtResource("12_bigfc")]
+[node name="FadeOutAction" parent="SelectorReactiveComposite/SeekLureSequence/SelectorComposite/RunAwaySequence/SimpleParallelComposite" unique_id=87593940 instance=ExtResource("12_bigfc")]
 
-[node name="WanderSequence" type="Node" parent="SelectorReactiveComposite"]
+[node name="WanderSequence" type="Node" parent="SelectorReactiveComposite" unique_id=597995951]
 script = ExtResource("2_o45ge")
 
-[node name="SelectorRandomComposite" type="Node" parent="SelectorReactiveComposite/WanderSequence"]
+[node name="SelectorRandomComposite" type="Node" parent="SelectorReactiveComposite/WanderSequence" unique_id=708085321]
 script = ExtResource("18_6oy5m")
 
-[node name="MoveForwardAndBackSequence" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite"]
+[node name="MoveForwardAndBackSequence" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite" unique_id=1720016973]
 script = ExtResource("2_o45ge")
 
-[node name="RandomWaitAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("4_pc2f7")]
+[node name="RandomWaitAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" unique_id=1334430620 instance=ExtResource("4_pc2f7")]
 
-[node name="PickPosInFrontAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("19_fuqww")]
+[node name="PickPosInFrontAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" unique_id=1053929286 instance=ExtResource("19_fuqww")]
 
-[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("21_bbyls")]
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" unique_id=1990473159 instance=ExtResource("21_bbyls")]
 
-[node name="AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence"]
+[node name="AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" unique_id=1704023750]
 script = ExtResource("22_efvys")
 
-[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/AlwaysSucceedDecorator"]
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/AlwaysSucceedDecorator" unique_id=373072996]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
 
-[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/AlwaysSucceedDecorator/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence/AlwaysSucceedDecorator/TimeLimiterDecorator" unique_id=2009590345 instance=ExtResource("6_revx4")]
 attack_target = false
 
-[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("22_epr68")]
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" unique_id=381780250 instance=ExtResource("22_epr68")]
 
-[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" instance=ExtResource("11_un5y5")]
+[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/MoveForwardAndBackSequence" unique_id=363189558 instance=ExtResource("11_un5y5")]
 
-[node name="RotateAndMoveSequence" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite"]
+[node name="RotateAndMoveSequence" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite" unique_id=1786090964]
 script = ExtResource("2_o45ge")
 
-[node name="RandomWaitAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("4_pc2f7")]
+[node name="RandomWaitAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" unique_id=1616737070 instance=ExtResource("4_pc2f7")]
 min_wait_time = 2.0
 max_wait_time = 5.0
 
-[node name="PickPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("3_idxc8")]
+[node name="PickPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" unique_id=2115079715 instance=ExtResource("3_idxc8")]
 
-[node name="RotateAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("3_cdi3n")]
+[node name="RotateAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" unique_id=67586736 instance=ExtResource("3_cdi3n")]
 
-[node name="RandomWaitAction2" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("4_pc2f7")]
+[node name="RandomWaitAction2" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" unique_id=1430063339 instance=ExtResource("4_pc2f7")]
 min_wait_time = 0.0
 max_wait_time = 2.0
 
-[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("21_bbyls")]
+[node name="PlaySwimFastAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" unique_id=1369291583 instance=ExtResource("21_bbyls")]
 
-[node name="AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence"]
+[node name="AlwaysSucceedDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" unique_id=602315507]
 script = ExtResource("22_efvys")
 
-[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/AlwaysSucceedDecorator"]
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/AlwaysSucceedDecorator" unique_id=1057446322]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
 
-[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/AlwaysSucceedDecorator/TimeLimiterDecorator" instance=ExtResource("6_revx4")]
+[node name="MoveToPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/AlwaysSucceedDecorator/TimeLimiterDecorator" unique_id=844025325 instance=ExtResource("6_revx4")]
 attack_target = false
 
-[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" instance=ExtResource("22_epr68")]
+[node name="PlaySwimSlowAnimAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" unique_id=493176015 instance=ExtResource("22_epr68")]
 
-[node name="TimeLimiterDecorator2" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence"]
+[node name="TimeLimiterDecorator2" type="Node" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence" unique_id=464443387]
 script = ExtResource("6_8kapi")
 wait_time = 2.0
 
-[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/TimeLimiterDecorator2" instance=ExtResource("11_un5y5")]
+[node name="MoveAwayFromPosAction" parent="SelectorReactiveComposite/WanderSequence/SelectorRandomComposite/RotateAndMoveSequence/TimeLimiterDecorator2" unique_id=699419068 instance=ExtResource("11_un5y5")]

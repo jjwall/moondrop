@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://06ws025jp3p2"]
+[gd_scene format=3 uid="uid://06ws025jp3p2"]
 
 [ext_resource type="Script" uid="uid://d2ywnpuwmmdje" path="res://objects/lure/lure.gd" id="1_y873i"]
 [ext_resource type="Texture2D" uid="uid://dxdc5hi53phy" path="res://assets/textures/objects/lure-submerging.png" id="2_1cgld"]
@@ -195,15 +195,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_r0jrn"]
 radius = 6.08276
 
-[node name="Lure" type="CharacterBody2D" groups=["Lures"]]
+[node name="Lure" type="CharacterBody2D" unique_id=1293254316 groups=["Lures"]]
 script = ExtResource("1_y873i")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=392261991]
 position = Vector2(0, -1)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_alrnq")
 animation = &"plop"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2109345014]
 shape = SubResource("CircleShape2D_r0jrn")
