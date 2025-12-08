@@ -8,12 +8,16 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Moondrop"
 config/tags=PackedStringArray("template")
 run/main_scene="res://scenes/main_menu/main_menu.tscn"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time.release=2000
 
@@ -26,10 +30,10 @@ buses/default_bus_layout="res://audio_bus_layout.tres"
 Globals="*res://autoload/globals/globals.gd"
 SceneGirl="*res://autoload/scene_girl/scene_girl.gd"
 MusicMan="*res://autoload/music_man.gd"
-TestCamera="*res://addons/test_camera/test_camera_manager.gd"
-BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
-BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
-DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+TestCamera="*uid://cat7n4ilokwpe"
+BeehaveGlobalMetrics="*uid://bl7hkjpwhcf41"
+BeehaveGlobalDebugger="*uid://dn0lxnuih63di"
+DebugMenu="*uid://cggqb75a8w8r"
 RefData="*res://autoload/globals/ref_data.gd"
 
 [display]
