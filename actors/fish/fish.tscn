@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bc0pfq7sj6k7e"]
+[gd_scene format=3 uid="uid://bc0pfq7sj6k7e"]
 
 [ext_resource type="Script" uid="uid://d15mmvy2hqpnh" path="res://actors/fish/fish.gd" id="1_wsogg"]
 [ext_resource type="Script" uid="uid://dil4stoo2m5kk" path="res://addons/beehave/blackboard.gd" id="2_ai5bb"]
@@ -83,16 +83,16 @@ size = Vector2(24, 21)
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrfi2"]
 radius = 35.0
 
-[node name="Fish" type="CharacterBody2D"]
+[node name="Fish" type="CharacterBody2D" unique_id=1004603197]
 script = ExtResource("1_wsogg")
 
-[node name="Blackboard" type="Node" parent="."]
+[node name="Blackboard" type="Node" parent="." unique_id=164491572]
 script = ExtResource("2_ai5bb")
 
-[node name="FishBehavior" parent="." node_paths=PackedStringArray("blackboard") instance=ExtResource("3_e1k38")]
+[node name="FishBehavior" parent="." unique_id=124611156 node_paths=PackedStringArray("blackboard") instance=ExtResource("3_e1k38")]
 blackboard = NodePath("../Blackboard")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1834667778]
 position = Vector2(-6, -1)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_xpauj")
@@ -100,19 +100,19 @@ animation = &"swim_slow"
 autoplay = "swim_slow"
 frame_progress = 0.92502
 
-[node name="MouthHitBox" type="CollisionShape2D" parent="."]
+[node name="MouthHitBox" type="CollisionShape2D" parent="." unique_id=865835517]
 position = Vector2(19.5, 0.5)
 shape = SubResource("RectangleShape2D_qfym0")
 debug_color = Color(0.294207, 0.620864, 0.300171, 0.42)
 
-[node name="BodyHitBox" type="CollisionShape2D" parent="."]
+[node name="BodyHitBox" type="CollisionShape2D" parent="." unique_id=875037213]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_v2tsx")
 
-[node name="LureSeekingRadius" type="Area2D" parent="."]
+[node name="LureSeekingRadius" type="Area2D" parent="." unique_id=472391017]
 position = Vector2(53, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LureSeekingRadius"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LureSeekingRadius" unique_id=963425054]
 position = Vector2(-6, 0)
 shape = SubResource("CircleShape2D_hrfi2")
 debug_color = Color(0.866717, 0.342489, 0.248447, 0.42)

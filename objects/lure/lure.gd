@@ -70,7 +70,7 @@ func prep_lure(start_target, end_target):
 	
 	lure_path = points
 
-func _process(delta):
+func _physics_process(delta):
 	if not lure_flying:
 		return
 	
@@ -79,6 +79,22 @@ func _process(delta):
 	if lure_t >= 1.0:
 		if casting:
 			on_cast_end()
+			
+			# Test collision for lure hitting land.
+			var tilemap = $/root/MainGameplay/BIsland/TileMap
+			var collision = move_and_collide(velocity * delta, true)
+			if collision:
+				var cell = tilemap.local_to_map(collision.get_position() - collision.get_normal())
+				var tile_id = tilemap.get_cell_source_id(0, cell) # .get_cellv(cell)
+				if tile_id == -1:
+					# If lure hits land, trigger automatic yank (see Player fishing state for ref)
+					player_ref.yanking = true
+					player_ref.yank_lure()
+					# match direction ...
+					player_ref.anim.play("yank_south")
+					await player_ref.wait_for_lure_to_return()
+					yanking = false
+					player_ref._goto("idle")
 		else:
 			on_cancel_cast_end()
 		#ball.visible = false
