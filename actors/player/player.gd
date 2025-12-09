@@ -40,11 +40,11 @@ func dialog_say(s: String) -> void:
 	#await dialog_button.pressed
 	await pressedConfirm
 
-func caught_fish_dialog(fish_data: Dictionary) -> void:
+func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float) -> void:
 	dialog_panel.visible = true
 	in_dialog = true
 	await dialog_say(fish_data.message)
-	await dialog_say("This badboy weighs 22 pounds!")
+	await dialog_say("I caught a %s weighing %.2f pounds!" % [fish_data.name, fish_measurement])
 	in_dialog = false
 	
 func on_reset_ui():
@@ -55,6 +55,10 @@ func wait_for_lure_to_return():
 		return lure.tree_exited
 	else:
 		null
+
+func determine_fish_measurement(fish_data: Dictionary) -> float:
+	var fish_measurement = randf_range(fish_data.min_weight, fish_data.max_weight)
+	return fish_measurement
 
 func _always_process(_delta):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
@@ -237,7 +241,8 @@ func _state_get_item_enter():
 	caught_fish_to_display = recent_caught_fish.scene.instantiate()
 	caught_fish_to_display.position.y -= 75
 	self.add_child(caught_fish_to_display)
-	caught_fish_dialog(recent_caught_fish)
+	var fish_measurement = determine_fish_measurement(recent_caught_fish)
+	caught_fish_dialog(recent_caught_fish, fish_measurement)
 
 func _state_get_item_process(_delta):
 	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display) and !in_dialog:
