@@ -18,10 +18,12 @@ var in_dialog = false
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dialog_panel: Panel = %DialogPanel
 @onready var dialog_label: Label = %DialogLabel
+@onready var dialog_confirm: Label = %DialogConfirm
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():
 	dialog_panel.visible = false
+	dialog_confirm.visible = false
 	_goto("idle")
 
 
@@ -33,12 +35,18 @@ func dialog_say(s: String) -> void:
 	dialog_label.text = s
 	dialog_label.visible_ratio = 0.0
 	var tween = create_tween()
-	tween.tween_property(dialog_label, "visible_ratio", 1.0, 0.5)
+	tween.tween_property(dialog_label, "visible_ratio", 1.0, 0.75)
 	#dialog_button.disabled = true
 	await tween.finished
+	dialog_confirm.visible = true
+	var tw = create_tween()
+	tw.set_loops()
+	tw.tween_property(dialog_confirm, "self_modulate:a", 0, 0.5)
+	tw.tween_property(dialog_confirm, "self_modulate:a", 1, 0.5)
 	#dialog_button.disabled = false
 	#await dialog_button.pressed
 	await pressedConfirm
+	dialog_confirm.visible = false
 
 func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float) -> void:
 	dialog_panel.visible = true

@@ -528,14 +528,30 @@ metadata/_edit_use_anchors_ = true
 
 [node name="DialogLabel" type="Label" parent="CanvasLayer/DialogPanel" unique_id=786438096]
 unique_name_in_owner = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0012820513
+anchor_top = -0.14358975
+anchor_right = -0.0012820513
+anchor_bottom = -0.14358975
 offset_left = 19.0
-offset_top = 16.0
+offset_top = 41.0
 offset_right = 757.0
 offset_bottom = 175.0
 theme_override_font_sizes/font_size = 58
 text = "Hello this is a test."
+autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="DialogConfirm" type="Label" parent="CanvasLayer/DialogPanel" unique_id=1980310554]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 746.0
+offset_top = 140.0
+offset_right = 771.0
+offset_bottom = 177.0
+theme_override_font_sizes/font_size = 58
+text = ">"
 
 [node name="DialogButton" type="Button" parent="CanvasLayer/DialogPanel" unique_id=1819362309]
 unique_name_in_owner = true
