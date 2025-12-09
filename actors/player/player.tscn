@@ -520,9 +520,9 @@ shape = SubResource("RectangleShape2D_aya8m")
 
 [node name="DialogPanel" type="Panel" parent="CanvasLayer" unique_id=850650733]
 unique_name_in_owner = true
-offset_left = 102.0
+offset_left = 92.0
 offset_top = 490.0
-offset_right = 882.0
+offset_right = 872.0
 offset_bottom = 685.0
 metadata/_edit_use_anchors_ = true
 
@@ -533,7 +533,9 @@ offset_left = 19.0
 offset_top = 16.0
 offset_right = 757.0
 offset_bottom = 175.0
+theme_override_font_sizes/font_size = 58
 text = "Hello this is a test."
+metadata/_edit_use_anchors_ = true
 
 [node name="DialogButton" type="Button" parent="CanvasLayer/DialogPanel" unique_id=1819362309]
 unique_name_in_owner = true
