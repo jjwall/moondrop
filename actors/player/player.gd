@@ -28,7 +28,19 @@ func _always_process(_delta):
 
 func _always_physics_process(_delta):
 	pass
-	
+
+func on_zoom_camera():
+	var camera_node: Camera2D = self.get_node("Camera2D")
+	var tween = get_tree().create_tween()
+	var new_zoom_vec2 = Vector2(1.5, 1.5)
+	tween.tween_property(camera_node, "zoom", new_zoom_vec2, 0.2).set_ease(Tween.EaseType.EASE_IN_OUT)
+
+func on_reset_camera():
+	var camera_node: Camera2D = self.get_node("Camera2D")
+	var tween = get_tree().create_tween()
+	var reset_zoom_vec2 = Vector2(1.0, 1.0)
+	tween.tween_property(camera_node, "zoom", reset_zoom_vec2, 0.2).set_ease(Tween.EaseType.EASE_IN_OUT)
+
 func cast_lure():
 	if is_instance_valid(lure) and lure != null:
 		lure.queue_free()
@@ -107,7 +119,9 @@ func _state_reel_exit():
 	anim.play("yank_south")
 	yank_lure()
 	await wait_for_lure_to_return()
+	on_zoom_camera()
 	_goto("get_item")
+	
 #endregion
 
 #region State idle
@@ -195,6 +209,7 @@ func _state_get_item_process(_delta):
 	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display):
 		caught_fish_to_display.queue_free()
 		caught_fish_to_display = null
+		on_reset_camera()
 		_goto("idle")
 
 func _state_get_item_physics_process(_delta):
