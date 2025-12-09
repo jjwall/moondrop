@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cx45ltpnar43i"]
+[gd_scene format=3 uid="uid://cx45ltpnar43i"]
 
 [ext_resource type="Script" uid="uid://cxpr5fuv5g25g" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
@@ -501,10 +501,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
 size = Vector2(39, 17)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=85828012]
 script = ExtResource("1_d7vyd")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=503992229]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mt824")
 animation = &"yank_south"
@@ -512,6 +512,35 @@ autoplay = "idle_south"
 frame = 2
 frame_progress = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2092531117]
 position = Vector2(1.5, 45.5)
 shape = SubResource("RectangleShape2D_aya8m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1576526034]
+
+[node name="DialogPanel" type="Panel" parent="CanvasLayer" unique_id=850650733]
+unique_name_in_owner = true
+offset_left = 102.0
+offset_top = 490.0
+offset_right = 882.0
+offset_bottom = 685.0
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogLabel" type="Label" parent="CanvasLayer/DialogPanel" unique_id=786438096]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 19.0
+offset_top = 16.0
+offset_right = 757.0
+offset_bottom = 175.0
+text = "Hello this is a test."
+
+[node name="DialogButton" type="Button" parent="CanvasLayer/DialogPanel" unique_id=1819362309]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 737.0
+offset_top = 157.0
+offset_right = 769.0
+offset_bottom = 189.0
+text = "->"

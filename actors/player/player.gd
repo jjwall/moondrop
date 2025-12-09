@@ -2,8 +2,9 @@ extends CharacterBody2D
 
 #TODO Player script needs de-complication pass.
 
+signal pressedConfirm
+
 const SPEED = 150.0
-var anim: AnimatedSprite2D
 var direction := Vector2.ZERO
 var prev_direction := Vector2(0, 1)
 
@@ -12,10 +13,42 @@ var caught_fish_to_display = null
 var lure = null
 var recent_caught_fish = {}
 var yanking = false
+var in_dialog = false
+
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var dialog_panel: Panel = %DialogPanel
+@onready var dialog_label: Label = %DialogLabel
+#@onready var dialog_button: Button = %DialogButton
 
 func _ready():
-	anim = $AnimatedSprite2D
+	dialog_panel.visible = false
 	_goto("idle")
+
+
+func _input(event):
+	if Input.is_action_just_pressed("ui_accept"):
+		pressedConfirm.emit()
+
+func dialog_say(s: String) -> void:
+	dialog_label.text = s
+	dialog_label.visible_ratio = 0.0
+	var tween = create_tween()
+	tween.tween_property(dialog_label, "visible_ratio", 1.0, 0.5)
+	#dialog_button.disabled = true
+	await tween.finished
+	#dialog_button.disabled = false
+	#await dialog_button.pressed
+	await pressedConfirm
+
+func caught_fish_dialog(fish_data: Dictionary) -> void:
+	dialog_panel.visible = true
+	in_dialog = true
+	await dialog_say(fish_data.message)
+	await dialog_say("This badboy weighs 22 pounds!")
+	in_dialog = false
+	
+func on_reset_ui():
+	dialog_panel.visible = false
 
 func wait_for_lure_to_return():
 	if is_instance_valid(lure):
@@ -204,11 +237,13 @@ func _state_get_item_enter():
 	caught_fish_to_display = recent_caught_fish.scene.instantiate()
 	caught_fish_to_display.position.y -= 75
 	self.add_child(caught_fish_to_display)
+	caught_fish_dialog(recent_caught_fish)
 
 func _state_get_item_process(_delta):
-	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display):
+	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display) and !in_dialog:
 		caught_fish_to_display.queue_free()
 		caught_fish_to_display = null
+		on_reset_ui()
 		on_reset_camera()
 		_goto("idle")
 
