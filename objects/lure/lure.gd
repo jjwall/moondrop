@@ -82,13 +82,24 @@ func _physics_process(delta):
 			
 			# Test collision for lure hitting land.
 			var tilemap = $/root/MainGameplay/BIsland/TileMap
-			var collision = move_and_collide(velocity * delta, true)
-			if collision:
-				print(collision)
-				var cell = tilemap.local_to_map(collision.get_position() - collision.get_normal())
-				var tile_id = tilemap.get_cell_source_id(1, cell) # .get_cellv(cell)
-				print(tile_id)
-				if tile_id == -1:
+			var collision = move_and_collide(Vector2.ZERO * delta, true)
+			if collision and collision.get_collider().get_class() == "TileMap":
+				var tile_coords = tilemap.local_to_map(to_local(collision.get_position()))
+				var atlas_coords = tilemap.get_cell_atlas_coords(0, tile_coords)
+				var tile_list = [
+					Vector2i(-1, -1), # Tile not found.
+					Vector2i(5, 1), # Land
+					Vector2i(7, 1), # Land
+					Vector2i(8, 1), # Land
+					Vector2i(9, 1), # Land
+					Vector2i(19, 5), # Shoreline
+					Vector2i(20, 5), # Shoreline
+					Vector2i(21, 5), # Shoreline
+					Vector2i(22, 5), # Shoreline
+					Vector2i(23, 5), # Shoreline
+					Vector2i(24, 5), # Shoreline
+				]
+				if atlas_coords in tile_list:
 					# If lure hits land, trigger automatic yank (see Player fishing state for ref)
 					player_ref.yanking = true
 					player_ref.yank_lure()
