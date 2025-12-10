@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bje3v5otj2v6d" path="res://objects/maps/b_island/b_island.tscn" id="2_klphv"]
 [ext_resource type="PackedScene" uid="uid://c2bmfu7agagkx" path="res://objects/water/water.scn" id="2_up2o6"]
 [ext_resource type="PackedScene" uid="uid://cx45ltpnar43i" path="res://actors/player/player.tscn" id="3_j1nau"]
+[ext_resource type="Script" uid="uid://bl7xocdssk0tu" path="res://scenes/main_gameplay/camera_controller.gd" id="6_2ufyh"]
 [ext_resource type="PackedScene" uid="uid://by7y6swpe6hsp" path="res://objects/fish_spawn_area/fish_spawn_area.tscn" id="7_dyrfq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fenso"]
@@ -98,8 +99,11 @@ scale = Vector2(3, 3)
 [node name="Player" parent="." unique_id=588714259 instance=ExtResource("3_j1nau")]
 position = Vector2(480, 354)
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1460226458]
-position = Vector2(0, 6)
+[node name="CameraController" type="Node2D" parent="." unique_id=142135720]
+script = ExtResource("6_2ufyh")
 
-[node name="CameraShake" type="Node" parent="Player/Camera2D" unique_id=2027841240]
+[node name="Camera2D" type="Camera2D" parent="CameraController" unique_id=1460226458]
+position = Vector2(480, 360)
+
+[node name="CameraShake" type="Node" parent="CameraController/Camera2D" unique_id=2027841240]
 script = ExtResource("1_lrklj")

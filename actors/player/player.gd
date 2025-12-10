@@ -18,6 +18,8 @@ var recent_caught_fish = {}
 var yanking = false
 var in_dialog = false
 
+@onready var camera_controller = $/root/MainGameplay/CameraController
+@onready var camera = $/root/MainGameplay/CameraController/Camera2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dialog_panel: Panel = %DialogPanel
 @onready var dialog_label: Label = %DialogLabel
@@ -27,6 +29,7 @@ var in_dialog = false
 func _ready():
 	dialog_panel.visible = false
 	dialog_confirm.visible = false
+	camera_controller.set_target(self)
 	_goto("idle")
 
 
@@ -78,13 +81,13 @@ func _always_physics_process(_delta):
 	pass
 
 func on_zoom_camera():
-	var camera_node: Camera2D = self.get_node("Camera2D")
+	var camera_node: Camera2D = $/root/MainGameplay/CameraController/Camera2D # self.get_node("Camera2D")
 	var tween = get_tree().create_tween()
 	var new_zoom_vec2 = Vector2(1.5, 1.5)
 	tween.tween_property(camera_node, "zoom", new_zoom_vec2, 0.2).set_ease(Tween.EaseType.EASE_IN_OUT)
 
 func on_reset_camera():
-	var camera_node: Camera2D = self.get_node("Camera2D")
+	var camera_node: Camera2D = $/root/MainGameplay/CameraController/Camera2D # self.get_node("Camera2D")
 	var tween = get_tree().create_tween()
 	var reset_zoom_vec2 = Vector2(1.0, 1.0)
 	tween.tween_property(camera_node, "zoom", reset_zoom_vec2, 0.2).set_ease(Tween.EaseType.EASE_IN_OUT)
@@ -100,6 +103,7 @@ func render_radial_highlight(pos):
 
 func cast_lure():
 	if is_instance_valid(lure) and lure != null:
+		camera_controller.set_target(self)
 		lure.queue_free()
 		lure == null
 	
@@ -109,6 +113,9 @@ func cast_lure():
 	#lure_pos += prev_direction * 150
 	new_lure.set_position(lure_pos)
 	new_lure.player_ref = self
+	
+	# Set camera to follow lure.
+	camera_controller.set_target(new_lure)
 	
 	# Set delay to match up with casting animation.
 	await get_tree().create_timer(0.5).timeout

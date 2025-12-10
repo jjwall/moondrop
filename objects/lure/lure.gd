@@ -30,6 +30,8 @@ var lure_flying := false
 var lure_cast_speed := 1.0
 var casting = true
 
+@onready var camera_controller = $/root/MainGameplay/CameraController
+
 func _ready():
 	casting = true
 	lure_cast_speed *= randf_range(0.9,1.1)
@@ -132,6 +134,8 @@ func on_cast_end():
 
 func on_cancel_cast_end():
 	lure_flying = false
+	# Set camera to follow player again - need set this before we free up the lure.
+	camera_controller.set_target(player_ref)
 	self.queue_free()
 
 func cast():
