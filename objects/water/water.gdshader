@@ -1,8 +1,15 @@
 shader_type canvas_item;
 
+render_mode skip_vertex_transform;
+uniform vec2 world_scale = vec2(1024.0, 1024.0);
+
+void vertex() {
+    VERTEX = (MODEL_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
+    UV = VERTEX / world_scale;
+}
+
 uniform vec2 tiled_factor = vec2(10.0, 10.0);
 uniform float aspect_ratio = 0.5;
-
 uniform vec2 offset_scale = vec2(2.0, 2.0);
 
 void fragment() {

@@ -2,26 +2,77 @@ extends CharacterBody2D
 
 #TODO Player script needs de-complication pass.
 
+signal pressedConfirm
+
 const SPEED = 150.0
-var anim: AnimatedSprite2D
 var direction := Vector2.ZERO
 var prev_direction := Vector2(0, 1)
 
+var radial_highlight_scene = preload("res://objects/radial_highlight/radial_highlight.tscn")
+
 var lure_scene = preload("res://objects/lure/lure.tscn")
 var caught_fish_to_display = null
+var radial_highlight_to_display = null
 var lure = null
 var recent_caught_fish = {}
 var yanking = false
+var in_dialog = false
+
+@onready var camera_controller = $/root/MainGameplay/CameraController
+@onready var camera = $/root/MainGameplay/CameraController/Camera2D
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var dialog_panel: Panel = %DialogPanel
+@onready var dialog_label: RichTextLabel = %DialogLabel
+@onready var dialog_confirm: Label = %DialogConfirm
+#@onready var dialog_button: Button = %DialogButton
 
 func _ready():
-	anim = $AnimatedSprite2D
+	dialog_panel.visible = false
+	dialog_confirm.visible = false
+	camera_controller.set_target(self)
 	_goto("idle")
+
+
+func _input(event):
+	if Input.is_action_just_pressed("ui_accept"):
+		pressedConfirm.emit()
+
+func dialog_say(s: String) -> void:
+	dialog_label.text = s
+	dialog_label.visible_ratio = 0.0
+	var tween = create_tween()
+	tween.tween_property(dialog_label, "visible_ratio", 1.0, 0.75)
+	#dialog_button.disabled = true
+	await tween.finished
+	dialog_confirm.visible = true
+	var tw = create_tween()
+	tw.set_loops()
+	tw.tween_property(dialog_confirm, "self_modulate:a", 0, 0.5)
+	tw.tween_property(dialog_confirm, "self_modulate:a", 1, 0.5)
+	#dialog_button.disabled = false
+	#await dialog_button.pressed
+	await pressedConfirm
+	dialog_confirm.visible = false
+
+func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float) -> void:
+	dialog_panel.visible = true
+	in_dialog = true
+	await dialog_say(fish_data.message)
+	await dialog_say("I caught a %s weighing %.2f pounds!" % [fish_data.name, fish_measurement])
+	in_dialog = false
+	
+func on_reset_ui():
+	dialog_panel.visible = false
 
 func wait_for_lure_to_return():
 	if is_instance_valid(lure):
 		return lure.tree_exited
 	else:
 		null
+
+func determine_fish_measurement(fish_data: Dictionary) -> float:
+	var fish_measurement = randf_range(fish_data.min_weight, fish_data.max_weight)
+	return fish_measurement
 
 func _always_process(_delta):
 	direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
@@ -30,19 +81,29 @@ func _always_physics_process(_delta):
 	pass
 
 func on_zoom_camera():
-	var camera_node: Camera2D = self.get_node("Camera2D")
+	var camera_node: Camera2D = $/root/MainGameplay/CameraController/Camera2D # self.get_node("Camera2D")
 	var tween = get_tree().create_tween()
 	var new_zoom_vec2 = Vector2(1.5, 1.5)
 	tween.tween_property(camera_node, "zoom", new_zoom_vec2, 0.2).set_ease(Tween.EaseType.EASE_IN_OUT)
 
 func on_reset_camera():
-	var camera_node: Camera2D = self.get_node("Camera2D")
+	var camera_node: Camera2D = $/root/MainGameplay/CameraController/Camera2D # self.get_node("Camera2D")
 	var tween = get_tree().create_tween()
 	var reset_zoom_vec2 = Vector2(1.0, 1.0)
-	tween.tween_property(camera_node, "zoom", reset_zoom_vec2, 0.2).set_ease(Tween.EaseType.EASE_IN_OUT)
+	tween.tween_property(camera_node, "zoom", reset_zoom_vec2, 0.35).set_ease(Tween.EaseType.EASE_IN_OUT)
+
+func render_radial_highlight(pos):
+	var new_highlight = radial_highlight_scene.instantiate()
+	radial_highlight_to_display = new_highlight
+	#var highlight_pos = Vector2(self.global_position.x, self.global_position.y) # self.global_position
+	pos.y -= 67
+	pos.x -= 70
+	new_highlight.set_position(pos)
+	self.add_child(new_highlight)
 
 func cast_lure():
 	if is_instance_valid(lure) and lure != null:
+		camera_controller.set_target(self)
 		lure.queue_free()
 		lure == null
 	
@@ -52,6 +113,9 @@ func cast_lure():
 	#lure_pos += prev_direction * 150
 	new_lure.set_position(lure_pos)
 	new_lure.player_ref = self
+	
+	# Set camera to follow lure.
+	camera_controller.set_target(new_lure)
 	
 	# Set delay to match up with casting animation.
 	await get_tree().create_timer(0.5).timeout
@@ -203,12 +267,19 @@ func _state_get_item_enter():
 	anim.play("get_item")
 	caught_fish_to_display = recent_caught_fish.scene.instantiate()
 	caught_fish_to_display.position.y -= 75
+	render_radial_highlight(caught_fish_to_display.position)
 	self.add_child(caught_fish_to_display)
+	
+	var fish_measurement = determine_fish_measurement(recent_caught_fish)
+	caught_fish_dialog(recent_caught_fish, fish_measurement)
 
 func _state_get_item_process(_delta):
-	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display):
+	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display) and !in_dialog:
 		caught_fish_to_display.queue_free()
 		caught_fish_to_display = null
+		radial_highlight_to_display.queue_free()
+		radial_highlight_to_display = null
+		on_reset_ui()
 		on_reset_camera()
 		_goto("idle")
 

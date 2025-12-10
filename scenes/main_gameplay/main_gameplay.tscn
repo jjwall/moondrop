@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bje3v5otj2v6d" path="res://objects/maps/b_island/b_island.tscn" id="2_klphv"]
 [ext_resource type="PackedScene" uid="uid://c2bmfu7agagkx" path="res://objects/water/water.scn" id="2_up2o6"]
 [ext_resource type="PackedScene" uid="uid://cx45ltpnar43i" path="res://actors/player/player.tscn" id="3_j1nau"]
+[ext_resource type="Script" uid="uid://bl7xocdssk0tu" path="res://scenes/main_gameplay/camera_controller.gd" id="6_2ufyh"]
 [ext_resource type="PackedScene" uid="uid://by7y6swpe6hsp" path="res://objects/fish_spawn_area/fish_spawn_area.tscn" id="7_dyrfq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fenso"]
@@ -24,51 +25,33 @@ size = Vector2(850, 75)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvb2x"]
 size = Vector2(850, 100)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xudop"]
+size = Vector2(114, 502)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ufyh"]
+size = Vector2(109, 487)
+
 [node name="MainGameplay" type="Node2D" unique_id=44315712]
 script = ExtResource("1_wt4mr")
 
 [node name="Water" parent="." unique_id=1366665200 instance=ExtResource("2_up2o6")]
 
-[node name="Water2" parent="." unique_id=1979463766 instance=ExtResource("2_up2o6")]
-position = Vector2(-960, 0)
-
-[node name="Water3" parent="." unique_id=1591168750 instance=ExtResource("2_up2o6")]
-position = Vector2(0, -720)
-
-[node name="Water4" parent="." unique_id=77757103 instance=ExtResource("2_up2o6")]
-position = Vector2(-960, -720)
-
-[node name="Water5" parent="." unique_id=936506987 instance=ExtResource("2_up2o6")]
-position = Vector2(960, -720)
-
-[node name="Water6" parent="." unique_id=1375560625 instance=ExtResource("2_up2o6")]
-position = Vector2(960, 0)
-
-[node name="Water7" parent="." unique_id=2003920340 instance=ExtResource("2_up2o6")]
-position = Vector2(960, 720)
-
-[node name="Water8" parent="." unique_id=1277424368 instance=ExtResource("2_up2o6")]
-position = Vector2(1, 719)
-
-[node name="Water9" parent="." unique_id=21197413 instance=ExtResource("2_up2o6")]
-position = Vector2(-959, 720)
-
 [node name="Walls" type="StaticBody2D" parent="." unique_id=851327041]
 
 [node name="LeftWall" type="CollisionShape2D" parent="Walls" unique_id=665122701]
-position = Vector2(0, 322)
+position = Vector2(-128, 322)
 shape = SubResource("WorldBoundaryShape2D_fenso")
 
 [node name="RightWall" type="CollisionShape2D" parent="Walls" unique_id=1788110795]
-position = Vector2(959, 322)
+position = Vector2(1095, 322)
 shape = SubResource("WorldBoundaryShape2D_vywn0")
 
 [node name="TopWall" type="CollisionShape2D" parent="Walls" unique_id=1637335568]
-position = Vector2(485, -2)
+position = Vector2(485, -170)
 shape = SubResource("WorldBoundaryShape2D_6mfka")
 
 [node name="BottomWall" type="CollisionShape2D" parent="Walls" unique_id=186869109]
-position = Vector2(486, 719)
+position = Vector2(486, 751)
 shape = SubResource("WorldBoundaryShape2D_4kntg")
 
 [node name="FishSpawnAreaNorth" parent="." unique_id=764436265 instance=ExtResource("7_dyrfq")]
@@ -89,6 +72,24 @@ position = Vector2(4, 1.5)
 shape = SubResource("RectangleShape2D_xvb2x")
 debug_color = Color(0.780532, 0.291189, 0.81456, 0.42)
 
+[node name="FishSpawnAreaEast" parent="." unique_id=1937481966 instance=ExtResource("7_dyrfq")]
+max_fish_count = 2
+fish_spawner_wait_time = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishSpawnAreaEast" unique_id=155730178]
+position = Vector2(1031, 345)
+shape = SubResource("RectangleShape2D_xudop")
+debug_color = Color(0.7087868, 0.3700309, 0.80779696, 0.41960785)
+
+[node name="FishSpawnAreaWest" parent="." unique_id=526359924 instance=ExtResource("7_dyrfq")]
+max_fish_count = 2
+fish_spawner_wait_time = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishSpawnAreaWest" unique_id=1477548217]
+position = Vector2(-59.5, 354.5)
+shape = SubResource("RectangleShape2D_2ufyh")
+debug_color = Color(0.6680774, 0.17083544, 0.45139492, 0.41960785)
+
 [node name="FishGroup" type="Node2D" parent="." unique_id=1295738368]
 
 [node name="BIsland" parent="." unique_id=491619344 instance=ExtResource("2_klphv")]
@@ -98,8 +99,11 @@ scale = Vector2(3, 3)
 [node name="Player" parent="." unique_id=588714259 instance=ExtResource("3_j1nau")]
 position = Vector2(480, 354)
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1460226458]
-position = Vector2(0, 6)
+[node name="CameraController" type="Node2D" parent="." unique_id=142135720]
+script = ExtResource("6_2ufyh")
 
-[node name="CameraShake" type="Node" parent="Player/Camera2D" unique_id=2027841240]
+[node name="Camera2D" type="Camera2D" parent="CameraController" unique_id=1460226458]
+position = Vector2(480, 360)
+
+[node name="CameraShake" type="Node" parent="CameraController/Camera2D" unique_id=2027841240]
 script = ExtResource("1_lrklj")

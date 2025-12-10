@@ -1,7 +1,8 @@
-[gd_scene load_steps=61 format=3 uid="uid://cx45ltpnar43i"]
+[gd_scene format=3 uid="uid://cx45ltpnar43i"]
 
 [ext_resource type="Script" uid="uid://cxpr5fuv5g25g" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
+[ext_resource type="FontFile" uid="uid://dv4y6a2mw7r2y" path="res://assets/fonts/Silver_nodescent.ttf" id="3_ax26v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fphvf"]
 atlas = ExtResource("2_tov0l")
@@ -501,10 +502,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
 size = Vector2(39, 17)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=85828012]
 script = ExtResource("1_d7vyd")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=503992229]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mt824")
 animation = &"yank_south"
@@ -512,6 +513,56 @@ autoplay = "idle_south"
 frame = 2
 frame_progress = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2092531117]
 position = Vector2(1.5, 45.5)
 shape = SubResource("RectangleShape2D_aya8m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1576526034]
+
+[node name="DialogPanel" type="Panel" parent="CanvasLayer" unique_id=850650733]
+unique_name_in_owner = true
+offset_left = 92.0
+offset_top = 490.0
+offset_right = 872.0
+offset_bottom = 685.0
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogLabel" type="RichTextLabel" parent="CanvasLayer/DialogPanel" unique_id=1267677233]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0012820513
+anchor_top = -0.14358975
+anchor_right = -0.0012820513
+anchor_bottom = -0.14358975
+offset_left = 19.0
+offset_top = 41.0
+offset_right = 757.0
+offset_bottom = 175.0
+theme_override_fonts/normal_font = ExtResource("3_ax26v")
+theme_override_font_sizes/normal_font_size = 58
+bbcode_enabled = true
+text = "[color=darkred][font_size={72}]Wow!!![/font_size][/color] Hello this is a [shake rate=15.0 level=5 connected=1]test[/shake]. Only a test. I want to know something. [rainbow freq=0.5 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]Wow![/wave][/rainbow]"
+scroll_active = false
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogConfirm" type="Label" parent="CanvasLayer/DialogPanel" unique_id=1980310554]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 746.0
+offset_top = 140.0
+offset_right = 771.0
+offset_bottom = 177.0
+theme_override_font_sizes/font_size = 58
+text = ">"
+
+[node name="DialogButton" type="Button" parent="CanvasLayer/DialogPanel" unique_id=1819362309]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 737.0
+offset_top = 157.0
+offset_right = 769.0
+offset_bottom = 189.0
+text = "->"
