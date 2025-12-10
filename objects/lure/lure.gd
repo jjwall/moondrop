@@ -136,6 +136,7 @@ func on_cancel_cast_end():
 	fish_interested = false
 	# Set camera to follow player again - need set this before we free up the lure.
 	camera_controller.set_target(player_ref)
+	player_ref.has_been_cast = false
 	self.queue_free()
 
 func cast():

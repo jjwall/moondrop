@@ -17,6 +17,7 @@ var lure = null
 var recent_caught_fish = {}
 var yanking = false
 var in_dialog = false
+var has_been_cast = false
 
 @onready var camera_controller = $/root/MainGameplay/CameraController
 @onready var camera = $/root/MainGameplay/CameraController/Camera2D
@@ -104,6 +105,7 @@ func render_radial_highlight(pos):
 func cast_lure():
 	if is_instance_valid(lure) and lure != null:
 		camera_controller.set_target(self)
+		has_been_cast = false
 		lure.queue_free()
 		lure == null
 	
@@ -209,8 +211,9 @@ func _state_idle_enter():
 			anim.play("idle_northeast")
 
 func _state_idle_process(_delta):
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and not has_been_cast:
 		_goto("fish")
+		has_been_cast = true
 	elif direction != Vector2(0,0):
 		_goto("walk")
 
