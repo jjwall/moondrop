@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://vn685as2raec"]
+[gd_resource type="Theme" format=3 uid="uid://vn685as2raec"]
 
 [ext_resource type="SystemFont" uid="uid://8qbeft7gpdu" path="res://addons/cider_wiki/document_font.tres" id="1_hs255"]
 [ext_resource type="SystemFont" uid="uid://cylrf18mkqukw" path="res://addons/cider_wiki/document_font_mono.tres" id="2_u31ti"]
