@@ -44,9 +44,8 @@ func player_input_press():
 	if fish_hooked:
 		fish_caught = true
 	else:
+		fish_interested = false
 		print("cancel cast")
-	
-	fish_interested = false
 
 func prep_lure(start_target, end_target):
 	var start = start_target
@@ -134,6 +133,7 @@ func on_cast_end():
 
 func on_cancel_cast_end():
 	lure_flying = false
+	fish_interested = false
 	# Set camera to follow player again - need set this before we free up the lure.
 	camera_controller.set_target(player_ref)
 	self.queue_free()
