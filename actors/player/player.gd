@@ -22,7 +22,7 @@ var in_dialog = false
 @onready var camera = $/root/MainGameplay/CameraController/Camera2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dialog_panel: Panel = %DialogPanel
-@onready var dialog_label: Label = %DialogLabel
+@onready var dialog_label: RichTextLabel = %DialogLabel
 @onready var dialog_confirm: Label = %DialogConfirm
 #@onready var dialog_button: Button = %DialogButton
 

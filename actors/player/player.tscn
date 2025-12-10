@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cxpr5fuv5g25g" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
+[ext_resource type="FontFile" uid="uid://dv4y6a2mw7r2y" path="res://assets/fonts/Silver_nodescent.ttf" id="3_ax26v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fphvf"]
 atlas = ExtResource("2_tov0l")
@@ -526,7 +527,7 @@ offset_right = 872.0
 offset_bottom = 685.0
 metadata/_edit_use_anchors_ = true
 
-[node name="DialogLabel" type="Label" parent="CanvasLayer/DialogPanel" unique_id=786438096]
+[node name="DialogLabel" type="RichTextLabel" parent="CanvasLayer/DialogPanel" unique_id=1267677233]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -538,8 +539,11 @@ offset_left = 19.0
 offset_top = 41.0
 offset_right = 757.0
 offset_bottom = 175.0
-theme_override_font_sizes/font_size = 58
-text = "Hello this is a test."
+theme_override_fonts/normal_font = ExtResource("3_ax26v")
+theme_override_font_sizes/normal_font_size = 58
+bbcode_enabled = true
+text = "[color=darkred][font_size={72}]Wow!!![/font_size][/color] Hello this is a [shake rate=15.0 level=5 connected=1]test[/shake]. Only a test. I want to know something. [rainbow freq=0.5 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]Wow![/wave][/rainbow]"
+scroll_active = false
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
