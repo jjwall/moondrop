@@ -90,7 +90,7 @@ func on_reset_camera():
 	var camera_node: Camera2D = $/root/MainGameplay/CameraController/Camera2D # self.get_node("Camera2D")
 	var tween = get_tree().create_tween()
 	var reset_zoom_vec2 = Vector2(1.0, 1.0)
-	tween.tween_property(camera_node, "zoom", reset_zoom_vec2, 0.2).set_ease(Tween.EaseType.EASE_IN_OUT)
+	tween.tween_property(camera_node, "zoom", reset_zoom_vec2, 0.35).set_ease(Tween.EaseType.EASE_IN_OUT)
 
 func render_radial_highlight(pos):
 	var new_highlight = radial_highlight_scene.instantiate()
