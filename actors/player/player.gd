@@ -18,7 +18,9 @@ var recent_caught_fish = {}
 var yanking = false
 var in_dialog = false
 var has_been_cast = false
+var inventory_open = false
 
+@onready var inventory = $Inventory
 @onready var camera_controller = $/root/MainGameplay/CameraController
 @onready var camera = $/root/MainGameplay/CameraController/Camera2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -28,6 +30,7 @@ var has_been_cast = false
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():
+	inventory.visible = false
 	dialog_panel.visible = false
 	dialog_confirm.visible = false
 	camera_controller.set_target(self)
@@ -211,11 +214,18 @@ func _state_idle_enter():
 			anim.play("idle_northeast")
 
 func _state_idle_process(_delta):
-	if Input.is_action_just_pressed("ui_accept") and not has_been_cast:
+	if Input.is_action_just_pressed("ui_accept") and not has_been_cast and not inventory_open:
 		_goto("fish")
 		has_been_cast = true
-	elif direction != Vector2(0,0):
+	elif direction != Vector2(0,0) and not inventory_open:
 		_goto("walk")
+	
+	if Input.is_action_just_pressed("toggle_inventory") and not has_been_cast and not inventory_open:
+		inventory_open = true
+		inventory.visible = true
+	elif Input.is_action_just_pressed("toggle_inventory") and not has_been_cast and inventory_open:
+		inventory_open = false
+		inventory.visible = false
 
 func _state_idle_physics_process(_delta):
 	pass

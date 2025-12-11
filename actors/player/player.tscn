@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cxpr5fuv5g25g" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
 [ext_resource type="FontFile" uid="uid://dv4y6a2mw7r2y" path="res://assets/fonts/Silver_nodescent.ttf" id="3_ax26v"]
+[ext_resource type="PackedScene" uid="uid://cbupaj0owytnj" path="res://objects/inventory/inventory.tscn" id="4_lsqbn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fphvf"]
 atlas = ExtResource("2_tov0l")
@@ -566,3 +567,5 @@ offset_top = 157.0
 offset_right = 769.0
 offset_bottom = 189.0
 text = "->"
+
+[node name="Inventory" parent="." unique_id=725755749 instance=ExtResource("4_lsqbn")]
