@@ -41,6 +41,13 @@ func _input(event):
 	if Input.is_action_just_pressed("ui_accept"):
 		pressedConfirm.emit()
 
+func prep_fish_item_data(fish_data: Dictionary, fish_measurement: float) -> Dictionary:
+	return {
+		"scene": fish_data.scene,
+		"name": fish_data.name,
+		"weight": fish_measurement
+	}
+
 func dialog_say(s: String) -> void:
 	dialog_label.text = s
 	dialog_label.visible_ratio = 0.0
@@ -221,6 +228,7 @@ func _state_idle_process(_delta):
 		_goto("walk")
 	
 	if Input.is_action_just_pressed("toggle_inventory") and not has_been_cast and not inventory_open:
+		inventory.render_backpack(0)
 		inventory_open = true
 		inventory.visible = true
 	elif Input.is_action_just_pressed("toggle_inventory") and not has_been_cast and inventory_open:
@@ -284,6 +292,8 @@ func _state_get_item_enter():
 	self.add_child(caught_fish_to_display)
 	
 	var fish_measurement = determine_fish_measurement(recent_caught_fish)
+	var new_item_data = prep_fish_item_data(recent_caught_fish, fish_measurement)
+	inventory.pocket_item(new_item_data) # TODO: Check if pockets are full, handle dialog accordingly.
 	caught_fish_dialog(recent_caught_fish, fish_measurement)
 
 func _state_get_item_process(_delta):
