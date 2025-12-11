@@ -1,3 +1,7 @@
 [gd_scene format=3 uid="uid://cbupaj0owytnj"]
 
+[ext_resource type="PackedScene" uid="uid://ci7tcjta3ewqe" path="res://addons/inventory/scenes/inventory_manager.tscn" id="1_io2hh"]
+
 [node name="Inventory" type="Node2D" unique_id=1884425418]
+
+[node name="inventory_manager" parent="." unique_id=367163715 instance=ExtResource("1_io2hh")]

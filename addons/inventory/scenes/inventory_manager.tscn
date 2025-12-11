@@ -1,23 +1,23 @@
-[gd_scene load_steps=40 format=3 uid="uid://ci7tcjta3ewqe"]
+[gd_scene format=3 uid="uid://ci7tcjta3ewqe"]
 
-[ext_resource type="Script" path="res://addons/inventory/scripts/inventory_manager.gd" id="1_xhcdd"]
+[ext_resource type="Script" uid="uid://bydy5a0sgt1bl" path="res://addons/inventory/scripts/inventory_manager.gd" id="1_xhcdd"]
 [ext_resource type="Texture2D" uid="uid://bst68pk5ww0f" path="res://addons/inventory/assets/panel.png" id="3_cldsp"]
 [ext_resource type="PackedScene" uid="uid://dv5lmbx51opjc" path="res://addons/inventory/scenes/slot.tscn" id="5_7wrew"]
 [ext_resource type="Texture2D" uid="uid://36rmd30e4rm1" path="res://addons/inventory/assets/items.png" id="9_i7wfa"]
-[ext_resource type="Script" path="res://addons/inventory/scripts/item_button.gd" id="10_8y8rd"]
+[ext_resource type="Script" uid="uid://ojws6fqcrff8" path="res://addons/inventory/scripts/item_button.gd" id="10_8y8rd"]
 [ext_resource type="Texture2D" uid="uid://1bp7qgje8k45" path="res://addons/inventory/assets/slot.png" id="10_eoh4r"]
 [ext_resource type="Texture2D" uid="uid://bbigg5u2qb8v4" path="res://addons/inventory/assets/tools.png" id="10_jnme6"]
 [ext_resource type="Texture2D" uid="uid://mqasme6eudwk" path="res://addons/inventory/assets/cancel_button.png" id="11_k4b7m"]
 [ext_resource type="PackedScene" uid="uid://uh706kva4gth" path="res://addons/inventory/scenes/needed_amount.tscn" id="12_ctflo"]
-[ext_resource type="Script" path="res://addons/inventory/scripts/category_button.gd" id="12_iupju"]
+[ext_resource type="Script" uid="uid://ggjv8axkhn5j" path="res://addons/inventory/scripts/category_button.gd" id="12_iupju"]
 [ext_resource type="PackedScene" uid="uid://cf1nsg8vf5fhu" path="res://addons/inventory/scenes/needed_item.tscn" id="13_xdbi1"]
-[ext_resource type="Texture2D" uid="uid://rjoymc8tl0bu" path="res://icon.svg" id="14_38cn8"]
-[ext_resource type="Script" path="res://addons/inventory/scripts/storage.gd" id="14_of7hj"]
-[ext_resource type="Script" path="res://addons/inventory/scripts/recipe.gd" id="16_4hjgp"]
-[ext_resource type="Script" path="res://addons/inventory/scripts/needed_item.gd" id="17_4qtik"]
-[ext_resource type="Script" path="res://addons/inventory/scripts/storage_manager.gd" id="17_iia8k"]
-[ext_resource type="Script" path="res://addons/inventory/scripts/crafting_manager.gd" id="18_jcxec"]
-[ext_resource type="Script" path="res://addons/inventory/scripts/chest_manager.gd" id="19_bd26s"]
+[ext_resource type="Texture2D" uid="uid://c7lc46m6g41vv" path="res://icon.svg" id="14_38cn8"]
+[ext_resource type="Script" uid="uid://bjqcw1rxokd5x" path="res://addons/inventory/scripts/storage.gd" id="14_of7hj"]
+[ext_resource type="Script" uid="uid://b11mc73lbxe" path="res://addons/inventory/scripts/recipe.gd" id="16_4hjgp"]
+[ext_resource type="Script" uid="uid://cxhgsvahktup6" path="res://addons/inventory/scripts/needed_item.gd" id="17_4qtik"]
+[ext_resource type="Script" uid="uid://8lq7qgv6rhou" path="res://addons/inventory/scripts/storage_manager.gd" id="17_iia8k"]
+[ext_resource type="Script" uid="uid://cm3ex1wyfvw7r" path="res://addons/inventory/scripts/crafting_manager.gd" id="18_jcxec"]
+[ext_resource type="Script" uid="uid://dc4d2u7xjfqj3" path="res://addons/inventory/scripts/chest_manager.gd" id="19_bd26s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_44it6"]
 atlas = ExtResource("9_i7wfa")
@@ -46,14 +46,10 @@ region = Rect2(46, 4, 25, 25)
 [sub_resource type="Resource" id="Resource_nyj6j"]
 script = ExtResource("14_of7hj")
 node_path = NodePath("../VBoxContainer/VBoxContainer/hotbar")
-allowed_items = PackedStringArray()
-collect_items = true
 
 [sub_resource type="Resource" id="Resource_o2aag"]
 script = ExtResource("14_of7hj")
 node_path = NodePath("../VBoxContainer/VBoxContainer/bag")
-allowed_items = PackedStringArray()
-collect_items = true
 
 [sub_resource type="Resource" id="Resource_mnw2h"]
 script = ExtResource("14_of7hj")
@@ -122,7 +118,7 @@ script = ExtResource("16_4hjgp")
 item_name = "Wooden Sword"
 needed_items = Array[ExtResource("17_4qtik")]([SubResource("Resource_by72t")])
 
-[node name="inventory_manager" type="CanvasLayer" node_paths=PackedStringArray("storage_manager", "chest_manager", "crafting_manager", "hotbar", "chest", "equipment", "craft_section")]
+[node name="inventory_manager" type="CanvasLayer" unique_id=1500899079 node_paths=PackedStringArray("storage_manager", "chest_manager", "crafting_manager", "hotbar", "chest", "equipment", "craft_section")]
 script = ExtResource("1_xhcdd")
 storage_manager = NodePath("storage_manager")
 chest_manager = NodePath("chest_manager")
@@ -132,7 +128,7 @@ chest = NodePath("VBoxContainer/chest")
 equipment = NodePath("VBoxContainer/HBoxContainer/equipment")
 craft_section = NodePath("VBoxContainer/HBoxContainer/craft_section")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1856675616]
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
@@ -146,7 +142,7 @@ grow_vertical = 2
 theme_override_constants/separation = -2
 alignment = 2
 
-[node name="chest" type="NinePatchRect" parent="VBoxContainer"]
+[node name="chest" type="NinePatchRect" parent="VBoxContainer" unique_id=1910711569]
 visible = false
 custom_minimum_size = Vector2(455, 135)
 layout_mode = 2
@@ -156,7 +152,7 @@ patch_margin_top = 14
 patch_margin_right = 11
 patch_margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/chest"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/chest" unique_id=834896512]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -169,120 +165,120 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 12
 
-[node name="slot" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot" parent="VBoxContainer/chest/GridContainer" unique_id=212384993 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot2" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot2" parent="VBoxContainer/chest/GridContainer" unique_id=1841635855 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot3" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot3" parent="VBoxContainer/chest/GridContainer" unique_id=41678741 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot4" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot4" parent="VBoxContainer/chest/GridContainer" unique_id=641339569 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot5" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot5" parent="VBoxContainer/chest/GridContainer" unique_id=2053977733 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot6" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot6" parent="VBoxContainer/chest/GridContainer" unique_id=1620141042 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot7" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot7" parent="VBoxContainer/chest/GridContainer" unique_id=1841006109 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot8" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot8" parent="VBoxContainer/chest/GridContainer" unique_id=1183911776 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot9" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot9" parent="VBoxContainer/chest/GridContainer" unique_id=661201088 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot10" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot10" parent="VBoxContainer/chest/GridContainer" unique_id=1495688817 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot11" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot11" parent="VBoxContainer/chest/GridContainer" unique_id=1717486407 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot12" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot12" parent="VBoxContainer/chest/GridContainer" unique_id=2045362873 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot13" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot13" parent="VBoxContainer/chest/GridContainer" unique_id=1483276616 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot14" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot14" parent="VBoxContainer/chest/GridContainer" unique_id=1134819528 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot15" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot15" parent="VBoxContainer/chest/GridContainer" unique_id=1276669308 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot16" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot16" parent="VBoxContainer/chest/GridContainer" unique_id=236265599 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot17" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot17" parent="VBoxContainer/chest/GridContainer" unique_id=1973949080 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot18" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot18" parent="VBoxContainer/chest/GridContainer" unique_id=613386985 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot19" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot19" parent="VBoxContainer/chest/GridContainer" unique_id=648229540 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot20" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot20" parent="VBoxContainer/chest/GridContainer" unique_id=1260386387 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot21" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot21" parent="VBoxContainer/chest/GridContainer" unique_id=589782028 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot22" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot22" parent="VBoxContainer/chest/GridContainer" unique_id=749283962 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot23" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot23" parent="VBoxContainer/chest/GridContainer" unique_id=1805748620 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot24" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot24" parent="VBoxContainer/chest/GridContainer" unique_id=1408783119 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot25" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot25" parent="VBoxContainer/chest/GridContainer" unique_id=1573253785 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot26" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot26" parent="VBoxContainer/chest/GridContainer" unique_id=1188667563 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot27" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot27" parent="VBoxContainer/chest/GridContainer" unique_id=2008758795 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot28" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot28" parent="VBoxContainer/chest/GridContainer" unique_id=546888194 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot29" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot29" parent="VBoxContainer/chest/GridContainer" unique_id=151973638 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot30" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot30" parent="VBoxContainer/chest/GridContainer" unique_id=1448422551 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot31" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot31" parent="VBoxContainer/chest/GridContainer" unique_id=57356347 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot32" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot32" parent="VBoxContainer/chest/GridContainer" unique_id=140224807 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot33" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot33" parent="VBoxContainer/chest/GridContainer" unique_id=1841096167 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot34" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot34" parent="VBoxContainer/chest/GridContainer" unique_id=1058195801 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot35" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot35" parent="VBoxContainer/chest/GridContainer" unique_id=157079449 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot36" parent="VBoxContainer/chest/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot36" parent="VBoxContainer/chest/GridContainer" unique_id=1613697365 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=443911845]
 layout_mode = 2
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="crafting_menu" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="crafting_menu" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=751985350]
 visible = false
 custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
@@ -290,7 +286,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="categories" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/crafting_menu"]
+[node name="categories" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/crafting_menu" unique_id=1443677305]
 custom_minimum_size = Vector2(60, 160)
 layout_mode = 2
 texture = ExtResource("3_cldsp")
@@ -299,7 +295,7 @@ patch_margin_top = 14
 patch_margin_right = 11
 patch_margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/categories"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/categories" unique_id=180368773]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -313,17 +309,17 @@ offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="wood" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/categories/VBoxContainer"]
+[node name="wood" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/categories/VBoxContainer" unique_id=1223498114]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_menu/categories/VBoxContainer/wood"]
+[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_menu/categories/VBoxContainer/wood" unique_id=1879915494]
 layout_mode = 2
 texture = ExtResource("10_eoh4r")
 
-[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_menu/categories/VBoxContainer/wood/slot_texture"]
+[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_menu/categories/VBoxContainer/wood/slot_texture" unique_id=92667736]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -339,13 +335,13 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_44it6")
 stretch_mode = 5
 
-[node name="category_button" type="Button" parent="VBoxContainer/HBoxContainer/crafting_menu/categories/VBoxContainer/wood" node_paths=PackedStringArray("crafting_manager")]
+[node name="category_button" type="Button" parent="VBoxContainer/HBoxContainer/crafting_menu/categories/VBoxContainer/wood" unique_id=270657812 node_paths=PackedStringArray("crafting_manager")]
 layout_mode = 2
 flat = true
 script = ExtResource("12_iupju")
 crafting_manager = NodePath("../../../../../../../crafting_manager")
 
-[node name="items" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/crafting_menu"]
+[node name="items" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/crafting_menu" unique_id=364587582]
 custom_minimum_size = Vector2(140, 165)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -355,7 +351,7 @@ patch_margin_top = 17
 patch_margin_right = 22
 patch_margin_bottom = 19
 
-[node name="wood" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items"]
+[node name="wood" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items" unique_id=683828545]
 custom_minimum_size = Vector2(120, 0)
 layout_direction = 3
 layout_mode = 1
@@ -372,29 +368,29 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood" unique_id=377522651]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer" unique_id=1422041412]
 layout_direction = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Wood" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer"]
+[node name="Wood" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer" unique_id=464927495]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood" unique_id=1677313666]
 layout_mode = 2
 
-[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood/VBoxContainer"]
+[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood/VBoxContainer" unique_id=844591857]
 layout_mode = 2
 texture = ExtResource("10_eoh4r")
 stretch_mode = 5
 
-[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood/VBoxContainer/slot_texture"]
+[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood/VBoxContainer/slot_texture" unique_id=1295451004]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -410,7 +406,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_44it6")
 stretch_mode = 4
 
-[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood/VBoxContainer/slot_texture" node_paths=PackedStringArray("crafting_manager")]
+[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood/VBoxContainer/slot_texture" unique_id=1335437519 node_paths=PackedStringArray("crafting_manager")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -421,7 +417,7 @@ flat = true
 script = ExtResource("10_8y8rd")
 crafting_manager = NodePath("../../../../../../../../../../../crafting_manager")
 
-[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood/VBoxContainer"]
+[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/crafting_menu/items/wood/MarginContainer/VBoxContainer/Wood/VBoxContainer" unique_id=2080679653]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -430,7 +426,7 @@ text = "Wood"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="crafting_table_menu" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="crafting_table_menu" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=984635740]
 visible = false
 custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
@@ -438,7 +434,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="categories" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu"]
+[node name="categories" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu" unique_id=1622671857]
 custom_minimum_size = Vector2(60, 160)
 layout_mode = 2
 texture = ExtResource("3_cldsp")
@@ -447,7 +443,7 @@ patch_margin_top = 14
 patch_margin_right = 11
 patch_margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories" unique_id=604736990]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -461,17 +457,17 @@ offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="equipment" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories/VBoxContainer"]
+[node name="equipment" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories/VBoxContainer" unique_id=1273858115]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories/VBoxContainer/equipment"]
+[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories/VBoxContainer/equipment" unique_id=788133648]
 layout_mode = 2
 texture = ExtResource("10_eoh4r")
 
-[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories/VBoxContainer/equipment/slot_texture"]
+[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories/VBoxContainer/equipment/slot_texture" unique_id=523129517]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -487,13 +483,13 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_arcuk")
 stretch_mode = 5
 
-[node name="category_button" type="Button" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories/VBoxContainer/equipment" node_paths=PackedStringArray("crafting_manager")]
+[node name="category_button" type="Button" parent="VBoxContainer/HBoxContainer/crafting_table_menu/categories/VBoxContainer/equipment" unique_id=1939374170 node_paths=PackedStringArray("crafting_manager")]
 layout_mode = 2
 flat = true
 script = ExtResource("12_iupju")
 crafting_manager = NodePath("../../../../../../../crafting_manager")
 
-[node name="items" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu"]
+[node name="items" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu" unique_id=1505922934]
 custom_minimum_size = Vector2(140, 165)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -503,7 +499,7 @@ patch_margin_top = 17
 patch_margin_right = 22
 patch_margin_bottom = 19
 
-[node name="equipment" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items"]
+[node name="equipment" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items" unique_id=366559198]
 custom_minimum_size = Vector2(120, 0)
 layout_direction = 3
 layout_mode = 1
@@ -520,29 +516,29 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment" unique_id=1779176150]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer" unique_id=1710849805]
 layout_direction = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Wooden Sword" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer"]
+[node name="Wooden Sword" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer" unique_id=682325935]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword" unique_id=2032895333]
 layout_mode = 2
 
-[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword/VBoxContainer"]
+[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword/VBoxContainer" unique_id=1105880764]
 layout_mode = 2
 texture = ExtResource("10_eoh4r")
 stretch_mode = 5
 
-[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword/VBoxContainer/slot_texture"]
+[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword/VBoxContainer/slot_texture" unique_id=524135063]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -558,7 +554,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_2hmx0")
 stretch_mode = 4
 
-[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword/VBoxContainer/slot_texture" node_paths=PackedStringArray("crafting_manager")]
+[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword/VBoxContainer/slot_texture" unique_id=931977715 node_paths=PackedStringArray("crafting_manager")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -569,7 +565,7 @@ flat = true
 script = ExtResource("10_8y8rd")
 crafting_manager = NodePath("../../../../../../../../../../../crafting_manager")
 
-[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword/VBoxContainer"]
+[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/crafting_table_menu/items/equipment/MarginContainer/VBoxContainer/Wooden Sword/VBoxContainer" unique_id=994797019]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -578,7 +574,7 @@ text = "Wooden Sword"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="anvil_menu" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="anvil_menu" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=257287076]
 visible = false
 custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
@@ -586,7 +582,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="categories" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/anvil_menu"]
+[node name="categories" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/anvil_menu" unique_id=495476812]
 custom_minimum_size = Vector2(60, 160)
 layout_mode = 2
 texture = ExtResource("3_cldsp")
@@ -595,7 +591,7 @@ patch_margin_top = 14
 patch_margin_right = 11
 patch_margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/categories"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/categories" unique_id=1305915755]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -609,17 +605,17 @@ offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="equipment" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/categories/VBoxContainer"]
+[node name="equipment" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/categories/VBoxContainer" unique_id=461619110]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/categories/VBoxContainer/equipment"]
+[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/categories/VBoxContainer/equipment" unique_id=811693686]
 layout_mode = 2
 texture = ExtResource("10_eoh4r")
 
-[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/categories/VBoxContainer/equipment/slot_texture"]
+[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/categories/VBoxContainer/equipment/slot_texture" unique_id=1433697587]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -635,13 +631,13 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_1n8cl")
 stretch_mode = 5
 
-[node name="category_button" type="Button" parent="VBoxContainer/HBoxContainer/anvil_menu/categories/VBoxContainer/equipment" node_paths=PackedStringArray("crafting_manager")]
+[node name="category_button" type="Button" parent="VBoxContainer/HBoxContainer/anvil_menu/categories/VBoxContainer/equipment" unique_id=183851360 node_paths=PackedStringArray("crafting_manager")]
 layout_mode = 2
 flat = true
 script = ExtResource("12_iupju")
 crafting_manager = NodePath("../../../../../../../crafting_manager")
 
-[node name="items" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/anvil_menu"]
+[node name="items" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/anvil_menu" unique_id=1127366225]
 custom_minimum_size = Vector2(140, 165)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -651,7 +647,7 @@ patch_margin_top = 17
 patch_margin_right = 22
 patch_margin_bottom = 19
 
-[node name="equipment" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items"]
+[node name="equipment" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items" unique_id=1301623825]
 custom_minimum_size = Vector2(120, 0)
 layout_direction = 3
 layout_mode = 1
@@ -668,29 +664,29 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment" unique_id=491511349]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer" unique_id=811053179]
 layout_direction = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Stone Axe" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer"]
+[node name="Stone Axe" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer" unique_id=2117864224]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe" unique_id=1413516650]
 layout_mode = 2
 
-[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe/VBoxContainer"]
+[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe/VBoxContainer" unique_id=1462880475]
 layout_mode = 2
 texture = ExtResource("10_eoh4r")
 stretch_mode = 5
 
-[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe/VBoxContainer/slot_texture"]
+[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe/VBoxContainer/slot_texture" unique_id=1906428155]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -706,7 +702,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_1n8cl")
 stretch_mode = 4
 
-[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe/VBoxContainer/slot_texture" node_paths=PackedStringArray("crafting_manager")]
+[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe/VBoxContainer/slot_texture" unique_id=282479083 node_paths=PackedStringArray("crafting_manager")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -717,7 +713,7 @@ flat = true
 script = ExtResource("10_8y8rd")
 crafting_manager = NodePath("../../../../../../../../../../../crafting_manager")
 
-[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe/VBoxContainer"]
+[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Axe/VBoxContainer" unique_id=1709339274]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -726,20 +722,20 @@ text = "Stone Axe"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Stone Pickaxe" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer"]
+[node name="Stone Pickaxe" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer" unique_id=210722521]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe" unique_id=1702213414]
 layout_mode = 2
 
-[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe/VBoxContainer"]
+[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe/VBoxContainer" unique_id=702893039]
 layout_mode = 2
 texture = ExtResource("10_eoh4r")
 stretch_mode = 5
 
-[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe/VBoxContainer/slot_texture"]
+[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe/VBoxContainer/slot_texture" unique_id=1003566509]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -755,7 +751,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_x4hy5")
 stretch_mode = 4
 
-[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe/VBoxContainer/slot_texture" node_paths=PackedStringArray("crafting_manager")]
+[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe/VBoxContainer/slot_texture" unique_id=1076180755 node_paths=PackedStringArray("crafting_manager")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -766,7 +762,7 @@ flat = true
 script = ExtResource("10_8y8rd")
 crafting_manager = NodePath("../../../../../../../../../../../crafting_manager")
 
-[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe/VBoxContainer"]
+[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Pickaxe/VBoxContainer" unique_id=498690371]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -775,20 +771,20 @@ text = "Stone Pickaxe"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Stone Hoe" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer"]
+[node name="Stone Hoe" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer" unique_id=1935628920]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe" unique_id=1700544874]
 layout_mode = 2
 
-[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe/VBoxContainer"]
+[node name="slot_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe/VBoxContainer" unique_id=1412531885]
 layout_mode = 2
 texture = ExtResource("10_eoh4r")
 stretch_mode = 5
 
-[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe/VBoxContainer/slot_texture"]
+[node name="item_texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe/VBoxContainer/slot_texture" unique_id=2033961961]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -804,7 +800,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_nwh17")
 stretch_mode = 4
 
-[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe/VBoxContainer/slot_texture" node_paths=PackedStringArray("crafting_manager")]
+[node name="item_button" type="Button" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe/VBoxContainer/slot_texture" unique_id=400083219 node_paths=PackedStringArray("crafting_manager")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -815,7 +811,7 @@ flat = true
 script = ExtResource("10_8y8rd")
 crafting_manager = NodePath("../../../../../../../../../../../crafting_manager")
 
-[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe/VBoxContainer"]
+[node name="name" type="Label" parent="VBoxContainer/HBoxContainer/anvil_menu/items/equipment/MarginContainer/VBoxContainer/Stone Hoe/VBoxContainer" unique_id=89535382]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -824,7 +820,7 @@ text = "Stone Hoe"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="craft_section" type="NinePatchRect" parent="VBoxContainer/HBoxContainer"]
+[node name="craft_section" type="NinePatchRect" parent="VBoxContainer/HBoxContainer" unique_id=602002989]
 visible = false
 custom_minimum_size = Vector2(260, 160)
 layout_mode = 2
@@ -834,7 +830,7 @@ patch_margin_top = 17
 patch_margin_right = 22
 patch_margin_bottom = 19
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/craft_section"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/craft_section" unique_id=565864287]
 custom_minimum_size = Vector2(120, 140)
 layout_mode = 1
 anchors_preset = 8
@@ -851,11 +847,11 @@ grow_vertical = 2
 theme_override_constants/separation = 7
 alignment = 1
 
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer" unique_id=150872603]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/Control"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/Control" unique_id=786317071]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -875,7 +871,7 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_1n8cl")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer" unique_id=2016251736]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -884,30 +880,30 @@ text = "Used to cut down trees."
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer" unique_id=1260186264]
 layout_mode = 2
 alignment = 1
 
-[node name="needed_amount" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/HBoxContainer" instance=ExtResource("12_ctflo")]
+[node name="needed_amount" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/HBoxContainer" unique_id=23143365 instance=ExtResource("12_ctflo")]
 layout_mode = 2
 
-[node name="needed_item" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/HBoxContainer" instance=ExtResource("13_xdbi1")]
+[node name="needed_item" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/HBoxContainer" unique_id=1031909167 instance=ExtResource("13_xdbi1")]
 layout_mode = 2
 
-[node name="needed_amount2" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/HBoxContainer" instance=ExtResource("12_ctflo")]
+[node name="needed_amount2" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/HBoxContainer" unique_id=228618586 instance=ExtResource("12_ctflo")]
 layout_mode = 2
 
-[node name="needed_item2" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/HBoxContainer" instance=ExtResource("13_xdbi1")]
+[node name="needed_item2" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer/HBoxContainer" unique_id=266333381 instance=ExtResource("13_xdbi1")]
 layout_mode = 2
 
-[node name="craft" type="Button" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer"]
+[node name="craft" type="Button" parent="VBoxContainer/HBoxContainer/craft_section/VBoxContainer" unique_id=330791083]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 10
 disabled = true
 text = "CRAFT"
 
-[node name="equipment_button" type="TextureButton" parent="VBoxContainer/HBoxContainer/craft_section"]
+[node name="equipment_button" type="TextureButton" parent="VBoxContainer/HBoxContainer/craft_section" unique_id=1495276679]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 1
 anchors_preset = 8
@@ -924,12 +920,12 @@ grow_vertical = 2
 texture_normal = ExtResource("11_k4b7m")
 stretch_mode = 5
 
-[node name="equipment" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="equipment" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1647161558]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="offhand" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/equipment"]
+[node name="offhand" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/equipment" unique_id=1541734968]
 custom_minimum_size = Vector2(60, 160)
 layout_mode = 2
 texture = ExtResource("3_cldsp")
@@ -938,7 +934,7 @@ patch_margin_top = 14
 patch_margin_right = 11
 patch_margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/equipment/offhand"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/equipment/offhand" unique_id=2094840945]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -953,10 +949,10 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="slot4" parent="VBoxContainer/HBoxContainer/equipment/offhand/VBoxContainer" instance=ExtResource("5_7wrew")]
+[node name="slot4" parent="VBoxContainer/HBoxContainer/equipment/offhand/VBoxContainer" unique_id=1726790328 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="player" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/equipment"]
+[node name="player" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/equipment" unique_id=2113583060]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(144, 165)
 layout_mode = 2
@@ -966,12 +962,12 @@ patch_margin_top = 17
 patch_margin_right = 22
 patch_margin_bottom = 19
 
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/equipment/player"]
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/equipment/player" unique_id=1634540308]
 position = Vector2(71, 84)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_38cn8")
 
-[node name="armor" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/equipment"]
+[node name="armor" type="NinePatchRect" parent="VBoxContainer/HBoxContainer/equipment" unique_id=84876095]
 custom_minimum_size = Vector2(60, 160)
 layout_mode = 2
 texture = ExtResource("3_cldsp")
@@ -980,7 +976,7 @@ patch_margin_top = 14
 patch_margin_right = 11
 patch_margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/equipment/armor"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/equipment/armor" unique_id=497362453]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -995,24 +991,24 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="slot" parent="VBoxContainer/HBoxContainer/equipment/armor/VBoxContainer" instance=ExtResource("5_7wrew")]
+[node name="slot" parent="VBoxContainer/HBoxContainer/equipment/armor/VBoxContainer" unique_id=973439360 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot1" parent="VBoxContainer/HBoxContainer/equipment/armor/VBoxContainer" instance=ExtResource("5_7wrew")]
+[node name="slot1" parent="VBoxContainer/HBoxContainer/equipment/armor/VBoxContainer" unique_id=138996958 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot2" parent="VBoxContainer/HBoxContainer/equipment/armor/VBoxContainer" instance=ExtResource("5_7wrew")]
+[node name="slot2" parent="VBoxContainer/HBoxContainer/equipment/armor/VBoxContainer" unique_id=701764416 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot3" parent="VBoxContainer/HBoxContainer/equipment/armor/VBoxContainer" instance=ExtResource("5_7wrew")]
+[node name="slot3" parent="VBoxContainer/HBoxContainer/equipment/armor/VBoxContainer" unique_id=1498700421 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=480519977]
 layout_mode = 2
 theme_override_constants/separation = -2
 alignment = 2
 
-[node name="bag" type="NinePatchRect" parent="VBoxContainer/VBoxContainer"]
+[node name="bag" type="NinePatchRect" parent="VBoxContainer/VBoxContainer" unique_id=1480052874]
 visible = false
 custom_minimum_size = Vector2(455, 95)
 layout_mode = 2
@@ -1022,7 +1018,7 @@ patch_margin_top = 14
 patch_margin_right = 11
 patch_margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VBoxContainer/bag"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VBoxContainer/bag" unique_id=285980234]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1035,79 +1031,79 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 12
 
-[node name="slot" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=2126825209 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot2" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot2" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1414004841 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot3" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot3" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=522386736 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot4" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot4" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1976625668 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot5" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot5" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1129895518 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot6" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot6" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=59726176 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot7" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot7" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1100781262 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot8" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot8" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1085441967 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot9" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot9" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1153267083 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot10" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot10" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=501467257 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot11" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot11" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1305084434 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot12" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot12" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=12716980 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot13" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot13" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=2056900056 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot14" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot14" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1923208343 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot15" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot15" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=784159217 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot16" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot16" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1007963102 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot17" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot17" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=672052729 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot18" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot18" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1783062794 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot19" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot19" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1621215728 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot20" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot20" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1449788442 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot21" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot21" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1461429042 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot22" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot22" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=47843614 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot23" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot23" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1904384778 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot24" parent="VBoxContainer/VBoxContainer/bag/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot24" parent="VBoxContainer/VBoxContainer/bag/GridContainer" unique_id=1337832303 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="hotbar" type="NinePatchRect" parent="VBoxContainer/VBoxContainer"]
+[node name="hotbar" type="NinePatchRect" parent="VBoxContainer/VBoxContainer" unique_id=1216230742]
 custom_minimum_size = Vector2(458, 60)
 layout_mode = 2
 texture = ExtResource("3_cldsp")
@@ -1116,7 +1112,7 @@ patch_margin_top = 14
 patch_margin_right = 11
 patch_margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VBoxContainer/hotbar"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VBoxContainer/hotbar" unique_id=1636048681]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1129,55 +1125,55 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 12
 
-[node name="slot" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=1889515529 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot2" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot2" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=236270893 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot3" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot3" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=1865888577 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot4" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot4" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=730677268 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot5" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot5" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=283297755 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot6" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot6" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=1305501111 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot7" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot7" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=929891966 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot8" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot8" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=20031443 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot9" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot9" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=1774284651 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot10" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot10" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=428756755 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot11" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot11" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=1406024686 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="slot12" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" instance=ExtResource("5_7wrew")]
+[node name="slot12" parent="VBoxContainer/VBoxContainer/hotbar/GridContainer" unique_id=282612216 instance=ExtResource("5_7wrew")]
 layout_mode = 2
 
-[node name="storage_manager" type="Node" parent="." node_paths=PackedStringArray("inventory_manager", "hotbar")]
+[node name="storage_manager" type="Node" parent="." unique_id=1528069249 node_paths=PackedStringArray("inventory_manager", "hotbar")]
 script = ExtResource("17_iia8k")
 storages = Array[ExtResource("14_of7hj")]([SubResource("Resource_nyj6j"), SubResource("Resource_o2aag"), SubResource("Resource_mnw2h"), SubResource("Resource_famtx")])
 inventory_manager = NodePath("..")
 hotbar = NodePath("../VBoxContainer/VBoxContainer/hotbar")
 
-[node name="chest_manager" type="Node" parent="." node_paths=PackedStringArray("inventory_manager", "chest", "chest_grid")]
+[node name="chest_manager" type="Node" parent="." unique_id=959861870 node_paths=PackedStringArray("inventory_manager", "chest", "chest_grid")]
 script = ExtResource("19_bd26s")
 inventory_manager = NodePath("..")
 chest = NodePath("../VBoxContainer/chest")
 chest_grid = NodePath("../VBoxContainer/chest/GridContainer")
 
-[node name="crafting_manager" type="Node" parent="." node_paths=PackedStringArray("crafting_menus", "inventory_manager", "storage_manager", "equipment", "crafting_section", "craftable_item", "description", "needed_items_list", "craft_button")]
+[node name="crafting_manager" type="Node" parent="." unique_id=1217176954 node_paths=PackedStringArray("crafting_menus", "inventory_manager", "storage_manager", "equipment", "crafting_section", "craftable_item", "description", "needed_items_list", "craft_button")]
 script = ExtResource("18_jcxec")
 recipes = Array[ExtResource("16_4hjgp")]([SubResource("Resource_wkmkp"), SubResource("Resource_2u7rf"), SubResource("Resource_sif4l"), SubResource("Resource_108y4")])
 crafting_menus = [NodePath("../VBoxContainer/HBoxContainer/crafting_menu"), NodePath("../VBoxContainer/HBoxContainer/crafting_table_menu"), NodePath("../VBoxContainer/HBoxContainer/anvil_menu")]
