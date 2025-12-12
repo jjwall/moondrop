@@ -49,6 +49,14 @@ func prep_fish_item_data(fish_data: Dictionary, fish_measurement: float) -> Dict
 		"weight": fish_measurement
 	}
 
+func pickup_item(item_data_ref: Dictionary) -> bool:
+	var successful = inventory.pocket_item(item_data_ref)
+	
+	if not successful:
+		print("render error message: Backpack Full")
+	
+	return successful
+
 func dialog_say(s: String) -> void:
 	dialog_label.text = s
 	dialog_label.visible_ratio = 0.0

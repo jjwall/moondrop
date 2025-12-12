@@ -9,7 +9,7 @@ var item_structure = {
 	# aquire_on: new Date()
 }
 
-var total_pockets = 12
+var total_pockets = 1
 var items_in_pockets = []
 
 func _ready():

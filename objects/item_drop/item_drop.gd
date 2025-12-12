@@ -8,6 +8,12 @@ func set_item_data(item_data):
 
 func _ready() -> void:
 	if item_data_ref == null:
+		item_data_ref = { # fake data
+			"scene": place_holder_item_scene,
+			"name": "Test Clown Fish",
+			"weight": 55.55,
+		}
+		
 		var item = place_holder_item_scene.instantiate()
 		#item.global_position = self.global_position
 		add_child(item)
@@ -18,4 +24,8 @@ func _ready() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
-		print("ran into players")
+		var player_ref = get_tree().get_first_node_in_group("player")
+		var successful = player_ref.pickup_item(item_data_ref)
+		
+		if successful:
+			self.queue_free()
