@@ -542,7 +542,7 @@ offset_bottom = 175.0
 theme_override_fonts/normal_font = ExtResource("3_ax26v")
 theme_override_font_sizes/normal_font_size = 58
 bbcode_enabled = true
-text = "[color=darkred][font_size={72}]Wow!!![/font_size][/color] Hello this is a [shake rate=15.0 level=5 connected=1]test[/shake]. Only a test. I want to know something. [rainbow freq=0.5 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]Wow![/wave][/rainbow]"
+text = "[color=darkred][font_size={76}]Wow!!![/font_size][/color] Hello this is a [shake rate=15.0 level=5 connected=1]test[/shake]. Only a test. I want to know something. [rainbow freq=0.5 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]Wow![/wave][/rainbow]"
 scroll_active = false
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
