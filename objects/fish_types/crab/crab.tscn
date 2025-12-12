@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdobvloialle3"]
+[gd_scene format=3 uid="uid://cdobvloialle3"]
 
 [ext_resource type="Texture2D" uid="uid://ds44rb2tprps5" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Sea_and_Food.png" id="1_q28kv"]
 
@@ -17,8 +17,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Crab" type="Node2D"]
+[node name="Crab" type="Node2D" unique_id=255525553]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=73063214]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_b72tt")

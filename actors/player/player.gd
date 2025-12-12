@@ -9,8 +9,9 @@ var direction := Vector2.ZERO
 var prev_direction := Vector2(0, 1)
 
 var radial_highlight_scene = preload("res://objects/radial_highlight/radial_highlight.tscn")
-
+var item_drop_scene = preload("res://objects/item_drop/item_drop.tscn")
 var lure_scene = preload("res://objects/lure/lure.tscn")
+
 var caught_fish_to_display = null
 var radial_highlight_to_display = null
 var lure = null
@@ -18,17 +19,22 @@ var recent_caught_fish = {}
 var yanking = false
 var in_dialog = false
 var has_been_cast = false
+var inventory_open = false
 
+@onready var inventory = $Inventory
 @onready var camera_controller = $/root/MainGameplay/CameraController
 @onready var camera = $/root/MainGameplay/CameraController/Camera2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dialog_panel: Panel = %DialogPanel
 @onready var dialog_label: RichTextLabel = %DialogLabel
 @onready var dialog_confirm: Label = %DialogConfirm
+@onready var notification_panel: Panel = %NotificationPanel
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():
+	inventory.visible = false
 	dialog_panel.visible = false
+	notification_panel.modulate.a = 0
 	dialog_confirm.visible = false
 	camera_controller.set_target(self)
 	_goto("idle")
@@ -37,6 +43,38 @@ func _ready():
 func _input(event):
 	if Input.is_action_just_pressed("ui_accept"):
 		pressedConfirm.emit()
+
+func _on_inventory_item_dropped(item_data: Dictionary) -> void:
+	drop_item(item_data, true)
+
+func prep_fish_item_data(fish_data: Dictionary, fish_measurement: float) -> Dictionary:
+	return {
+		"scene": fish_data.scene,
+		"name": fish_data.name,
+		"weight": fish_measurement
+	}
+
+func pickup_item(item_data_ref: Dictionary) -> bool:
+	var successful = inventory.pocket_item(item_data_ref)
+	
+	if not successful:
+		render_backpack_full_notification()
+	
+	return successful
+
+func render_backpack_full_notification():
+	var fade_in_tween = create_tween()
+	await fade_in_tween.tween_property(notification_panel, "modulate:a", 1, 0.5).finished
+	var fade_out_tween = create_tween()
+	fade_out_tween.tween_interval(1.5)
+	await fade_out_tween.tween_property(notification_panel, "modulate:a", 0, 0.5).finished
+
+func drop_item(dropped_item_data: Dictionary, recent_manual_drop = false):
+	var item_drop = item_drop_scene.instantiate()
+	item_drop.set_item_data(dropped_item_data)
+	item_drop.global_position = self.global_position # make a bit random
+	item_drop.recent_manual_drop = recent_manual_drop
+	$/root/MainGameplay/ItemDropsContainer.add_child(item_drop)
 
 func dialog_say(s: String) -> void:
 	dialog_label.text = s
@@ -55,11 +93,14 @@ func dialog_say(s: String) -> void:
 	await pressedConfirm
 	dialog_confirm.visible = false
 
-func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float) -> void:
+func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float, pocket_successful: bool) -> void:
 	dialog_panel.visible = true
 	in_dialog = true
 	await dialog_say(fish_data.message)
 	await dialog_say("I caught a %s weighing %.2f pounds!" % [fish_data.name, fish_measurement])
+	if not pocket_successful:
+		await dialog_say("Aww my pockets are full. I'll leave this on the ground for now.")
+		
 	in_dialog = false
 	
 func on_reset_ui():
@@ -211,11 +252,19 @@ func _state_idle_enter():
 			anim.play("idle_northeast")
 
 func _state_idle_process(_delta):
-	if Input.is_action_just_pressed("ui_accept") and not has_been_cast:
+	if Input.is_action_just_pressed("ui_accept") and not has_been_cast and not inventory_open:
 		_goto("fish")
 		has_been_cast = true
-	elif direction != Vector2(0,0):
+	elif direction != Vector2(0,0) and not inventory_open:
 		_goto("walk")
+	
+	if Input.is_action_just_pressed("toggle_inventory") and not has_been_cast and not inventory_open:
+		inventory.render_backpack(0)
+		inventory_open = true
+		inventory.visible = true
+	elif Input.is_action_just_pressed("toggle_inventory") and not has_been_cast and inventory_open:
+		inventory_open = false
+		inventory.visible = false
 
 func _state_idle_physics_process(_delta):
 	pass
@@ -274,7 +323,12 @@ func _state_get_item_enter():
 	self.add_child(caught_fish_to_display)
 	
 	var fish_measurement = determine_fish_measurement(recent_caught_fish)
-	caught_fish_dialog(recent_caught_fish, fish_measurement)
+	var new_item_data = prep_fish_item_data(recent_caught_fish, fish_measurement)
+	var pocket_successful = inventory.pocket_item(new_item_data)
+	caught_fish_dialog(recent_caught_fish, fish_measurement, pocket_successful)
+	
+	if not pocket_successful:
+		drop_item(new_item_data)
 
 func _state_get_item_process(_delta):
 	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display) and !in_dialog:
