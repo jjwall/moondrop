@@ -58,7 +58,6 @@ func on_pocket_pressed(pocket_index: int):
 	var dropped_item_data = remove_item_from_pocket(pocket_index)
 	print(dropped_item_data)
 	item_dropped.emit(dropped_item_data)
-	# signal up drop item data
 
 func remove_item_from_pocket(pocket_index: int):
 	var dropped_item_data = items_in_pockets[pocket_index]

@@ -28,11 +28,13 @@ var inventory_open = false
 @onready var dialog_panel: Panel = %DialogPanel
 @onready var dialog_label: RichTextLabel = %DialogLabel
 @onready var dialog_confirm: Label = %DialogConfirm
+@onready var notification_panel: Panel = %NotificationPanel
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():
 	inventory.visible = false
 	dialog_panel.visible = false
+	notification_panel.modulate.a = 0
 	dialog_confirm.visible = false
 	camera_controller.set_target(self)
 	_goto("idle")
@@ -56,9 +58,16 @@ func pickup_item(item_data_ref: Dictionary) -> bool:
 	var successful = inventory.pocket_item(item_data_ref)
 	
 	if not successful:
-		print("render error message: Backpack Full")
+		render_backpack_full_notification()
 	
 	return successful
+
+func render_backpack_full_notification():
+	var fade_in_tween = create_tween()
+	await fade_in_tween.tween_property(notification_panel, "modulate:a", 1, 0.5).finished
+	var fade_out_tween = create_tween()
+	fade_out_tween.tween_interval(1.5)
+	await fade_out_tween.tween_property(notification_panel, "modulate:a", 0, 0.5).finished
 
 func drop_item(dropped_item_data: Dictionary, recent_manual_drop = false):
 	var item_drop = item_drop_scene.instantiate()

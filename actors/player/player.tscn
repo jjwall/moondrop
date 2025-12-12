@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cxpr5fuv5g25g" path="res://actors/player/player.gd" id="1_d7vyd"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_tov0l"]
 [ext_resource type="FontFile" uid="uid://dv4y6a2mw7r2y" path="res://assets/fonts/Silver_nodescent.ttf" id="3_ax26v"]
+[ext_resource type="Texture2D" uid="uid://bfiyxief2332h" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Map_and_UI.png" id="4_6p1w3"]
 [ext_resource type="PackedScene" uid="uid://cbupaj0owytnj" path="res://objects/inventory/inventory.tscn" id="4_lsqbn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
@@ -506,6 +507,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_15y17"]
+atlas = ExtResource("4_6p1w3")
+region = Rect2(112, 128, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bop6h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15y17")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D" unique_id=85828012 groups=["player"]]
 script = ExtResource("1_d7vyd")
 
@@ -576,6 +592,27 @@ offset_top = 157.0
 offset_right = 769.0
 offset_bottom = 189.0
 text = "->"
+
+[node name="NotificationPanel" type="Panel" parent="CanvasLayer" unique_id=1232311531]
+unique_name_in_owner = true
+offset_left = 20.0
+offset_top = 25.0
+offset_right = 334.0
+offset_bottom = 98.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/NotificationPanel" unique_id=159123064]
+position = Vector2(34, 35)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_bop6h")
+
+[node name="Label" type="Label" parent="CanvasLayer/NotificationPanel" unique_id=1507912323]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 11.0
+offset_right = 296.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 58
+text = "Backpack Full"
 
 [node name="Inventory" parent="." unique_id=725755749 instance=ExtResource("4_lsqbn")]
 
