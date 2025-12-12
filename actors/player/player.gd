@@ -73,8 +73,18 @@ func drop_item(dropped_item_data: Dictionary, recent_manual_drop = false):
 	var item_drop = item_drop_scene.instantiate()
 	item_drop.set_item_data(dropped_item_data)
 	item_drop.global_position = self.global_position # make a bit random
+	item_drop.global_position.x += randf_range(0, 50) * random_sign()
+	item_drop.global_position.y += randf_range(0, 50) * random_sign()
 	item_drop.recent_manual_drop = recent_manual_drop
 	$/root/MainGameplay/ItemDropsContainer.add_child(item_drop)
+
+func random_sign() -> int:
+	var num = floor(randi_range(0, 2))
+	if num == 0:
+		return 1
+	else:
+		return -1
+		
 
 func dialog_say(s: String) -> void:
 	dialog_label.text = s

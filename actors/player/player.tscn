@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cbupaj0owytnj" path="res://objects/inventory/inventory.tscn" id="4_lsqbn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
-radius = 72.06247
+radius = 39.012817
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
 size = Vector2(39, 17)
