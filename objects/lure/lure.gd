@@ -104,8 +104,7 @@ func _physics_process(delta):
 					# If lure hits land, trigger automatic yank (see Player fishing state for ref)
 					player_ref.yanking = true
 					player_ref.yank_lure()
-					# match direction ...
-					player_ref.anim.play("yank_south")
+					player_ref.play_yank_animation()
 					await player_ref.wait_for_lure_to_return()
 					yanking = false
 					player_ref._goto("idle")

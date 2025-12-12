@@ -185,17 +185,60 @@ func yank_lure():
 
 #region State fish
 func _state_fish_enter():
-	# match direction ...
-	anim.play("fish_south")
+	match prev_direction:
+		Vector2.DOWN:
+			anim.play("fish_south")
+		Vector2.UP:
+			anim.play("fish_south")
+			#anim.play("fish_north")
+		Vector2.RIGHT:
+			anim.play("fish_south")
+			#anim.play("fish_east")
+		Vector2.LEFT:
+			anim.play("fish_south")
+			#anim.play("fish_west")
+		Vector2(-1, 1):
+			anim.play("fish_southwest")
+		Vector2(1, 1):
+			anim.play("fish_southeast")
+		Vector2(-1, -1):
+			anim.play("fish_south")
+			#anim.play("fish_northwest")
+		Vector2(1, -1):
+			anim.play("fish_south")
+			#anim.play("fish_northeast")
 	
 	cast_lure()
+
+func play_yank_animation():
+	match prev_direction:
+		Vector2.DOWN:
+			anim.play("yank_south")
+		Vector2.UP:
+			anim.play("yank_south")
+			#anim.play("yank_north")
+		Vector2.RIGHT:
+			anim.play("yank_south")
+			#anim.play("yank_east")
+		Vector2.LEFT:
+			anim.play("yank_south")
+			#anim.play("yank_west")
+		Vector2(-1, 1):
+			anim.play("yank_southwest")
+		Vector2(1, 1):
+			anim.play("yank_southeast")
+		Vector2(-1, -1):
+			anim.play("yank_south")
+			#anim.play("yank_northwest")
+		Vector2(1, -1):
+			anim.play("yank_south")
+			#anim.play("yank_northeast")
 
 func _state_fish_process(_delta):
 	if direction != Vector2(0,0) and not yanking:
 		yanking = true
 		yank_lure()
-		# match direction ...
-		anim.play("yank_south")
+		play_yank_animation()
 		await wait_for_lure_to_return()
 		yanking = false
 		_goto("idle")
@@ -204,8 +247,7 @@ func _state_fish_process(_delta):
 		if is_instance_valid(lure):
 			if !lure.fish_hooked: # cancel cast
 				yank_lure()
-				# match direction ...
-				anim.play("yank_south")
+				play_yank_animation()
 				await wait_for_lure_to_return()
 				_goto("idle")
 			else: # sucessful catch!
@@ -222,8 +264,28 @@ func _state_fish_exit():
 
 #region State reel
 func _state_reel_enter():
-	# match direction ...
-	anim.play("reel_south")
+	match prev_direction:
+		Vector2.DOWN:
+			anim.play("reel_south")
+		Vector2.UP:
+			anim.play("reel_south")
+			#anim.play("reel_north")
+		Vector2.RIGHT:
+			anim.play("reel_south")
+			#anim.play("reel_east")
+		Vector2.LEFT:
+			anim.play("reel_south")
+			#anim.play("reel_west")
+		Vector2(-1, 1):
+			anim.play("reel_southwest")
+		Vector2(1, 1):
+			anim.play("reel_southeast")
+		Vector2(-1, -1):
+			anim.play("reel_south")
+			#anim.play("reel_northwest")
+		Vector2(1, -1):
+			anim.play("reel_south")
+			#anim.play("reel_northeast")
 
 func _state_reel_process(_delta):
 	pass
@@ -232,8 +294,7 @@ func _state_reel_physics_process(_delta):
 	pass
 
 func _state_reel_exit():
-	# match direction ...
-	anim.play("yank_south")
+	play_yank_animation()
 	yank_lure()
 	await wait_for_lure_to_return()
 	on_zoom_camera()
