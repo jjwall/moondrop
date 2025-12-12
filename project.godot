@@ -47,6 +47,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/test_camera/plugin.cfg")
 
+[global_group]
+
+player=""
+
 [gui]
 
 theme/custom="res://gui_theme.tres"

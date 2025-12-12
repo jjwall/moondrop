@@ -9,8 +9,9 @@ var direction := Vector2.ZERO
 var prev_direction := Vector2(0, 1)
 
 var radial_highlight_scene = preload("res://objects/radial_highlight/radial_highlight.tscn")
-
+var item_drop_scene = preload("res://objects/item_drop/item_drop.tscn")
 var lure_scene = preload("res://objects/lure/lure.tscn")
+
 var caught_fish_to_display = null
 var radial_highlight_to_display = null
 var lure = null
@@ -65,11 +66,14 @@ func dialog_say(s: String) -> void:
 	await pressedConfirm
 	dialog_confirm.visible = false
 
-func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float) -> void:
+func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float, pocket_successful: bool) -> void:
 	dialog_panel.visible = true
 	in_dialog = true
 	await dialog_say(fish_data.message)
 	await dialog_say("I caught a %s weighing %.2f pounds!" % [fish_data.name, fish_measurement])
+	if not pocket_successful:
+		await dialog_say("Aww my pockets are full. I'll leave this on the ground for now.")
+		
 	in_dialog = false
 	
 func on_reset_ui():
@@ -293,8 +297,14 @@ func _state_get_item_enter():
 	
 	var fish_measurement = determine_fish_measurement(recent_caught_fish)
 	var new_item_data = prep_fish_item_data(recent_caught_fish, fish_measurement)
-	inventory.pocket_item(new_item_data) # TODO: Check if pockets are full, handle dialog accordingly.
-	caught_fish_dialog(recent_caught_fish, fish_measurement)
+	var pocket_successful = inventory.pocket_item(new_item_data) # TODO: Check if pockets are full, handle dialog accordingly.
+	caught_fish_dialog(recent_caught_fish, fish_measurement, pocket_successful)
+	
+	if not pocket_successful:
+		var item_drop = item_drop_scene.instantiate()
+		item_drop.set_item_data(new_item_data)
+		item_drop.global_position = self.global_position # make a bit random
+		$/root/MainGameplay/ItemDropsContainer.add_child(item_drop)
 
 func _state_get_item_process(_delta):
 	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display) and !in_dialog:

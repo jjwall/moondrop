@@ -5,6 +5,12 @@
 [ext_resource type="FontFile" uid="uid://dv4y6a2mw7r2y" path="res://assets/fonts/Silver_nodescent.ttf" id="3_ax26v"]
 [ext_resource type="PackedScene" uid="uid://cbupaj0owytnj" path="res://objects/inventory/inventory.tscn" id="4_lsqbn"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
+radius = 72.06247
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
+size = Vector2(39, 17)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_fphvf"]
 atlas = ExtResource("2_tov0l")
 region = Rect2(0, 576, 64, 64)
@@ -500,11 +506,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aya8m"]
-size = Vector2(39, 17)
-
-[node name="Player" type="CharacterBody2D" unique_id=85828012]
+[node name="Player" type="CharacterBody2D" unique_id=85828012 groups=["player"]]
 script = ExtResource("1_d7vyd")
+
+[node name="ItemPickupArea2D" type="Area2D" parent="." unique_id=1934980497 groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPickupArea2D" unique_id=354316918 groups=["player"]]
+shape = SubResource("CircleShape2D_lsqbn")
+debug_color = Color(0.68176913, 0.5008338, 0.1319671, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2092531117]
+position = Vector2(1.5, 45.5)
+shape = SubResource("RectangleShape2D_aya8m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=503992229]
 scale = Vector2(3, 3)
@@ -513,10 +526,6 @@ animation = &"yank_south"
 autoplay = "idle_south"
 frame = 2
 frame_progress = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2092531117]
-position = Vector2(1.5, 45.5)
-shape = SubResource("RectangleShape2D_aya8m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1576526034]
 

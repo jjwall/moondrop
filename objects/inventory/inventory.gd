@@ -23,11 +23,14 @@ func render_backpack(starting_pocket_index: int):
 		
 	init_backpack_pockets(starting_pocket_index)
 
-func pocket_item(item_data: Dictionary):
+# Returns if pocketing was successful or not. Failure means pockets are full.
+func pocket_item(item_data: Dictionary) -> bool:
 	if items_in_pockets.size() < total_pockets:
 		items_in_pockets.push_back(item_data)
+		return true
 	else:
 		print("too many items in pockets!")
+		return false
 
 func init_backpack_pockets(starting_pocket_index: int):
 	var pocket_pos_y = -90
