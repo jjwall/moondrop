@@ -14,13 +14,10 @@ func _ready() -> void:
 			"weight": 55.55,
 		}
 		
-		var item = place_holder_item_scene.instantiate()
-		#item.global_position = self.global_position
-		add_child(item)
-	else:
-		var item = item_data_ref.scene.instantiate()
-		#item.global_position = self.global_position
-		add_child(item)
+	var item = item_data_ref.scene.instantiate()
+	#item.global_position = self.global_position
+	add_child(item)
+	# TODO: Add dropping animation
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
@@ -28,4 +25,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		var successful = player_ref.pickup_item(item_data_ref)
 		
 		if successful:
+			# TODO: render pickup animation
 			self.queue_free()
