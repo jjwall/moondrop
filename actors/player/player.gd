@@ -396,7 +396,7 @@ func _state_get_item_enter():
 	var fish_measurement = determine_fish_measurement(recent_caught_fish)
 	var new_item_data = prep_fish_item_data(recent_caught_fish, fish_measurement)
 	var pocket_successful = inventory.pocket_item(new_item_data)
-	caught_fish_dialog(recent_caught_fish, fish_measurement, pocket_successful)
+	await caught_fish_dialog(recent_caught_fish, fish_measurement, pocket_successful)
 	
 	if not pocket_successful:
 		drop_item(new_item_data)

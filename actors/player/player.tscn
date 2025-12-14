@@ -758,7 +758,7 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mt824")
 animation = &"reel_southwest"
 autoplay = "idle_south"
-frame_progress = 0.9044648
+frame_progress = 0.84292984
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1576526034]
 
