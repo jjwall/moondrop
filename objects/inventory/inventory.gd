@@ -68,6 +68,7 @@ func init_backpack_pockets(starting_pocket_index: int):
 			var new_pocket = render_pocket(Vector2(pocket_pos_x, pocket_pos_y))
 			new_pocket.button_up.connect(on_pocket_button_up)
 			new_pocket.mouse_entered.connect(on_pocket_mouse_entered.bind(pocket_index))
+			new_pocket.mouse_exited.connect(on_pocket_mouse_exited)
 			# if pocket_index < items_in_pockets.size():
 			if items_in_pockets[pocket_index] != null:
 				var item_in_pocket = render_item(items_in_pockets[pocket_index], Vector2(pocket_pos_x, pocket_pos_y))
@@ -102,6 +103,10 @@ func on_pocket_button_up():
 func on_pocket_mouse_entered(pocket_index: int):
 	if dragging:
 		pocket_index_to_swap_with = pocket_index
+
+func on_pocket_mouse_exited():
+	if dragging:
+		pocket_index_to_swap_with = dragged_item_pocket_index
 
 func remove_item_from_pocket(pocket_index: int):
 	var dropped_item_data = items_in_pockets[pocket_index]
