@@ -7,8 +7,9 @@ signal item_dropped(item_data: Dictionary)
 var dragging = false
 var item_being_dragged = null
 var starting_drag_pos = Vector2(0, 0)
-var dragged_item_pocket_index = 0
-var pocket_index_to_swap_with = 0
+var dragged_item_pocket_index = -1
+var pocket_index_to_swap_with = -1
+var mouse_exited_last = false
 
 var item_structure = {
 	"scene": "blah",
@@ -55,6 +56,10 @@ func pocket_item(item_data: Dictionary) -> bool:
 		print("too many items in pockets!")
 		return false
 
+func drop_item(pocket_index: int):
+	var dropped_item_data = remove_item_from_pocket(pocket_index)
+	item_dropped.emit(dropped_item_data)
+
 func init_backpack_pockets(starting_pocket_index: int):
 	var pocket_pos_y = -90
 	var pocket_pos_x = 15
@@ -69,7 +74,7 @@ func init_backpack_pockets(starting_pocket_index: int):
 			new_pocket.button_up.connect(on_pocket_button_up)
 			new_pocket.mouse_entered.connect(on_pocket_mouse_entered.bind(pocket_index))
 			new_pocket.mouse_exited.connect(on_pocket_mouse_exited)
-			# if pocket_index < items_in_pockets.size():
+			
 			if items_in_pockets[pocket_index] != null:
 				var item_in_pocket = render_item(items_in_pockets[pocket_index], Vector2(pocket_pos_x, pocket_pos_y))
 				new_pocket.button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
@@ -85,27 +90,26 @@ func on_pocket_button_down(item: Node2D, pocket_index: int):
 	item_being_dragged.z_index += 1
 	dragged_item_pocket_index = pocket_index
 	pocket_index_to_swap_with = pocket_index
-	
-	# For now, drop item when pressed.
-	#var dropped_item_data = remove_item_from_pocket(pocket_index)
-	#print(dropped_item_data)
-	#item_dropped.emit(dropped_item_data)
 
 func on_pocket_button_up():
 	if dragging:
-		swap_pocket_contents(dragged_item_pocket_index, pocket_index_to_swap_with)
-		item_being_dragged.z_index -= 1
-		#item_being_dragged.position = starting_drag_pos
+		if dragged_item_pocket_index == pocket_index_to_swap_with and mouse_exited_last:
+			drop_item(dragged_item_pocket_index)
+		else:
+			swap_pocket_contents(dragged_item_pocket_index, pocket_index_to_swap_with)
+			item_being_dragged.z_index -= 1
+		
 		dragging = false
 		render_backpack(0)
-	#item.position = starting_drag_pos
 
 func on_pocket_mouse_entered(pocket_index: int):
 	if dragging:
+		mouse_exited_last = false
 		pocket_index_to_swap_with = pocket_index
 
 func on_pocket_mouse_exited():
 	if dragging:
+		mouse_exited_last = true
 		pocket_index_to_swap_with = dragged_item_pocket_index
 
 func remove_item_from_pocket(pocket_index: int):
@@ -125,12 +129,11 @@ func render_item(item_data: Dictionary, pos: Vector2) -> Node2D:
 	backpack_panel.add_child(item)
 	return item
 
-func render_pocket(pos: Vector2) -> Button: #(pos: Vector2, hat_index: int):	
-		#var hat_scene_file = hat_keys[hat_index]
+func render_pocket(pos: Vector2) -> Button: #(pos: Vector2, hat_index: int):
 	var item_height = 100
 	var item_length = 100
 	var new_pocket = Button.new()
-	#new_hat_button_panel.focus_mode = Control.FOCUS_CLICK
+	#new_pocket.focus_mode = Control.FOCUS_CLICK
 	new_pocket.set_position(pos)
 	new_pocket.set_size(Vector2(item_length, item_height))
 	backpack_panel.add_child(new_pocket)
