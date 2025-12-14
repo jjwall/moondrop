@@ -81,6 +81,7 @@ func on_pocket_button_down(item: Node2D, pocket_index: int):
 	dragging = true
 	starting_drag_pos = item.position
 	item_being_dragged = item
+	item_being_dragged.z_index += 1
 	dragged_item_pocket_index = pocket_index
 	pocket_index_to_swap_with = pocket_index
 	
@@ -92,6 +93,7 @@ func on_pocket_button_down(item: Node2D, pocket_index: int):
 func on_pocket_button_up():
 	if dragging:
 		swap_pocket_contents(dragged_item_pocket_index, pocket_index_to_swap_with)
+		item_being_dragged.z_index -= 1
 		#item_being_dragged.position = starting_drag_pos
 		dragging = false
 		render_backpack(0)
