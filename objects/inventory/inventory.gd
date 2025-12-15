@@ -3,6 +3,7 @@ extends CanvasLayer
 signal item_dropped(item_data: Dictionary)
 
 @onready var backpack_panel: Panel = %BackpackPanel
+@onready var outline_shader = preload("res://assets/shaders/outline.gdshader")
 
 var dragging = false
 var item_being_dragged = null
@@ -33,12 +34,12 @@ func _process(_delta: float) -> void:
 		var mousepos = get_viewport().get_mouse_position()
 		item_being_dragged.global_position = Vector2(mousepos.x, mousepos.y)
 
-func render_backpack(starting_pocket_index: int):
+func render_backpack(starting_pocket_index: int, selected_pocket_index = -1):
 	# Wipe previously rendered catalog items.
 	for child in backpack_panel.get_children():
 		child.queue_free()
 		
-	init_backpack_pockets(starting_pocket_index)
+	return init_backpack_pockets(starting_pocket_index, selected_pocket_index)
 
 func swap_pocket_contents(index_a: int, index_b: int):
 	var temp = items_in_pockets[index_a]
@@ -60,10 +61,16 @@ func drop_item(pocket_index: int):
 	var dropped_item_data = remove_item_from_pocket(pocket_index)
 	item_dropped.emit(dropped_item_data)
 
-func init_backpack_pockets(starting_pocket_index: int):
+func select_item(selected_item: Node2D, pocket_index: int):
+	var new_material = ShaderMaterial.new()
+	new_material.shader = outline_shader
+	selected_item.get_child(0).material = new_material
+
+func init_backpack_pockets(starting_pocket_index: int, selected_pocket_index = -1) -> Node2D:
 	var pocket_pos_y = -90
 	var pocket_pos_x = 15
 	var pocket_index = starting_pocket_index
+	var selected_pocket_item = null
 	
 	for r in range(3):
 		pocket_pos_y += 105
@@ -71,17 +78,23 @@ func init_backpack_pockets(starting_pocket_index: int):
 		
 		for c in range(4):
 			var new_pocket = render_pocket(Vector2(pocket_pos_x, pocket_pos_y))
-			new_pocket.button_up.connect(on_pocket_button_up)
 			new_pocket.mouse_entered.connect(on_pocket_mouse_entered.bind(pocket_index))
 			new_pocket.mouse_exited.connect(on_pocket_mouse_exited)
 			
 			if items_in_pockets[pocket_index] != null:
 				var item_in_pocket = render_item(items_in_pockets[pocket_index], Vector2(pocket_pos_x, pocket_pos_y))
 				new_pocket.button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
+				new_pocket.button_up.connect(on_pocket_button_up)
+				
+				if selected_pocket_index == pocket_index:
+					selected_pocket_item = item_in_pocket
+					
 			# else: empty pocket
 				
 			pocket_index += 1
 			pocket_pos_x += 105
+	
+	return selected_pocket_item
 
 func on_pocket_button_down(item: Node2D, pocket_index: int):
 	dragging = true
@@ -90,6 +103,9 @@ func on_pocket_button_down(item: Node2D, pocket_index: int):
 	item_being_dragged.z_index += 1
 	dragged_item_pocket_index = pocket_index
 	pocket_index_to_swap_with = pocket_index
+	
+	# Clear shader to not highlight when dragging.
+	item.get_child(0).material = null
 
 func on_pocket_button_up():
 	if dragging:
@@ -101,7 +117,10 @@ func on_pocket_button_up():
 			item_being_dragged.z_index -= 1
 		
 		dragging = false
-		render_backpack(0)
+		var selected_item = render_backpack(0, pocket_index_to_swap_with)
+		
+		if selected_item != null:
+			select_item(selected_item, pocket_index_to_swap_with)
 
 func on_pocket_mouse_entered(pocket_index: int):
 	if dragging:
