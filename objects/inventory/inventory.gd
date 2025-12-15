@@ -95,6 +95,7 @@ func on_pocket_button_up():
 	if dragging:
 		if dragged_item_pocket_index == pocket_index_to_swap_with and mouse_exited_last:
 			drop_item(dragged_item_pocket_index)
+			mouse_exited_last = false
 		else:
 			swap_pocket_contents(dragged_item_pocket_index, pocket_index_to_swap_with)
 			item_being_dragged.z_index -= 1
@@ -114,7 +115,6 @@ func on_pocket_mouse_exited():
 
 func remove_item_from_pocket(pocket_index: int):
 	var dropped_item_data = items_in_pockets[pocket_index]
-	print(pocket_index)
 	#items_in_pockets.remove_at(pocket_index)
 	items_in_pockets[pocket_index] = null
 	render_backpack(0)
