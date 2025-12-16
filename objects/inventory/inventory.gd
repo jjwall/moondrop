@@ -23,7 +23,9 @@ var item_structure = {
 	# aquire_on: new Date()
 }
 
-var total_pockets = 12
+var total_pockets = 18
+var rod_equip_index = 16
+var bait_equip_index = 17
 var items_in_pockets = []
 
 func _ready():
@@ -54,6 +56,14 @@ func render_backpack(starting_pocket_index: int, selected_pocket_index = -1):
 		
 	return init_backpack_pockets(starting_pocket_index, selected_pocket_index)
 
+func check_item_type_and_swap_contents(index_a: int, index_b: int):
+	if rod_equip_index == index_b:
+		print("check item type")
+	elif bait_equip_index == index_b:
+		print("check item type")
+	else:
+		swap_pocket_contents(index_a, index_b)
+
 func swap_pocket_contents(index_a: int, index_b: int):
 	var temp = items_in_pockets[index_a]
 	items_in_pockets[index_a] = items_in_pockets[index_b]
@@ -63,7 +73,7 @@ func swap_pocket_contents(index_a: int, index_b: int):
 func pocket_item(item_data: Dictionary) -> bool:
 	var first_empty_pocket_index = items_in_pockets.find(null)
 	
-	if first_empty_pocket_index != -1:
+	if first_empty_pocket_index != -1 and first_empty_pocket_index != rod_equip_index and first_empty_pocket_index != bait_equip_index:
 		items_in_pockets[first_empty_pocket_index] = item_data
 		return true
 	else:
@@ -94,32 +104,51 @@ func render_item_profile(item_scene: PackedScene):
 	item_profile_panel.add_child(item_profile)
 
 func init_backpack_pockets(starting_pocket_index: int, selected_pocket_index = -1) -> Node2D:
-	var pocket_pos_y = -90
+	var pocket_pos_y = -55
 	var pocket_pos_x = 15
 	var pocket_index = starting_pocket_index
 	var selected_pocket_item = null
 	
-	for r in range(3):
-		pocket_pos_y += 105
+	# Init pockets.
+	for r in range(4):
+		pocket_pos_y += 70
 		pocket_pos_x = 15
 		
 		for c in range(4):
-			var new_pocket = render_pocket(Vector2(pocket_pos_x, pocket_pos_y))
-			new_pocket.mouse_entered.connect(on_pocket_mouse_entered.bind(pocket_index))
-			new_pocket.mouse_exited.connect(on_pocket_mouse_exited)
-			
-			if items_in_pockets[pocket_index] != null:
-				var item_in_pocket = render_item(items_in_pockets[pocket_index], Vector2(pocket_pos_x, pocket_pos_y))
-				new_pocket.button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
-				new_pocket.button_up.connect(on_pocket_button_up)
-				
-				if selected_pocket_index == pocket_index:
-					selected_pocket_item = item_in_pocket
+			if items_in_pockets.size() > pocket_index:
+				var possible_selected_item = render_pocket_and_item(Vector2(pocket_pos_x, pocket_pos_y), pocket_index, selected_pocket_index)
+				if possible_selected_item != null:
+					selected_pocket_item = possible_selected_item
 					
-			# else: empty pocket
-				
-			pocket_index += 1
-			pocket_pos_x += 105
+				pocket_index += 1
+			pocket_pos_x += 70
+		
+	pocket_pos_x += 39
+	
+	# Int equip slots.
+	for i in range(2):
+		var possible_selected_item = render_pocket_and_item(Vector2(pocket_pos_x, pocket_pos_y), pocket_index, selected_pocket_index)
+		if possible_selected_item != null:
+			selected_pocket_item = possible_selected_item
+			
+		pocket_index += 1
+		pocket_pos_x += 70
+	
+	return selected_pocket_item
+
+func render_pocket_and_item(pos: Vector2, pocket_index: int, selected_pocket_index = -1) -> Node2D:
+	var selected_pocket_item = null
+	var new_pocket = render_pocket(pos)
+	new_pocket.mouse_entered.connect(on_pocket_mouse_entered.bind(pocket_index))
+	new_pocket.mouse_exited.connect(on_pocket_mouse_exited)
+
+	if items_in_pockets.size() > pocket_index and items_in_pockets[pocket_index] != null:
+		var item_in_pocket = render_item(items_in_pockets[pocket_index], pos)
+		new_pocket.button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
+		new_pocket.button_up.connect(on_pocket_button_up)
+		
+		if selected_pocket_index == pocket_index:
+			selected_pocket_item = item_in_pocket
 	
 	return selected_pocket_item
 
@@ -140,7 +169,8 @@ func on_pocket_button_up():
 			drop_item(dragged_item_pocket_index)
 			mouse_exited_last = false
 		else:
-			swap_pocket_contents(dragged_item_pocket_index, pocket_index_to_swap_with)
+			check_item_type_and_swap_contents(dragged_item_pocket_index, pocket_index_to_swap_with)
+			#swap_pocket_contents(dragged_item_pocket_index, pocket_index_to_swap_with)
 			item_being_dragged.z_index -= 1
 		
 		dragging = false
@@ -168,16 +198,16 @@ func remove_item_from_pocket(pocket_index: int):
 
 func render_item(item_data: Dictionary, pos: Vector2) -> Node2D:
 	var item: Node2D = item_data.scene.instantiate()
-	pos.x += 48
-	pos.y += 48
+	pos.x += 32
+	pos.y += 32
 	item.z_index += 1
 	item.set_position(pos)
 	backpack_panel.add_child(item)
 	return item
 
 func render_pocket(pos: Vector2) -> Button: #(pos: Vector2, hat_index: int):
-	var item_height = 100
-	var item_length = 100
+	var item_height = 65
+	var item_length = 65
 	var new_pocket = Button.new()
 	#new_pocket.focus_mode = Control.FOCUS_CLICK
 	new_pocket.set_position(pos)
