@@ -31,19 +31,22 @@ func _ready():
 		items_in_pockets.push_back(null)
 		
 	render_backpack(0)
-	#backpack_panel.visible = false
 
 func _process(_delta: float) -> void:
 	if dragging:
 		var mousepos = get_viewport().get_mouse_position()
 		item_being_dragged.global_position = Vector2(mousepos.x, mousepos.y)
 
-func reset_labels():
+func reset_item_details():
+	# Wipe previously rendered item profile.
+	for child in item_profile_panel.get_children():
+		child.queue_free()
+		
 	item_name_label.text = ""
 	item_description_label.text = ""
 
 func render_backpack(starting_pocket_index: int, selected_pocket_index = -1):
-	reset_labels()
+	reset_item_details()
 	
 	# Wipe previously rendered catalog items.
 	for child in backpack_panel.get_children():
@@ -78,6 +81,17 @@ func select_item(selected_item: Node2D, pocket_index: int):
 	item_name_label.text = item_data.name
 	#TODO: If item.type = ItemTypes.FISH
 	item_description_label.text = "A %s weighing %.2f pounds! This was caught on 12/12/2025." % [item_data.name, item_data.weight]
+	render_item_profile(item_data.scene)
+
+func render_item_profile(item_scene: PackedScene):
+	var item_profile: Node2D = item_scene.instantiate()
+	var pos = item_profile_panel.position
+	pos.x += 48
+	pos.y += 48
+	item_profile.scale.x *= 1.5
+	item_profile.scale.y *= 1.5
+	item_profile.set_position(pos)
+	item_profile_panel.add_child(item_profile)
 
 func init_backpack_pockets(starting_pocket_index: int, selected_pocket_index = -1) -> Node2D:
 	var pocket_pos_y = -90
