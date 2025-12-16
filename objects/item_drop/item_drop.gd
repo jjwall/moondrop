@@ -24,7 +24,7 @@ func _ready() -> void:
 		}
 		
 	var item = item_data_ref.scene.instantiate()
-	host_sprite = item.get_node("AnimatedSprite2D") # maybe check for Srpite2D as well
+	host_sprite = item.get_node("%AnimatedSprite2D") # maybe check for Srpite2D as well
 	#item.global_position = self.global_position
 	add_child(item)
 	start_bounce_tween()

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://nfq0cvlppqpj"]
 
 [ext_resource type="Texture2D" uid="uid://ds44rb2tprps5" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Sea_and_Food.png" id="1_8ykiu"]
+[ext_resource type="Script" uid="uid://b4gkkyan36auk" path="res://assets/scripts/canvas_group.gd" id="1_tmbpu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mbrux"]
 atlas = ExtResource("1_8ykiu")
@@ -19,6 +20,11 @@ animations = [{
 
 [node name="ClownFish" type="Node2D" unique_id=2081472733]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=650244780]
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1454406488]
+script = ExtResource("1_tmbpu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasGroup" unique_id=650244780]
+unique_name_in_owner = true
+texture_repeat = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_s5m31")

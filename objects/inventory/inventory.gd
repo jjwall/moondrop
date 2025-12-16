@@ -3,7 +3,8 @@ extends CanvasLayer
 signal item_dropped(item_data: Dictionary)
 
 @onready var backpack_panel: Panel = %BackpackPanel
-@onready var outline_shader = preload("res://assets/shaders/outline.gdshader")
+#const outline_shader = preload("res://assets/shaders/outline.gdshader")
+const outline_material = preload("res://assets/materials/outline.tres")
 
 var dragging = false
 var item_being_dragged = null
@@ -62,8 +63,7 @@ func drop_item(pocket_index: int):
 	item_dropped.emit(dropped_item_data)
 
 func select_item(selected_item: Node2D, pocket_index: int):
-	var new_material = ShaderMaterial.new()
-	new_material.shader = outline_shader
+	var new_material = outline_material.duplicate()
 	selected_item.get_child(0).material = new_material
 
 func init_backpack_pockets(starting_pocket_index: int, selected_pocket_index = -1) -> Node2D:
