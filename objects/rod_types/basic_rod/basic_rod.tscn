@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d1odqklalrf8s"]
+
+[ext_resource type="Script" uid="uid://b4gkkyan36auk" path="res://assets/scripts/canvas_group.gd" id="1_n50hu"]
+[ext_resource type="Texture2D" uid="uid://1mepqjfjawso" path="res://assets/textures/tilesets/spr_tileset_sunnysideworld_16px.png" id="2_oqkkm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo2ck"]
+atlas = ExtResource("2_oqkkm")
+region = Rect2(656, 784, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_srs16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo2ck")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BasicRod" type="Node2D" unique_id=1020366477]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=861110525]
+script = ExtResource("1_n50hu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasGroup" unique_id=324959712]
+unique_name_in_owner = true
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_srs16")

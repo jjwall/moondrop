@@ -103,6 +103,7 @@ scale = Vector2(3, 3)
 position = Vector2(117, 333)
 
 [node name="Player" parent="." unique_id=588714259 instance=ExtResource("3_j1nau")]
+unique_name_in_owner = true
 position = Vector2(480, 354)
 
 [node name="CameraController" type="Node2D" parent="." unique_id=142135720]

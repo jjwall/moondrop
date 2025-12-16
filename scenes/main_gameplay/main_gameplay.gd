@@ -1,10 +1,21 @@
 extends Node2D
+var basic_rod_scene = preload("res://objects/rod_types/basic_rod/basic_rod.tscn")
 
 #@onready var camera_shake: CameraShake = $Player/Camera2D/CameraShake
 var fish_group: Node2D
+@onready var player = %Player
 
 func _ready() -> void:
 	fish_group = $FishGroup
+	
+	var basic_rod_item_data = {
+		"name": "Basic Rod",
+		"description": "A simple rod that will catch you all of your basic fish.",
+		"item_type": RefData.item_types.ROD,
+		"scene": basic_rod_scene
+	}
+	
+	player.drop_item(basic_rod_item_data, true)
 
 # Called in the fish_spawn_area.gd script
 func add_fish_to_group(fish: Node2D):

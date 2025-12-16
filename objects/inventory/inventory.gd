@@ -97,9 +97,16 @@ func select_item(selected_item: Node2D, pocket_index: int):
 	selected_item.get_child(0).material = new_material
 	var item_data = items_in_pockets[pocket_index]
 	item_name_label.text = item_data.name
-	#TODO: If item.type = ItemTypes.FISH
-	item_description_label.text = "A %s weighing %.2f pounds! This was caught on 12/12/2025." % [item_data.name, item_data.weight]
+	
+	render_item_description(item_data)
 	render_item_profile(item_data.scene)
+
+func render_item_description(item_data: Dictionary):
+	match item_data.item_type:
+		RefData.item_types.FISH:
+			item_description_label.text = "A %s weighing %.2f pounds! This was caught on 12/12/2025." % [item_data.name, item_data.weight]
+		RefData.item_types.ROD:
+			item_description_label.text = "A %s. %s" % [item_data.name, item_data.description]
 
 func render_item_profile(item_scene: PackedScene):
 	var item_profile: Node2D = item_scene.instantiate()
