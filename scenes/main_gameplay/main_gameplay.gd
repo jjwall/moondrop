@@ -22,7 +22,7 @@ func _ready() -> void:
 	var boilies_item_data = {
 		"name": "Boilies",
 		"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
-		"value": 50,
+		"value": 2,
 		"item_type": RefData.item_types.BAIT,
 		"scene": boilies_scene
 	}

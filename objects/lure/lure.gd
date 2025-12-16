@@ -47,6 +47,26 @@ func player_input_press():
 		fish_interested = false
 		print("cancel cast")
 
+func set_fish_hooked(attempt_success: bool):
+	if attempt_success:
+		if player_ref.inventory.get_equipped_bait() != {}:
+			var equipped_bait_data = player_ref.inventory.get_equipped_bait()
+			
+			if equipped_bait_data.value > -1:
+				if not fish_hooked:
+					if equipped_bait_data.value != 0:
+						equipped_bait_data.value -= 1
+					else:
+						player_ref.render_notification("Out of Bait")
+						fish_hooked = false
+						return false
+				fish_hooked = true
+				return true
+	
+	player_ref.render_notification("Equip Bait")
+	fish_hooked = false
+	return false
+
 func prep_lure(start_target, end_target):
 	var start = start_target
 	var end = end_target

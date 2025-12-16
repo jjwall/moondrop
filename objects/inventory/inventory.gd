@@ -46,6 +46,12 @@ func get_equipped_rod() -> Dictionary:
 	else:
 		return {}
 
+func get_equipped_bait() -> Dictionary:
+	if items_in_pockets[bait_equip_index] != null:
+		return items_in_pockets[bait_equip_index]
+	else:
+		return {}
+
 func reset_item_details():
 	# Wipe previously rendered item profile.
 	for child in item_profile_panel.get_children():
@@ -190,7 +196,7 @@ func render_pocket_and_item(pos: Vector2, pocket_index: int, selected_pocket_ind
 		# Render value of item near item icon.
 		if items_in_pockets[pocket_index].has("value"):
 			var value_label = Label.new()
-			value_label.text = "%d" % [items_in_pockets[pocket_index].value] # Set the text content
+			value_label.text = "%s" % [items_in_pockets[pocket_index].value]
 			value_label.position.x -= 25
 			value_label.position.y += 14
 			value_label.add_theme_font_size_override("font_size", 19)

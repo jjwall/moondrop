@@ -20,6 +20,7 @@ var yanking = false
 var in_dialog = false
 var has_been_cast = false
 var inventory_open = false
+var notification_displaying = false
 
 @onready var inventory = $Inventory
 @onready var camera_controller = $/root/MainGameplay/CameraController
@@ -68,12 +69,15 @@ func pickup_item(item_data_ref: Dictionary) -> bool:
 	return successful
 
 func render_notification(notifcation_text: String):
-	notification_text_label.text = notifcation_text
-	var fade_in_tween = create_tween()
-	await fade_in_tween.tween_property(notification_panel, "modulate:a", 1, 0.5).finished
-	var fade_out_tween = create_tween()
-	fade_out_tween.tween_interval(1.5)
-	await fade_out_tween.tween_property(notification_panel, "modulate:a", 0, 0.5).finished
+	if not notification_displaying:
+		notification_displaying = true
+		notification_text_label.text = notifcation_text
+		var fade_in_tween = create_tween()
+		await fade_in_tween.tween_property(notification_panel, "modulate:a", 1, 0.5).finished
+		var fade_out_tween = create_tween()
+		fade_out_tween.tween_interval(1.5)
+		await fade_out_tween.tween_property(notification_panel, "modulate:a", 0, 0.5).finished
+		notification_displaying = false
 
 func drop_item(dropped_item_data: Dictionary, recent_manual_drop = false):
 	var item_drop = item_drop_scene.instantiate()
