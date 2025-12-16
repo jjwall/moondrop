@@ -3,6 +3,9 @@ extends CanvasLayer
 signal item_dropped(item_data: Dictionary)
 
 @onready var backpack_panel: Panel = %BackpackPanel
+@onready var item_profile_panel: Panel = %ItemProfilePanel
+@onready var item_name_label: Label = %ItemNameLabel
+@onready var item_description_label: Label = %ItemDescriptionLabel
 #const outline_shader = preload("res://assets/shaders/outline.gdshader")
 const outline_material = preload("res://assets/materials/outline.tres")
 
@@ -35,7 +38,13 @@ func _process(_delta: float) -> void:
 		var mousepos = get_viewport().get_mouse_position()
 		item_being_dragged.global_position = Vector2(mousepos.x, mousepos.y)
 
+func reset_labels():
+	item_name_label.text = ""
+	item_description_label.text = ""
+
 func render_backpack(starting_pocket_index: int, selected_pocket_index = -1):
+	reset_labels()
+	
 	# Wipe previously rendered catalog items.
 	for child in backpack_panel.get_children():
 		child.queue_free()
@@ -65,6 +74,10 @@ func drop_item(pocket_index: int):
 func select_item(selected_item: Node2D, pocket_index: int):
 	var new_material = outline_material.duplicate()
 	selected_item.get_child(0).material = new_material
+	var item_data = items_in_pockets[pocket_index]
+	item_name_label.text = item_data.name
+	#TODO: If item.type = ItemTypes.FISH
+	item_description_label.text = "A %s weighing %.2f pounds! This was caught on 12/12/2025." % [item_data.name, item_data.weight]
 
 func init_backpack_pockets(starting_pocket_index: int, selected_pocket_index = -1) -> Node2D:
 	var pocket_pos_y = -90
