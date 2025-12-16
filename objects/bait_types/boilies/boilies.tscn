@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bf4mf1uq48aco"]
+
+[ext_resource type="Script" uid="uid://b4gkkyan36auk" path="res://assets/scripts/canvas_group.gd" id="1_vu2d8"]
+[ext_resource type="Texture2D" uid="uid://ds44rb2tprps5" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Sea_and_Food.png" id="2_xd7w8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4eim"]
+atlas = ExtResource("2_xd7w8")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vind6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4eim")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Boilies" type="Node2D" unique_id=1710285420]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1951936283]
+script = ExtResource("1_vu2d8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasGroup" unique_id=1010958936]
+unique_name_in_owner = true
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_vind6")

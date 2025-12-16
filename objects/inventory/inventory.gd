@@ -130,6 +130,8 @@ func render_item_description(item_data: Dictionary):
 			item_description_label.text = "A %s weighing %.2f pounds! This was caught on 12/12/2025." % [item_data.name, item_data.weight]
 		RefData.item_types.ROD:
 			item_description_label.text = "A %s. %s" % [item_data.name, item_data.description]
+		RefData.item_types.BAIT:
+			item_description_label.text = "%s" % [item_data.description]
 
 func render_item_profile(item_scene: PackedScene):
 	var item_profile: Node2D = item_scene.instantiate()

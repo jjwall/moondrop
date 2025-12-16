@@ -1,5 +1,6 @@
 extends Node2D
 var basic_rod_scene = preload("res://objects/rod_types/basic_rod/basic_rod.tscn")
+var boilies_scene = preload("res://objects/bait_types/boilies/boilies.tscn")
 var test_clown_fish_scene = preload("res://objects/fish_types/clown_fish/clown_fish.tscn")
 
 #@onready var camera_shake: CameraShake = $Player/Camera2D/CameraShake
@@ -17,6 +18,16 @@ func _ready() -> void:
 	}
 	
 	player.drop_item(basic_rod_item_data, true)
+	
+	var boilies_item_data = {
+		"name": "Boilies",
+		"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
+		"value": 50,
+		"item_type": RefData.item_types.BAIT,
+		"scene": boilies_scene
+	}
+	
+	player.drop_item(boilies_item_data, true)
 	
 	# Generate a bunch of caught fish for inventory testing.
 	#for i in range(15):
