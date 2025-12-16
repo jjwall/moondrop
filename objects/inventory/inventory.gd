@@ -187,6 +187,15 @@ func render_pocket_and_item(pos: Vector2, pocket_index: int, selected_pocket_ind
 		new_pocket.button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
 		new_pocket.button_up.connect(on_pocket_button_up)
 		
+		# Render value of item near item icon.
+		if items_in_pockets[pocket_index].has("value"):
+			var value_label = Label.new()
+			value_label.text = "%d" % [items_in_pockets[pocket_index].value] # Set the text content
+			value_label.position.x -= 25
+			value_label.position.y += 14
+			value_label.add_theme_font_size_override("font_size", 19)
+			item_in_pocket.add_child(value_label)
+		
 		if selected_pocket_index == pocket_index:
 			selected_pocket_item = item_in_pocket
 	
