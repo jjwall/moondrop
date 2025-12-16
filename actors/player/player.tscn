@@ -821,7 +821,8 @@ position = Vector2(34, 35)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_bop6h")
 
-[node name="Label" type="Label" parent="CanvasLayer/NotificationPanel" unique_id=1507912323]
+[node name="NotificationTextLabel" type="Label" parent="CanvasLayer/NotificationPanel" unique_id=1507912323]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 73.0
 offset_top = 11.0
@@ -829,7 +830,9 @@ offset_right = 296.0
 offset_bottom = 48.0
 theme_override_font_sizes/font_size = 58
 text = "Backpack Full"
+horizontal_alignment = 1
 
 [node name="Inventory" parent="." unique_id=725755749 instance=ExtResource("4_lsqbn")]
 
+[connection signal="equip_failed" from="Inventory" to="." method="_on_inventory_equip_failed"]
 [connection signal="item_dropped" from="Inventory" to="." method="_on_inventory_item_dropped"]

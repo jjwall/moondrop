@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal item_dropped(item_data: Dictionary)
+signal equip_failed
 
 @onready var backpack_panel: Panel = %BackpackPanel
 @onready var item_profile_panel: Panel = %ItemProfilePanel
@@ -63,12 +64,28 @@ func check_item_type_and_swap_contents(index_a: int, index_b: int):
 			swap_pocket_contents(index_a, index_b)
 		else:
 			print("Trigger Can't Equip Rod error msg")
+			equip_failed.emit()
 	elif bait_equip_index == index_b:
 		if items_in_pockets[index_a].item_type == RefData.item_types.BAIT:
 			print("Equipping bait")
 			swap_pocket_contents(index_a, index_b)
 		else:
 			print("Trigger Can't Equip Bait error msg")
+			equip_failed.emit()
+	elif rod_equip_index == index_a and items_in_pockets[index_b] != null:
+		if items_in_pockets[index_b].item_type == RefData.item_types.ROD:
+			print("Equipping rod")
+			swap_pocket_contents(index_a, index_b)
+		else:
+			print("Trigger Can't Equip Rod error msg")
+			equip_failed.emit()
+	elif bait_equip_index == index_a and items_in_pockets[index_b] != null:
+		if items_in_pockets[index_b].item_type == RefData.item_types.BAIT:
+			print("Equipping bait")
+			swap_pocket_contents(index_a, index_b)
+		else:
+			print("Trigger Can't Equip Bait error msg")
+			equip_failed.emit()
 	else: # just a fish.
 		swap_pocket_contents(index_a, index_b)
 

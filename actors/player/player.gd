@@ -29,6 +29,7 @@ var inventory_open = false
 @onready var dialog_label: RichTextLabel = %DialogLabel
 @onready var dialog_confirm: Label = %DialogConfirm
 @onready var notification_panel: Panel = %NotificationPanel
+@onready var notification_text_label: Label = %NotificationTextLabel
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():
@@ -40,12 +41,15 @@ func _ready():
 	_goto("idle")
 
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("ui_accept"):
 		pressedConfirm.emit()
 
 func _on_inventory_item_dropped(item_data: Dictionary) -> void:
 	drop_item(item_data, true)
+
+func _on_inventory_equip_failed() -> void:
+	render_notification("Can't Equip")
 
 func prep_fish_item_data(fish_data: Dictionary, fish_measurement: float) -> Dictionary:
 	return {
@@ -59,11 +63,12 @@ func pickup_item(item_data_ref: Dictionary) -> bool:
 	var successful = inventory.pocket_item(item_data_ref)
 	
 	if not successful:
-		render_backpack_full_notification()
+		render_notification("Backpack Full")
 	
 	return successful
 
-func render_backpack_full_notification():
+func render_notification(notifcation_text: String):
+	notification_text_label.text = notifcation_text
 	var fade_in_tween = create_tween()
 	await fade_in_tween.tween_property(notification_panel, "modulate:a", 1, 0.5).finished
 	var fade_out_tween = create_tween()

@@ -1,5 +1,6 @@
 extends Node2D
 var basic_rod_scene = preload("res://objects/rod_types/basic_rod/basic_rod.tscn")
+var test_clown_fish_scene = preload("res://objects/fish_types/clown_fish/clown_fish.tscn")
 
 #@onready var camera_shake: CameraShake = $Player/Camera2D/CameraShake
 var fish_group: Node2D
@@ -16,6 +17,17 @@ func _ready() -> void:
 	}
 	
 	player.drop_item(basic_rod_item_data, true)
+	
+	# Generate a bunch of caught fish for inventory testing.
+	#for i in range(15):
+		#var item_data_ref = { # fake data
+			#"scene": test_clown_fish_scene,
+			#"name": "Test Clown Fish",
+			#"weight": 55.55,
+			#"item_type": RefData.item_types.FISH,
+		#}
+		#
+		#player.drop_item(item_data_ref, true)
 
 # Called in the fish_spawn_area.gd script
 func add_fish_to_group(fish: Node2D):
