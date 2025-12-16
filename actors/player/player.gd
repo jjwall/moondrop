@@ -51,7 +51,8 @@ func prep_fish_item_data(fish_data: Dictionary, fish_measurement: float) -> Dict
 	return {
 		"scene": fish_data.scene,
 		"name": fish_data.name,
-		"weight": fish_measurement
+		"weight": fish_measurement,
+		"item_type": RefData.item_types.FISH,
 	}
 
 func pickup_item(item_data_ref: Dictionary) -> bool:

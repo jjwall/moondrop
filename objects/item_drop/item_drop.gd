@@ -21,6 +21,7 @@ func _ready() -> void:
 			"scene": place_holder_item_scene,
 			"name": "Test Clown Fish",
 			"weight": 55.55,
+			"item_type": RefData.item_types.FISH,
 		}
 		
 	var item = item_data_ref.scene.instantiate()

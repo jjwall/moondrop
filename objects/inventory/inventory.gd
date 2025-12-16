@@ -58,10 +58,18 @@ func render_backpack(starting_pocket_index: int, selected_pocket_index = -1):
 
 func check_item_type_and_swap_contents(index_a: int, index_b: int):
 	if rod_equip_index == index_b:
-		print("check item type")
+		if items_in_pockets[index_a].item_type == RefData.item_types.ROD:
+			print("Equipping rod")
+			swap_pocket_contents(index_a, index_b)
+		else:
+			print("Trigger Can't Equip Rod error msg")
 	elif bait_equip_index == index_b:
-		print("check item type")
-	else:
+		if items_in_pockets[index_a].item_type == RefData.item_types.BAIT:
+			print("Equipping bait")
+			swap_pocket_contents(index_a, index_b)
+		else:
+			print("Trigger Can't Equip Bait error msg")
+	else: # just a fish.
 		swap_pocket_contents(index_a, index_b)
 
 func swap_pocket_contents(index_a: int, index_b: int):

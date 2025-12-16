@@ -23,3 +23,11 @@ var commmon_fish_types := [
 		"max_weight": 4.89,
 	},
 ]
+
+enum item_types {
+	FISH,
+	ROD,
+	BAIT,
+	# LURE,
+	# etc...
+}
