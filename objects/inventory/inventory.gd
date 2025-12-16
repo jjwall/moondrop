@@ -40,6 +40,12 @@ func _process(_delta: float) -> void:
 		var mousepos = get_viewport().get_mouse_position()
 		item_being_dragged.global_position = Vector2(mousepos.x, mousepos.y)
 
+func get_equipped_rod() -> Dictionary:
+	if items_in_pockets[rod_equip_index] != null:
+		return items_in_pockets[rod_equip_index]
+	else:
+		return {}
+
 func reset_item_details():
 	# Wipe previously rendered item profile.
 	for child in item_profile_panel.get_children():

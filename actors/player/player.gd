@@ -330,8 +330,11 @@ func _state_idle_enter():
 
 func _state_idle_process(_delta):
 	if Input.is_action_just_pressed("ui_accept") and not has_been_cast and not inventory_open:
-		_goto("fish")
-		has_been_cast = true
+		if inventory.get_equipped_rod() != {}:
+			_goto("fish")
+			has_been_cast = true
+		else:
+			render_notification("Equip Rod")
 	elif direction != Vector2(0,0) and not inventory_open:
 		_goto("walk")
 	
