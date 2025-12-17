@@ -102,8 +102,44 @@ func check_item_type_and_swap_contents(index_a: int, index_b: int):
 		else:
 			print("Trigger Can't Equip Bait error msg")
 			equip_failed.emit()
+	elif items_in_pockets[index_a] != null and items_in_pockets[index_b] != null:
+		if items_in_pockets[index_a].has("value") and items_in_pockets[index_b].has("value"):
+			if items_in_pockets[index_a].name == items_in_pockets[index_b].name:
+				if index_a != index_b: # merge values if not the same item.
+					handle_item_value_stack(items_in_pockets[index_a].max_value, index_a, index_b)
+				swap_pocket_contents(index_a, index_b)
 	else: # just a fish.
 		swap_pocket_contents(index_a, index_b)
+
+func handle_item_value_stack(max_value: int, index_a: int, index_b: int):
+	var item_a_value: int = items_in_pockets[index_a].value
+	var item_b_value: int = items_in_pockets[index_b].value
+	var new_a_value = 0
+	var new_b_value = 0
+	
+	if (item_a_value + item_b_value) > max_value:
+		new_a_value = max_value
+		new_b_value = item_b_value - (max_value - item_a_value) # - item_a_value
+	else:
+		new_a_value = item_a_value + item_b_value
+		new_b_value = 0
+		
+	if new_a_value > 0:
+		items_in_pockets[index_a].value = new_a_value
+		
+		if new_b_value == 0:
+			items_in_pockets[index_b] = null
+		else:
+			items_in_pockets[index_b].value = new_b_value
+			
+	elif new_b_value > 0:
+		items_in_pockets[index_b].value = new_b_value
+		
+		if new_a_value == 0:
+			items_in_pockets[index_a].value = null
+		else:
+			items_in_pockets[index_a].value = new_a_value
+			
 
 func swap_pocket_contents(index_a: int, index_b: int):
 	var temp = items_in_pockets[index_a]

@@ -22,12 +22,35 @@ func _ready() -> void:
 	var boilies_item_data = {
 		"name": "Boilies",
 		"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
-		"value": 2,
+		"value": 10,
+		"max_value": 50,
 		"item_type": RefData.item_types.BAIT,
 		"scene": boilies_scene
 	}
 	
 	player.drop_item(boilies_item_data, true)
+	
+	var boilies_item_data2 = {
+		"name": "Boilies",
+		"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
+		"value": 48,
+		"max_value": 50,
+		"item_type": RefData.item_types.BAIT,
+		"scene": boilies_scene
+	}
+	
+	player.drop_item(boilies_item_data2, true)
+	
+	var boilies_item_data3 = {
+		"name": "Boilies",
+		"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
+		"value": 2,
+		"max_value": 50,
+		"item_type": RefData.item_types.BAIT,
+		"scene": boilies_scene
+	}
+	
+	player.drop_item(boilies_item_data3, true)
 	
 	# Generate a bunch of caught fish for inventory testing.
 	#for i in range(15):
