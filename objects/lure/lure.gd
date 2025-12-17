@@ -56,6 +56,8 @@ func set_fish_hooked(attempt_success: bool):
 				if not fish_hooked:
 					if equipped_bait_data.value != 0:
 						equipped_bait_data.value -= 1
+						if equipped_bait_data.value == 0:
+							player_ref.render_notification("Item Depleted", equipped_bait_data.scene)
 					else:
 						player_ref.render_notification("Out of Bait")
 						fish_hooked = false

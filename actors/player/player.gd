@@ -21,6 +21,7 @@ var in_dialog = false
 var has_been_cast = false
 var inventory_open = false
 var notification_displaying = false
+var original_notification_sprite = null
 
 @onready var inventory = $Inventory
 @onready var camera_controller = $/root/MainGameplay/CameraController
@@ -31,9 +32,12 @@ var notification_displaying = false
 @onready var dialog_confirm: Label = %DialogConfirm
 @onready var notification_panel: Panel = %NotificationPanel
 @onready var notification_text_label: Label = %NotificationTextLabel
+@onready var notification_sprite: AnimatedSprite2D = %NotificationSprite
+@onready var notification_sprite_control: Control = %NotificationSpriteControl
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():
+	original_notification_sprite = notification_sprite.duplicate()
 	inventory.visible = false
 	dialog_panel.visible = false
 	notification_panel.modulate.a = 0
@@ -52,6 +56,9 @@ func _on_inventory_item_dropped(item_data: Dictionary) -> void:
 func _on_inventory_equip_failed() -> void:
 	render_notification("Can't Equip")
 
+func _on_inventory_item_value_depleted(item_scene: PackedScene) -> void:
+	render_notification("Item Depleted", item_scene)
+
 func prep_fish_item_data(fish_data: Dictionary, fish_measurement: float) -> Dictionary:
 	return {
 		"scene": fish_data.scene,
@@ -68,8 +75,19 @@ func pickup_item(item_data_ref: Dictionary) -> bool:
 	
 	return successful
 
-func render_notification(notifcation_text: String):
+func render_notification(notifcation_text: String, sprite_scene: PackedScene = null):
 	if not notification_displaying:
+		for child in notification_sprite_control.get_children():
+			child.queue_free()
+			
+		if sprite_scene:
+			var sprite: Node2D = sprite_scene.instantiate()
+			sprite.position.x += 32
+			sprite.position.y += 32
+			notification_sprite_control.add_child(sprite)
+		else:
+			notification_sprite_control.add_child(original_notification_sprite.duplicate())
+			
 		notification_displaying = true
 		notification_text_label.text = notifcation_text
 		var fade_in_tween = create_tween()

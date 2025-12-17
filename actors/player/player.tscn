@@ -816,11 +816,6 @@ offset_top = 25.0
 offset_right = 334.0
 offset_bottom = 98.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/NotificationPanel" unique_id=159123064]
-position = Vector2(34, 35)
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_bop6h")
-
 [node name="NotificationTextLabel" type="Label" parent="CanvasLayer/NotificationPanel" unique_id=1507912323]
 unique_name_in_owner = true
 layout_mode = 0
@@ -832,7 +827,20 @@ theme_override_font_sizes/font_size = 58
 text = "Backpack Full"
 horizontal_alignment = 1
 
+[node name="NotificationSpriteControl" type="Control" parent="CanvasLayer/NotificationPanel" unique_id=245302765]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NotificationSprite" type="AnimatedSprite2D" parent="CanvasLayer/NotificationPanel/NotificationSpriteControl" unique_id=159123064]
+unique_name_in_owner = true
+position = Vector2(34, 35)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_bop6h")
+
 [node name="Inventory" parent="." unique_id=725755749 instance=ExtResource("4_lsqbn")]
 
 [connection signal="equip_failed" from="Inventory" to="." method="_on_inventory_equip_failed"]
 [connection signal="item_dropped" from="Inventory" to="." method="_on_inventory_item_dropped"]
+[connection signal="item_value_depleted" from="Inventory" to="." method="_on_inventory_item_value_depleted"]

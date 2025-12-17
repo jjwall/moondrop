@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+signal item_value_depleted(item_scene: PackedScene)
 signal item_dropped(item_data: Dictionary)
 signal equip_failed
 
@@ -102,13 +103,12 @@ func check_item_type_and_swap_contents(index_a: int, index_b: int):
 		else:
 			print("Trigger Can't Equip Bait error msg")
 			equip_failed.emit()
-	elif items_in_pockets[index_a] != null and items_in_pockets[index_b] != null:
-		if items_in_pockets[index_a].has("value") and items_in_pockets[index_b].has("value"):
-			if items_in_pockets[index_a].name == items_in_pockets[index_b].name:
-				if index_a != index_b: # merge values if not the same item.
-					handle_item_value_stack(items_in_pockets[index_a].max_value, index_a, index_b)
-				swap_pocket_contents(index_a, index_b)
-	else: # just a fish.
+	# If same item and have value, handle the item value stack merges.
+	elif items_in_pockets[index_a] != null and items_in_pockets[index_b] != null and items_in_pockets[index_a].has("value") and items_in_pockets[index_b].has("value") and items_in_pockets[index_a].name == items_in_pockets[index_b].name:
+		if index_a != index_b: # merge values if not the same item.
+			handle_item_value_stack(items_in_pockets[index_a].max_value, index_a, index_b)
+		swap_pocket_contents(index_a, index_b)
+	else: # Regular item swap.
 		swap_pocket_contents(index_a, index_b)
 
 func handle_item_value_stack(max_value: int, index_a: int, index_b: int):
@@ -234,6 +234,7 @@ func render_pocket_and_item(pos: Vector2, pocket_index: int, selected_pocket_ind
 		# Render value of item near item icon.
 		if items_in_pockets[pocket_index].has("value"):
 			if items_in_pockets[pocket_index].value == 0:
+				item_value_depleted.emit(items_in_pockets[pocket_index].scene)
 				items_in_pockets[pocket_index] = null
 				render_bait_silhouette(new_pocket)
 			else:
