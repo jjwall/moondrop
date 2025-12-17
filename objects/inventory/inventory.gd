@@ -229,22 +229,36 @@ func render_pocket_and_item(pos: Vector2, pocket_index: int, selected_pocket_ind
 	new_pocket.mouse_exited.connect(on_pocket_mouse_exited)
 
 	if items_in_pockets.size() > pocket_index and items_in_pockets[pocket_index] != null:
-		var item_in_pocket = render_item(items_in_pockets[pocket_index], pos)
-		new_pocket.button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
-		new_pocket.button_up.connect(on_pocket_button_up)
+		var value_label = null
 		
 		# Render value of item near item icon.
 		if items_in_pockets[pocket_index].has("value"):
-			var value_label = Label.new()
-			value_label.text = "%s" % [items_in_pockets[pocket_index].value]
-			value_label.position.x -= 25
-			value_label.position.y += 14
-			value_label.add_theme_font_size_override("font_size", 19)
-			item_in_pocket.add_child(value_label)
+			if items_in_pockets[pocket_index].value == 0:
+				items_in_pockets[pocket_index] = null
+				render_bait_silhouette(new_pocket)
+			else:
+				value_label = Label.new()
+				value_label.text = "%s" % [items_in_pockets[pocket_index].value]
+				value_label.position.x -= 25
+				value_label.position.y += 14
+				value_label.add_theme_font_size_override("font_size", 19)
+				
+				if items_in_pockets[pocket_index].value == items_in_pockets[pocket_index].max_value:
+					value_label.add_theme_color_override("font_color", Color(0, 1, 0))
+				
+			#item_in_pocket.add_child(value_label)
 		
-		if selected_pocket_index == pocket_index:
-			selected_pocket_item = item_in_pocket
+		if items_in_pockets[pocket_index] != null:
+			var item_in_pocket = render_item(items_in_pockets[pocket_index], pos)
+			new_pocket.button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
+			new_pocket.button_up.connect(on_pocket_button_up)
 			
+			if value_label != null:
+				item_in_pocket.add_child(value_label)
+		
+			if selected_pocket_index == pocket_index:
+				selected_pocket_item = item_in_pocket
+				
 	elif pocket_index == rod_equip_index: # Rod not equipped.
 		render_rod_silhouette(new_pocket)
 	elif pocket_index == bait_equip_index: # Bait not equipped.
