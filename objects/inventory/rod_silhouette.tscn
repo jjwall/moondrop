@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://brprhfxb74dwd"]
+
+[ext_resource type="Texture2D" uid="uid://dt03pxyqyi50h" path="res://assets/textures/objects/rod-silhouette.png" id="1_g0r7d"]
+
+[node name="RodSilhouette" type="Node2D" unique_id=686727959]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=447455868]
+scale = Vector2(3, 3)
+texture = ExtResource("1_g0r7d")

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://qji7qs0ujkas"]
+
+[ext_resource type="Texture2D" uid="uid://cn42vk7uaofhv" path="res://assets/textures/objects/bait-silhouette.png" id="1_ot5rr"]
+
+[node name="BaitSilhouette" type="Node2D" unique_id=308199790]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=365130144]
+scale = Vector2(3, 3)
+texture = ExtResource("1_ot5rr")

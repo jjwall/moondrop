@@ -7,8 +7,12 @@ signal equip_failed
 @onready var item_profile_panel: Panel = %ItemProfilePanel
 @onready var item_name_label: Label = %ItemNameLabel
 @onready var item_description_label: Label = %ItemDescriptionLabel
+
 #const outline_shader = preload("res://assets/shaders/outline.gdshader")
 const outline_material = preload("res://assets/materials/outline.tres")
+
+var rod_silhouette_scene = preload("res://objects/inventory/rod_silhouette.tscn")
+var bait_silhouette_scene = preload("res://objects/inventory/bait_silhouette.tscn")
 
 var dragging = false
 var item_being_dragged = null
@@ -204,8 +208,25 @@ func render_pocket_and_item(pos: Vector2, pocket_index: int, selected_pocket_ind
 		
 		if selected_pocket_index == pocket_index:
 			selected_pocket_item = item_in_pocket
+			
+	elif pocket_index == rod_equip_index: # Rod not equipped.
+		render_rod_silhouette(new_pocket)
+	elif pocket_index == bait_equip_index: # Bait not equipped.
+		render_bait_silhouette(new_pocket)
 	
 	return selected_pocket_item
+
+func render_rod_silhouette(pocket: Button):
+	var rod_silhouette: Node2D = rod_silhouette_scene.instantiate()
+	rod_silhouette.position.x += 32
+	rod_silhouette.position.y += 32
+	pocket.add_child(rod_silhouette)
+
+func render_bait_silhouette(pocket: Button):
+	var bait_silhouette: Node2D = bait_silhouette_scene.instantiate()
+	bait_silhouette.position.x += 32
+	bait_silhouette.position.y += 32
+	pocket.add_child(bait_silhouette)
 
 func on_pocket_button_down(item: Node2D, pocket_index: int):
 	dragging = true
