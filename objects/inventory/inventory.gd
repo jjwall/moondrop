@@ -77,37 +77,24 @@ func render_backpack(starting_pocket_index: int, selected_pocket_index = -1):
 func check_item_type_and_swap_contents(index_a: int, index_b: int):
 	if rod_equip_index == index_b:
 		if items_in_pockets[index_a].item_type == RefData.item_types.ROD:
-			print("Equipping rod")
 			swap_pocket_contents(index_a, index_b)
 		else:
-			print("Trigger Can't Equip Rod error msg")
 			equip_failed.emit()
 	elif bait_equip_index == index_b:
 		if items_in_pockets[index_a].item_type == RefData.item_types.BAIT:
-			print("Equipping bait")
 			swap_pocket_contents(index_a, index_b)
 		else:
-			print("Trigger Can't Equip Bait error msg")
 			equip_failed.emit()
 	elif rod_equip_index == index_a and items_in_pockets[index_b] != null:
 		if items_in_pockets[index_b].item_type == RefData.item_types.ROD:
-			print("Equipping rod")
 			swap_pocket_contents(index_a, index_b)
 		else:
-			print("Trigger Can't Equip Rod error msg")
 			equip_failed.emit()
 	elif bait_equip_index == index_a and items_in_pockets[index_b] != null:
 		if items_in_pockets[index_b].item_type == RefData.item_types.BAIT:
-			print("Equipping bait")
 			swap_pocket_contents(index_a, index_b)
 		else:
-			print("Trigger Can't Equip Bait error msg")
 			equip_failed.emit()
-	# If same item and have value, handle the item value stack merges.
-	elif items_in_pockets[index_a] != null and items_in_pockets[index_b] != null and items_in_pockets[index_a].has("value") and items_in_pockets[index_b].has("value") and items_in_pockets[index_a].name == items_in_pockets[index_b].name:
-		if index_a != index_b: # merge values if not the same item.
-			handle_item_value_stack(items_in_pockets[index_a].max_value, index_a, index_b)
-		swap_pocket_contents(index_a, index_b)
 	else: # Regular item swap.
 		swap_pocket_contents(index_a, index_b)
 
@@ -142,6 +129,11 @@ func handle_item_value_stack(max_value: int, index_a: int, index_b: int):
 			
 
 func swap_pocket_contents(index_a: int, index_b: int):
+	# If same item and have value, handle the item value stack merges.
+	if items_in_pockets[index_a] != null and items_in_pockets[index_b] != null and items_in_pockets[index_a].has("value") and items_in_pockets[index_b].has("value") and items_in_pockets[index_a].name == items_in_pockets[index_b].name:
+		if index_a != index_b: # merge values if not the same item.
+			handle_item_value_stack(items_in_pockets[index_a].max_value, index_a, index_b)
+			
 	var temp = items_in_pockets[index_a]
 	items_in_pockets[index_a] = items_in_pockets[index_b]
 	items_in_pockets[index_b] = temp
