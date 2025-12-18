@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b61i8e21b336"]
+
+[ext_resource type="Texture2D" uid="uid://cn2wxfhg2l3tv" path="res://assets/textures/objects/popsshop.png" id="1_upsu5"]
+
+[node name="PopsShop" type="StaticBody2D" unique_id=901753863]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=875409987]
+scale = Vector2(3, 3)
+texture = ExtResource("1_upsu5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1120179320]
+scale = Vector2(3, 3)
+polygon = PackedVector2Array(-14, -31, -14, -28.8, -32.8, -10, -35.2, -10, -31, 28.199997, -31, 30.699997, -20, 32.699997, -20, 34.1, 24.099998, 31, 28.800003, 31, 32.800003, -4, 34.4, -6.5, 12, -28.900002, 12, -31)
