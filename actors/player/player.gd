@@ -353,6 +353,13 @@ func _state_idle_enter():
 
 func _state_idle_process(_delta):
 	if Input.is_action_just_pressed("ui_accept") and not has_been_cast and not inventory_open:
+		var areas = $ItemPickupArea2D.get_overlapping_areas()
+		for area: Area2D in areas:
+			if area.is_in_group("interactable_zone"):
+				var interactable_zone = area.get_parent()
+				interactable_zone.interact()
+				return
+		
 		if inventory.get_equipped_rod() != {}:
 			_goto("fish")
 			has_been_cast = true

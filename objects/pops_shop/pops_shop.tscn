@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://b61i8e21b336"]
 
+[ext_resource type="Script" uid="uid://t8m2aayp3lnm" path="res://objects/pops_shop/pops_shop.gd" id="1_5brra"]
 [ext_resource type="Texture2D" uid="uid://cn2wxfhg2l3tv" path="res://assets/textures/objects/popsshop.png" id="1_upsu5"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upsu5"]
+size = Vector2(56, 78)
+
 [node name="PopsShop" type="StaticBody2D" unique_id=901753863]
+script = ExtResource("1_5brra")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=875409987]
 scale = Vector2(3, 3)
@@ -11,3 +16,9 @@ texture = ExtResource("1_upsu5")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1120179320]
 scale = Vector2(3, 3)
 polygon = PackedVector2Array(-14, -31, -14, -28.8, -32.8, -10, -35.2, -10, -31, 28.199997, -31, 30.699997, -20, 32.699997, -20, 34.1, 24.099998, 31, 28.800003, 31, 32.800003, -4, 34.4, -6.5, 12, -28.900002, 12, -31)
+
+[node name="PopsShopLoadingZoneArea2D" type="Area2D" parent="." unique_id=1047425220 groups=["interactable_zone"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PopsShopLoadingZoneArea2D" unique_id=808631827]
+position = Vector2(28, 58)
+shape = SubResource("RectangleShape2D_upsu5")

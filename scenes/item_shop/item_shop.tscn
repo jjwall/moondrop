@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://bl7xocdssk0tu" path="res://scenes/main_gameplay/camera_controller.gd" id="3_6s45s"]
 [ext_resource type="Script" uid="uid://cwfn12h87mdvh" path="res://node_types/camera_shake.gd" id="4_87pai"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iiklw"]
+size = Vector2(91.25, 46)
+
 [node name="ItemShop" type="Node2D" unique_id=1974702551]
 script = ExtResource("1_iiklw")
 
@@ -17,7 +20,7 @@ scale = Vector2(3, 3)
 
 [node name="Player" parent="." unique_id=85828012 node_paths=PackedStringArray("camera_controller", "camera", "item_drops_container") instance=ExtResource("2_iiklw")]
 unique_name_in_owner = true
-position = Vector2(480, 354)
+position = Vector2(482, 570)
 camera_controller = NodePath("../CameraController")
 camera = NodePath("../CameraController/Camera2D")
 item_drops_container = NodePath("../ItemDropsContainer")
@@ -30,3 +33,9 @@ position = Vector2(480, 360)
 
 [node name="CameraShake" type="Node" parent="CameraController/Camera2D" unique_id=1966699438]
 script = ExtResource("4_87pai")
+
+[node name="ExitArea2D" type="Area2D" parent="." unique_id=180824442 groups=["interactable_zone"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea2D" unique_id=1753370780]
+position = Vector2(480.375, 647)
+shape = SubResource("RectangleShape2D_iiklw")

@@ -10,6 +10,10 @@ var fish_group: Node2D
 func _ready() -> void:
 	fish_group = $FishGroup
 	
+	match Globals.recent_exit_location:
+		Globals.ExitLocations.SHOP_EXIT:
+			player.position = $ShopExitMarker2D.position
+	
 	var basic_rod_item_data = {
 		"name": "Basic Rod",
 		"description": "A simple rod that will catch you all of your basic fish.",

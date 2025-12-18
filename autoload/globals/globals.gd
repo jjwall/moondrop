@@ -10,6 +10,13 @@ extends Node
 ## Emitted when any variable changes.
 signal changed
 
+enum ExitLocations {
+	GAME_START,
+	ISLAND_SHOP_ENTRANCE,
+	SHOP_EXIT,
+}
+
+var recent_exit_location: ExitLocations = ExitLocations.GAME_START
 
 ## Example variable.
 var player_health: int = 0:
