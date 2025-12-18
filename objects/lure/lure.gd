@@ -30,8 +30,6 @@ var lure_flying := false
 var lure_cast_speed := 1.0
 var casting = true
 
-@onready var camera_controller = $/root/MainGameplay/CameraController
-
 func _ready():
 	casting = true
 	lure_cast_speed *= randf_range(0.9,1.1)
@@ -104,25 +102,13 @@ func _physics_process(delta):
 			on_cast_end()
 			
 			# Test collision for lure hitting land.
-			var tilemap = $/root/MainGameplay/BIsland/TileMap
-			var collision = move_and_collide(Vector2.ZERO * delta, true)
-			if collision and collision.get_collider().get_class() == "TileMap":
-				var tile_coords = tilemap.local_to_map(to_local(collision.get_position()))
-				var atlas_coords = tilemap.get_cell_atlas_coords(0, tile_coords)
-				var tile_list = [
-					Vector2i(-1, -1), # Tile not found.
-					Vector2i(5, 1), # Land
-					Vector2i(7, 1), # Land
-					Vector2i(8, 1), # Land
-					Vector2i(9, 1), # Land
-					Vector2i(19, 5), # Shoreline
-					Vector2i(20, 5), # Shoreline
-					Vector2i(21, 5), # Shoreline
-					Vector2i(22, 5), # Shoreline
-					Vector2i(23, 5), # Shoreline
-					Vector2i(24, 5), # Shoreline
-				]
-				if atlas_coords in tile_list:
+			var tilemaps = get_tree().get_nodes_in_group("lure_ground_source")
+			
+			for tilemap: TileMapLayer in tilemaps:
+				var tile_coords = tilemap.local_to_map(tilemap.to_local(self.global_position))
+				var atlas_coords = tilemap.get_cell_atlas_coords(tile_coords)
+				
+				if atlas_coords != Vector2i(-1, -1):
 					# If lure hits land, trigger automatic yank (see Player fishing state for ref)
 					player_ref.yanking = true
 					player_ref.yank_lure()
@@ -156,7 +142,7 @@ func on_cancel_cast_end():
 	lure_flying = false
 	fish_interested = false
 	# Set camera to follow player again - need set this before we free up the lure.
-	camera_controller.set_target(player_ref)
+	player_ref.camera_controller.set_target(player_ref)
 	player_ref.has_been_cast = false
 	self.queue_free()
 

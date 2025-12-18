@@ -50,6 +50,7 @@ enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/debug
 [global_group]
 
 player=""
+lure_ground_source="what the lure cares about"
 
 [gui]
 

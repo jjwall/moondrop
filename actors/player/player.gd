@@ -23,9 +23,12 @@ var inventory_open = false
 var notification_displaying = false
 var original_notification_sprite = null
 
+@export var camera_controller: Node2D
+@export var camera: Camera2D
+@export var item_drops_container: Node2D
+#@export var tilemap
+
 @onready var inventory = $Inventory
-@onready var camera_controller = $/root/MainGameplay/CameraController
-@onready var camera = $/root/MainGameplay/CameraController/Camera2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dialog_panel: Panel = %DialogPanel
 @onready var dialog_label: RichTextLabel = %DialogLabel
@@ -104,7 +107,7 @@ func drop_item(dropped_item_data: Dictionary, recent_manual_drop = false):
 	item_drop.global_position.x += randf_range(0, 50) * random_sign()
 	item_drop.global_position.y += randf_range(0, 50) * random_sign()
 	item_drop.recent_manual_drop = recent_manual_drop
-	$/root/MainGameplay/ItemDropsContainer.add_child(item_drop)
+	item_drops_container.add_child(item_drop)
 
 func random_sign() -> int:
 	var num = floor(randi_range(0, 2))
@@ -161,16 +164,14 @@ func _always_physics_process(_delta):
 	pass
 
 func on_zoom_camera():
-	var camera_node: Camera2D = $/root/MainGameplay/CameraController/Camera2D # self.get_node("Camera2D")
 	var tween = get_tree().create_tween()
 	var new_zoom_vec2 = Vector2(1.5, 1.5)
-	tween.tween_property(camera_node, "zoom", new_zoom_vec2, 0.2).set_ease(Tween.EaseType.EASE_IN_OUT)
+	tween.tween_property(camera, "zoom", new_zoom_vec2, 0.2).set_ease(Tween.EaseType.EASE_IN_OUT)
 
 func on_reset_camera():
-	var camera_node: Camera2D = $/root/MainGameplay/CameraController/Camera2D # self.get_node("Camera2D")
 	var tween = get_tree().create_tween()
 	var reset_zoom_vec2 = Vector2(1.0, 1.0)
-	tween.tween_property(camera_node, "zoom", reset_zoom_vec2, 0.35).set_ease(Tween.EaseType.EASE_IN_OUT)
+	tween.tween_property(camera, "zoom", reset_zoom_vec2, 0.35).set_ease(Tween.EaseType.EASE_IN_OUT)
 
 func render_radial_highlight(pos):
 	var new_highlight = radial_highlight_scene.instantiate()

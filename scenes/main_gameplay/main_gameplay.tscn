@@ -102,9 +102,12 @@ scale = Vector2(3, 3)
 [node name="ItemDrop" parent="ItemDropsContainer" unique_id=1994412215 instance=ExtResource("8_1svbp")]
 position = Vector2(117, 333)
 
-[node name="Player" parent="." unique_id=588714259 instance=ExtResource("3_j1nau")]
+[node name="Player" parent="." unique_id=588714259 node_paths=PackedStringArray("camera_controller", "camera", "item_drops_container") instance=ExtResource("3_j1nau")]
 unique_name_in_owner = true
 position = Vector2(480, 354)
+camera_controller = NodePath("../CameraController")
+camera = NodePath("../CameraController/Camera2D")
+item_drops_container = NodePath("../ItemDropsContainer")
 
 [node name="CameraController" type="Node2D" parent="." unique_id=142135720]
 script = ExtResource("6_2ufyh")
