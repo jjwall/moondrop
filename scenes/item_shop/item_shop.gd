@@ -6,6 +6,8 @@ var basic_rod_scene = preload("res://objects/rod_types/basic_rod/basic_rod.tscn"
 
 func _ready() -> void:
 	player.anim.play("idle_north")
+	$CameraController.camera_follow = false
+	$CameraController.set_fixed_camera_position()
 	
 	var basic_rod_item_data = {
 		"name": "Basic Rod",

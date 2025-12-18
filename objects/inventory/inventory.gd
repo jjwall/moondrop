@@ -32,7 +32,7 @@ var item_structure = {
 var total_pockets = 18
 var rod_equip_index = 16
 var bait_equip_index = 17
-var items_in_pockets = []
+var items_in_pockets = [] # TODO: Should be global data to transfer state between scene loads.
 
 func _ready():
 	for i in range(total_pockets):
