@@ -64,6 +64,10 @@ region = Rect2(256, 768, 64, 64)
 atlas = ExtResource("2_tov0l")
 region = Rect2(320, 768, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jc6f"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(384, 768, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_6p1w3"]
 atlas = ExtResource("2_tov0l")
 region = Rect2(0, 704, 64, 64)
@@ -87,6 +91,10 @@ region = Rect2(256, 704, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hiosj"]
 atlas = ExtResource("2_tov0l")
 region = Rect2(320, 704, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3s8r"]
+atlas = ExtResource("2_tov0l")
+region = Rect2(384, 704, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcabc"]
 atlas = ExtResource("2_tov0l")
@@ -384,8 +392,11 @@ animations = [{
 "duration": 0.25,
 "texture": SubResource("AtlasTexture_otn2r")
 }, {
-"duration": 1.0,
+"duration": 0.25,
 "texture": SubResource("AtlasTexture_ctwkf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jc6f")
 }],
 "loop": false,
 "name": &"fish_southeast",
@@ -407,8 +418,11 @@ animations = [{
 "duration": 0.25,
 "texture": SubResource("AtlasTexture_lsln6")
 }, {
-"duration": 1.0,
+"duration": 0.25,
 "texture": SubResource("AtlasTexture_hiosj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3s8r")
 }],
 "loop": false,
 "name": &"fish_southwest",
@@ -756,7 +770,7 @@ shape = SubResource("RectangleShape2D_aya8m")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=503992229]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mt824")
-animation = &"yank_southeast"
+animation = &"fish_southwest"
 autoplay = "idle_south"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1576526034]
