@@ -20,7 +20,7 @@ scale = Vector2(3, 3)
 [node name="ItemDropsContainer" type="Node2D" parent="." unique_id=1473219326]
 
 [node name="Melvin" parent="." unique_id=2101687232 instance=ExtResource("3_87pai")]
-position = Vector2(290, 542)
+position = Vector2(309, 458)
 
 [node name="Player" parent="." unique_id=85828012 node_paths=PackedStringArray("camera_controller", "camera", "item_drops_container") instance=ExtResource("2_iiklw")]
 unique_name_in_owner = true
