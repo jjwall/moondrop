@@ -8,15 +8,6 @@ func _ready() -> void:
 	player.anim.play("idle_north")
 	$CameraController.camera_follow = false
 	$CameraController.set_fixed_camera_position()
-	
-	var basic_rod_item_data = {
-		"name": "Basic Rod",
-		"description": "A simple rod that will catch you all of your basic fish.",
-		"item_type": RefData.item_types.ROD,
-		"scene": basic_rod_scene
-	}
-	
-	player.drop_item(basic_rod_item_data, true)
 
 func interact():
 	Globals.recent_exit_location = Globals.ExitLocations.SHOP_EXIT

@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bl7xocdssk0tu" path="res://scenes/main_gameplay/camera_controller.gd" id="6_2ufyh"]
 [ext_resource type="PackedScene" uid="uid://b61i8e21b336" path="res://objects/pops_shop/pops_shop.tscn" id="6_vsax7"]
 [ext_resource type="PackedScene" uid="uid://by7y6swpe6hsp" path="res://objects/fish_spawn_area/fish_spawn_area.tscn" id="7_dyrfq"]
-[ext_resource type="PackedScene" uid="uid://b85c3ktbqng2m" path="res://objects/item_drop/item_drop.tscn" id="8_1svbp"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fenso"]
 normal = Vector2(1, 0)
@@ -102,9 +101,6 @@ scale = Vector2(3, 3)
 position = Vector2(270, 79)
 
 [node name="ItemDropsContainer" type="Node2D" parent="." unique_id=343890282]
-
-[node name="ItemDrop" parent="ItemDropsContainer" unique_id=1994412215 instance=ExtResource("8_1svbp")]
-position = Vector2(117, 333)
 
 [node name="Player" parent="." unique_id=588714259 node_paths=PackedStringArray("camera_controller", "camera", "item_drops_container") instance=ExtResource("3_j1nau")]
 unique_name_in_owner = true

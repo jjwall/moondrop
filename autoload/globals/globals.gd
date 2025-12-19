@@ -18,15 +18,20 @@ enum ExitLocations {
 
 var recent_exit_location: ExitLocations = ExitLocations.GAME_START
 
+var total_pockets = 18
+var items_in_pockets = []
+
 ## Example variable.
 var player_health: int = 0:
 	set(v): player_health = v; changed.emit()
 
+func _ready():
+	for i in range(total_pockets):
+		items_in_pockets.push_back(null)
 
 ## Reset all variables to their default state.
 func reset():
 	player_health = 0
-
 
 #region Debug overlay
 var _overlay

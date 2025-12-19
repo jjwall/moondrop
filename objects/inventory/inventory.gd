@@ -29,15 +29,10 @@ var item_structure = {
 	# aquire_on: new Date()
 }
 
-var total_pockets = 18
 var rod_equip_index = 16
 var bait_equip_index = 17
-var items_in_pockets = [] # TODO: Should be global data to transfer state between scene loads.
 
-func _ready():
-	for i in range(total_pockets):
-		items_in_pockets.push_back(null)
-		
+func _ready():		
 	render_backpack(0)
 
 func _process(_delta: float) -> void:
@@ -46,14 +41,14 @@ func _process(_delta: float) -> void:
 		item_being_dragged.global_position = Vector2(mousepos.x, mousepos.y)
 
 func get_equipped_rod() -> Dictionary:
-	if items_in_pockets[rod_equip_index] != null:
-		return items_in_pockets[rod_equip_index]
+	if Globals.items_in_pockets[rod_equip_index] != null:
+		return Globals.items_in_pockets[rod_equip_index]
 	else:
 		return {}
 
 func get_equipped_bait() -> Dictionary:
-	if items_in_pockets[bait_equip_index] != null:
-		return items_in_pockets[bait_equip_index]
+	if Globals.items_in_pockets[bait_equip_index] != null:
+		return Globals.items_in_pockets[bait_equip_index]
 	else:
 		return {}
 
@@ -76,22 +71,22 @@ func render_backpack(starting_pocket_index: int, selected_pocket_index = -1):
 
 func check_item_type_and_swap_contents(index_a: int, index_b: int):
 	if rod_equip_index == index_b:
-		if items_in_pockets[index_a].item_type == RefData.item_types.ROD:
+		if Globals.items_in_pockets[index_a].item_type == RefData.item_types.ROD:
 			swap_pocket_contents(index_a, index_b)
 		else:
 			equip_failed.emit()
 	elif bait_equip_index == index_b:
-		if items_in_pockets[index_a].item_type == RefData.item_types.BAIT:
+		if Globals.items_in_pockets[index_a].item_type == RefData.item_types.BAIT:
 			swap_pocket_contents(index_a, index_b)
 		else:
 			equip_failed.emit()
-	elif rod_equip_index == index_a and items_in_pockets[index_b] != null:
-		if items_in_pockets[index_b].item_type == RefData.item_types.ROD:
+	elif rod_equip_index == index_a and Globals.items_in_pockets[index_b] != null:
+		if Globals.items_in_pockets[index_b].item_type == RefData.item_types.ROD:
 			swap_pocket_contents(index_a, index_b)
 		else:
 			equip_failed.emit()
-	elif bait_equip_index == index_a and items_in_pockets[index_b] != null:
-		if items_in_pockets[index_b].item_type == RefData.item_types.BAIT:
+	elif bait_equip_index == index_a and Globals.items_in_pockets[index_b] != null:
+		if Globals.items_in_pockets[index_b].item_type == RefData.item_types.BAIT:
 			swap_pocket_contents(index_a, index_b)
 		else:
 			equip_failed.emit()
@@ -99,8 +94,8 @@ func check_item_type_and_swap_contents(index_a: int, index_b: int):
 		swap_pocket_contents(index_a, index_b)
 
 func handle_item_value_stack(max_value: int, index_a: int, index_b: int):
-	var item_a_value: int = items_in_pockets[index_a].value
-	var item_b_value: int = items_in_pockets[index_b].value
+	var item_a_value: int = Globals.items_in_pockets[index_a].value
+	var item_b_value: int = Globals.items_in_pockets[index_b].value
 	var new_a_value = 0
 	var new_b_value = 0
 	
@@ -112,38 +107,38 @@ func handle_item_value_stack(max_value: int, index_a: int, index_b: int):
 		new_b_value = 0
 		
 	if new_a_value > 0:
-		items_in_pockets[index_a].value = new_a_value
+		Globals.items_in_pockets[index_a].value = new_a_value
 		
 		if new_b_value == 0:
-			items_in_pockets[index_b] = null
+			Globals.items_in_pockets[index_b] = null
 		else:
-			items_in_pockets[index_b].value = new_b_value
+			Globals.items_in_pockets[index_b].value = new_b_value
 			
 	elif new_b_value > 0:
-		items_in_pockets[index_b].value = new_b_value
+		Globals.items_in_pockets[index_b].value = new_b_value
 		
 		if new_a_value == 0:
-			items_in_pockets[index_a].value = null
+			Globals.items_in_pockets[index_a].value = null
 		else:
-			items_in_pockets[index_a].value = new_a_value
+			Globals.items_in_pockets[index_a].value = new_a_value
 			
 
 func swap_pocket_contents(index_a: int, index_b: int):
 	# If same item and have value, handle the item value stack merges.
-	if items_in_pockets[index_a] != null and items_in_pockets[index_b] != null and items_in_pockets[index_a].has("value") and items_in_pockets[index_b].has("value") and items_in_pockets[index_a].name == items_in_pockets[index_b].name:
+	if Globals.items_in_pockets[index_a] != null and Globals.items_in_pockets[index_b] != null and Globals.items_in_pockets[index_a].has("value") and Globals.items_in_pockets[index_b].has("value") and Globals.items_in_pockets[index_a].name == Globals.items_in_pockets[index_b].name:
 		if index_a != index_b: # merge values if not the same item.
-			handle_item_value_stack(items_in_pockets[index_a].max_value, index_a, index_b)
+			handle_item_value_stack(Globals.items_in_pockets[index_a].max_value, index_a, index_b)
 			
-	var temp = items_in_pockets[index_a]
-	items_in_pockets[index_a] = items_in_pockets[index_b]
-	items_in_pockets[index_b] = temp
+	var temp = Globals.items_in_pockets[index_a]
+	Globals.items_in_pockets[index_a] = Globals.items_in_pockets[index_b]
+	Globals.items_in_pockets[index_b] = temp
 
 # Returns if pocketing was successful or not. Failure means pockets are full.
 func pocket_item(item_data: Dictionary) -> bool:
-	var first_empty_pocket_index = items_in_pockets.find(null)
+	var first_empty_pocket_index = Globals.items_in_pockets.find(null)
 	
 	if first_empty_pocket_index != -1 and first_empty_pocket_index != rod_equip_index and first_empty_pocket_index != bait_equip_index:
-		items_in_pockets[first_empty_pocket_index] = item_data
+		Globals.items_in_pockets[first_empty_pocket_index] = item_data
 		return true
 	else:
 		print("too many items in pockets!")
@@ -156,7 +151,7 @@ func drop_item(pocket_index: int):
 func select_item(selected_item: Node2D, pocket_index: int):
 	var new_material = outline_material.duplicate()
 	selected_item.get_child(0).material = new_material
-	var item_data = items_in_pockets[pocket_index]
+	var item_data = Globals.items_in_pockets[pocket_index]
 	item_name_label.text = item_data.name
 	
 	render_item_description(item_data)
@@ -193,7 +188,7 @@ func init_backpack_pockets(starting_pocket_index: int, selected_pocket_index = -
 		pocket_pos_x = 15
 		
 		for c in range(4):
-			if items_in_pockets.size() > pocket_index:
+			if Globals.items_in_pockets.size() > pocket_index:
 				var possible_selected_item = render_pocket_and_item(Vector2(pocket_pos_x, pocket_pos_y), pocket_index, selected_pocket_index)
 				if possible_selected_item != null:
 					selected_pocket_item = possible_selected_item
@@ -220,29 +215,29 @@ func render_pocket_and_item(pos: Vector2, pocket_index: int, selected_pocket_ind
 	new_pocket.mouse_entered.connect(on_pocket_mouse_entered.bind(pocket_index))
 	new_pocket.mouse_exited.connect(on_pocket_mouse_exited)
 
-	if items_in_pockets.size() > pocket_index and items_in_pockets[pocket_index] != null:
+	if Globals.items_in_pockets.size() > pocket_index and Globals.items_in_pockets[pocket_index] != null:
 		var value_label = null
 		
 		# Render value of item near item icon.
-		if items_in_pockets[pocket_index].has("value"):
-			if items_in_pockets[pocket_index].value == 0:
-				item_value_depleted.emit(items_in_pockets[pocket_index].scene)
-				items_in_pockets[pocket_index] = null
+		if Globals.items_in_pockets[pocket_index].has("value"):
+			if Globals.items_in_pockets[pocket_index].value == 0:
+				item_value_depleted.emit(Globals.items_in_pockets[pocket_index].scene)
+				Globals.items_in_pockets[pocket_index] = null
 				render_bait_silhouette(new_pocket)
 			else:
 				value_label = Label.new()
-				value_label.text = "%s" % [items_in_pockets[pocket_index].value]
+				value_label.text = "%s" % [Globals.items_in_pockets[pocket_index].value]
 				value_label.position.x -= 25
 				value_label.position.y += 14
 				value_label.add_theme_font_size_override("font_size", 19)
 				
-				if items_in_pockets[pocket_index].value == items_in_pockets[pocket_index].max_value:
+				if Globals.items_in_pockets[pocket_index].value == Globals.items_in_pockets[pocket_index].max_value:
 					value_label.add_theme_color_override("font_color", Color(0, 1, 0))
 				
 			#item_in_pocket.add_child(value_label)
 		
-		if items_in_pockets[pocket_index] != null:
-			var item_in_pocket = render_item(items_in_pockets[pocket_index], pos)
+		if Globals.items_in_pockets[pocket_index] != null:
+			var item_in_pocket = render_item(Globals.items_in_pockets[pocket_index], pos)
 			new_pocket.button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
 			new_pocket.button_up.connect(on_pocket_button_up)
 			
@@ -309,9 +304,9 @@ func on_pocket_mouse_exited():
 		pocket_index_to_swap_with = dragged_item_pocket_index
 
 func remove_item_from_pocket(pocket_index: int):
-	var dropped_item_data = items_in_pockets[pocket_index]
-	#items_in_pockets.remove_at(pocket_index)
-	items_in_pockets[pocket_index] = null
+	var dropped_item_data = Globals.items_in_pockets[pocket_index]
+	#Globals.items_in_pockets.remove_at(pocket_index)
+	Globals.items_in_pockets[pocket_index] = null
 	render_backpack(0)
 	return dropped_item_data
 

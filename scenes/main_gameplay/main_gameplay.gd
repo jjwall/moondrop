@@ -11,50 +11,51 @@ func _ready() -> void:
 	fish_group = $FishGroup
 	
 	match Globals.recent_exit_location:
+		Globals.ExitLocations.GAME_START:
+			var basic_rod_item_data = {
+				"name": "Basic Rod",
+				"description": "A simple rod that will catch you all of your basic fish.",
+				"item_type": RefData.item_types.ROD,
+				"scene": basic_rod_scene
+			}
+		
+			player.drop_item(basic_rod_item_data, true)
+		
+			var boilies_item_data = {
+				"name": "Boilies",
+				"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
+				"value": 50,
+				"max_value": 50,
+				"item_type": RefData.item_types.BAIT,
+				"scene": boilies_scene
+			}
+		
+			player.drop_item(boilies_item_data, true)
+			
 		Globals.ExitLocations.SHOP_EXIT:
 			player.position = $ShopExitMarker2D.position
 	
-	var basic_rod_item_data = {
-		"name": "Basic Rod",
-		"description": "A simple rod that will catch you all of your basic fish.",
-		"item_type": RefData.item_types.ROD,
-		"scene": basic_rod_scene
-	}
-	
-	player.drop_item(basic_rod_item_data, true)
-	
-	var boilies_item_data = {
-		"name": "Boilies",
-		"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
-		"value": 10,
-		"max_value": 50,
-		"item_type": RefData.item_types.BAIT,
-		"scene": boilies_scene
-	}
-	
-	player.drop_item(boilies_item_data, true)
-	
-	var boilies_item_data2 = {
-		"name": "Boilies",
-		"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
-		"value": 48,
-		"max_value": 50,
-		"item_type": RefData.item_types.BAIT,
-		"scene": boilies_scene
-	}
-	
-	player.drop_item(boilies_item_data2, true)
-	
-	var boilies_item_data3 = {
-		"name": "Boilies",
-		"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
-		"value": 2,
-		"max_value": 50,
-		"item_type": RefData.item_types.BAIT,
-		"scene": boilies_scene
-	}
-	
-	player.drop_item(boilies_item_data3, true)
+	#var boilies_item_data2 = {
+		#"name": "Boilies",
+		#"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
+		#"value": 48,
+		#"max_value": 50,
+		#"item_type": RefData.item_types.BAIT,
+		#"scene": boilies_scene
+	#}
+	#
+	#player.drop_item(boilies_item_data2, true)
+	#
+	#var boilies_item_data3 = {
+		#"name": "Boilies",
+		#"description": "An artificial fishing bait made from boiled paste primarily consisting of flours and cornmeals. It's good for your basic fish.",
+		#"value": 2,
+		#"max_value": 50,
+		#"item_type": RefData.item_types.BAIT,
+		#"scene": boilies_scene
+	#}
+	#
+	#player.drop_item(boilies_item_data3, true)
 	
 	# Generate a bunch of caught fish for inventory testing.
 	#for i in range(15):
