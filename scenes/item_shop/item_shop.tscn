@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c2p311mtlitip" path="res://scenes/item_shop/item_shop.gd" id="1_iiklw"]
 [ext_resource type="PackedScene" uid="uid://cx45ltpnar43i" path="res://actors/player/player.tscn" id="2_iiklw"]
 [ext_resource type="Script" uid="uid://bl7xocdssk0tu" path="res://scenes/main_gameplay/camera_controller.gd" id="3_6s45s"]
+[ext_resource type="PackedScene" uid="uid://bspqpkmjotgb3" path="res://actors/melvin/melvin.tscn" id="3_87pai"]
 [ext_resource type="Script" uid="uid://cwfn12h87mdvh" path="res://node_types/camera_shake.gd" id="4_87pai"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iiklw"]
@@ -17,6 +18,9 @@ position = Vector2(482.00003, 333)
 scale = Vector2(3, 3)
 
 [node name="ItemDropsContainer" type="Node2D" parent="." unique_id=1473219326]
+
+[node name="Melvin" parent="." unique_id=2101687232 instance=ExtResource("3_87pai")]
+position = Vector2(290, 542)
 
 [node name="Player" parent="." unique_id=85828012 node_paths=PackedStringArray("camera_controller", "camera", "item_drops_container") instance=ExtResource("2_iiklw")]
 unique_name_in_owner = true
