@@ -119,4 +119,4 @@ position = Vector2(480, 360)
 script = ExtResource("1_lrklj")
 
 [node name="ShopExitMarker2D" type="Marker2D" parent="." unique_id=187421515]
-position = Vector2(301, 198)
+position = Vector2(299, 164)

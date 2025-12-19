@@ -24,7 +24,7 @@ position = Vector2(312, 441)
 
 [node name="Player" parent="." unique_id=85828012 node_paths=PackedStringArray("camera_controller", "camera", "item_drops_container") instance=ExtResource("2_iiklw")]
 unique_name_in_owner = true
-position = Vector2(482, 570)
+position = Vector2(482, 554)
 camera_controller = NodePath("../CameraController")
 camera = NodePath("../CameraController/Camera2D")
 item_drops_container = NodePath("../ItemDropsContainer")
