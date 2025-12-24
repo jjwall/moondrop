@@ -787,18 +787,14 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.0012820513
-anchor_top = -0.14358975
-anchor_right = -0.0012820513
-anchor_bottom = -0.14358975
-offset_left = 19.0
-offset_top = 41.0
-offset_right = 757.0
-offset_bottom = 175.0
+offset_left = 28.0
+offset_top = 13.999998
+offset_right = 742.0
+offset_bottom = 148.0
 theme_override_fonts/normal_font = ExtResource("3_ax26v")
 theme_override_font_sizes/normal_font_size = 58
 bbcode_enabled = true
-text = "[color=darkred][font_size={76}]Wow!!![/font_size][/color] Hello this is a [shake rate=15.0 level=5 connected=1]test[/shake]. Only a test. I want to know something. [rainbow freq=0.5 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]Wow![/wave][/rainbow]"
+text = "Test [color=darkred][font_size={76}]Wow!!![/font_size][/color] Hello this is a [shake rate=15.0 level=5 connected=1]test[/shake]. Only a test. I want to know something. [rainbow freq=0.5 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]Wow![/wave][/rainbow] I'm gonna do some testing because that's why."
 scroll_active = false
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true

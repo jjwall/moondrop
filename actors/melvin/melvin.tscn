@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bspqpkmjotgb3"]
 
+[ext_resource type="Script" uid="uid://dp2e574cw0ja" path="res://actors/melvin/melvin.gd" id="1_jhnoi"]
 [ext_resource type="Texture2D" uid="uid://b50ieu32bufd8" path="res://assets/textures/melvin/melvin.png" id="1_jrk6q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jhnoi"]
@@ -17,8 +18,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrk6q"]
+size = Vector2(28.666668, 52.666668)
+
 [node name="Melvin" type="Node2D" unique_id=2101687232]
 scale = Vector2(3, 3)
+script = ExtResource("1_jhnoi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1331736163]
 sprite_frames = SubResource("SpriteFrames_t4v84")
+
+[node name="MelvinInteractArea2D" type="Area2D" parent="." unique_id=1001316547 groups=["interactable_zone"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MelvinInteractArea2D" unique_id=930453354]
+position = Vector2(12.333334, 0.33333334)
+shape = SubResource("RectangleShape2D_jrk6q")

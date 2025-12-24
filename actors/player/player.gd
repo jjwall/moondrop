@@ -22,6 +22,7 @@ var has_been_cast = false
 var inventory_open = false
 var notification_displaying = false
 var original_notification_sprite = null
+var interacting = false
 
 @export var camera_controller: Node2D
 @export var camera: Camera2D
@@ -133,6 +134,16 @@ func dialog_say(s: String) -> void:
 	#await dialog_button.pressed
 	await pressedConfirm
 	dialog_confirm.visible = false
+
+func custom_dialog(dialogs: Array[String]) -> void:
+	dialog_panel.visible = true
+	in_dialog = true
+	
+	for dialog in dialogs:
+		await dialog_say(dialog)
+	
+	in_dialog = false
+	on_reset_ui()
 
 func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float, pocket_successful: bool) -> void:
 	dialog_panel.visible = true
@@ -352,14 +363,20 @@ func _state_idle_enter():
 			anim.play("idle_northeast")
 
 func _state_idle_process(_delta):
+	if interacting and not has_been_cast:
+		return 
+		
 	if Input.is_action_just_pressed("ui_accept") and not has_been_cast and not inventory_open:
 		var areas = $ItemPickupArea2D.get_overlapping_areas()
 		for area: Area2D in areas:
 			if area.is_in_group("interactable_zone"):
-				var interactable_zone = area.get_parent()
-				interactable_zone.interact()
+				if not interacting:
+					var interactable_zone = area.get_parent()
+					interactable_zone.interact()
+				
 				return
 		
+		print("hello?")
 		if inventory.get_equipped_rod() != {}:
 			_goto("fish")
 			has_been_cast = true
