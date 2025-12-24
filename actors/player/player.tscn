@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://dv4y6a2mw7r2y" path="res://assets/fonts/Silver_nodescent.ttf" id="3_ax26v"]
 [ext_resource type="Texture2D" uid="uid://bfiyxief2332h" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Map_and_UI.png" id="4_6p1w3"]
 [ext_resource type="PackedScene" uid="uid://cbupaj0owytnj" path="res://objects/inventory/inventory.tscn" id="4_lsqbn"]
+[ext_resource type="Texture2D" uid="uid://ds44rb2tprps5" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Sea_and_Food.png" id="5_15y17"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
 radius = 39.012817
@@ -994,6 +995,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxd4t"]
+atlas = ExtResource("5_15y17")
+region = Rect2(128, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n5lsw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxd4t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D" unique_id=85828012 groups=["player"]]
 script = ExtResource("1_d7vyd")
 
@@ -1017,22 +1033,23 @@ autoplay = "idle_south"
 
 [node name="DialogPanel" type="Panel" parent="CanvasLayer" unique_id=850650733]
 unique_name_in_owner = true
-offset_left = 92.0
-offset_top = 490.0
-offset_right = 872.0
-offset_bottom = 685.0
+anchors_preset = -1
+anchor_left = 0.09583333
+anchor_top = 0.6375
+anchor_right = 0.90833336
+anchor_bottom = 0.8958333
 metadata/_edit_use_anchors_ = true
 
 [node name="DialogLabel" type="RichTextLabel" parent="CanvasLayer/DialogPanel" unique_id=1267677233]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-offset_left = 28.0
-offset_top = 13.999998
-offset_right = 742.0
-offset_bottom = 148.0
+anchor_left = 0.035897437
+anchor_top = 0.075268805
+anchor_right = 0.951282
+anchor_bottom = 0.79569894
 theme_override_fonts/normal_font = ExtResource("3_ax26v")
-theme_override_font_sizes/normal_font_size = 58
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "Test [color=darkred][font_size={76}]Wow!!![/font_size][/color] Hello this is a [shake rate=15.0 level=5 connected=1]test[/shake]. Only a test. I want to know something. [rainbow freq=0.5 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]Wow![/wave][/rainbow] I'm gonna do some testing because that's why."
 scroll_active = false
@@ -1042,13 +1059,17 @@ metadata/_edit_use_anchors_ = true
 [node name="DialogConfirm" type="Label" parent="CanvasLayer/DialogPanel" unique_id=1980310554]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 402.0
-offset_top = 160.0
-offset_right = 427.0
-offset_bottom = 197.0
+anchor_left = 0.4679487
+anchor_top = 0.81182796
+anchor_right = 0.4679487
+anchor_bottom = 0.94623655
+offset_left = 37.0
+offset_right = 62.0
+offset_bottom = 12.0
 rotation = 1.5707964
 theme_override_font_sizes/font_size = 58
 text = ">"
+metadata/_edit_use_anchors_ = true
 
 [node name="DialogButton" type="Button" parent="CanvasLayer/DialogPanel" unique_id=1819362309]
 unique_name_in_owner = true
@@ -1063,26 +1084,31 @@ text = "->"
 [node name="YesNoControl" type="Control" parent="CanvasLayer/DialogPanel" unique_id=893202601]
 unique_name_in_owner = true
 anchors_preset = 0
-offset_left = 358.0
-offset_top = 102.0
-offset_right = 398.0
-offset_bottom = 142.0
+anchor_left = 0.45897436
+anchor_top = 0.5483871
+anchor_right = 0.5102564
+anchor_bottom = 0.76344085
+metadata/_edit_use_anchors_ = true
 
 [node name="YesButton" type="Button" parent="CanvasLayer/DialogPanel/YesNoControl" unique_id=151566628]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+anchor_right = 1.1
+anchor_bottom = 0.8
+offset_right = -36.0
+offset_bottom = -24.0
 text = "Yes"
+metadata/_edit_use_anchors_ = true
 
 [node name="NoButton" type="Button" parent="CanvasLayer/DialogPanel/YesNoControl" unique_id=336069945]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 7.0
-offset_top = 45.0
-offset_right = 39.0
-offset_bottom = 77.0
+anchor_left = 0.175
+anchor_top = 1.125
+anchor_right = 0.975
+anchor_bottom = 1.925
 text = "No"
+metadata/_edit_use_anchors_ = true
 
 [node name="NotificationPanel" type="Panel" parent="CanvasLayer" unique_id=1232311531]
 unique_name_in_owner = true
@@ -1113,6 +1139,31 @@ unique_name_in_owner = true
 position = Vector2(34, 35)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_bop6h")
+
+[node name="ShellsContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=44936063]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.034375
+anchor_top = 1.05
+anchor_right = 0.07604167
+anchor_bottom = 1.1055555
+offset_top = 6.1035156e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/ShellsContainer" unique_id=768510266]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_n5lsw")
+
+[node name="Control" type="Control" parent="CanvasLayer/ShellsContainer" unique_id=1325377610]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ShellsContainer/Control" unique_id=1370201198]
+layout_mode = 0
+offset_left = 29.0
+offset_top = -13.0
+offset_right = 61.0
+offset_bottom = 11.0
+text = "100"
 
 [node name="Inventory" parent="." unique_id=725755749 instance=ExtResource("4_lsqbn")]
 

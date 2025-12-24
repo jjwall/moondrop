@@ -13,6 +13,7 @@ var radial_highlight_scene = preload("res://objects/radial_highlight/radial_high
 var item_drop_scene = preload("res://objects/item_drop/item_drop.tscn")
 var lure_scene = preload("res://objects/lure/lure.tscn")
 
+var shells_container_starting_position: Vector2
 var caught_fish_to_display = null
 var radial_highlight_to_display = null
 var lure = null
@@ -42,10 +43,12 @@ var interacting = false
 @onready var yes_no_control: Control = %YesNoControl
 @onready var yes_button: Button = %YesButton
 @onready var no_button: Button = %NoButton
+@onready var shells_container = %ShellsContainer
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():
 	original_notification_sprite = notification_sprite.duplicate()
+	shells_container_starting_position = shells_container.position
 	inventory.visible = false
 	dialog_panel.visible = false
 	notification_panel.modulate.a = 0
@@ -74,6 +77,18 @@ func _on_inventory_equip_failed() -> void:
 
 func _on_inventory_item_value_depleted(item_scene: PackedScene) -> void:
 	render_notification("Item Depleted", item_scene)
+
+func show_shells() -> void:
+	var tween = create_tween()
+	var target_position = shells_container_starting_position
+	target_position.y -= 75
+	tween.tween_property(shells_container, "position", target_position, 0.25)
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+
+func hide_shells() -> void:
+	var tween = create_tween()
+	tween.tween_property(shells_container, "position", shells_container_starting_position, 0.25)
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 
 func prep_fish_item_data(fish_data: Dictionary, fish_measurement: float) -> Dictionary:
 	return {

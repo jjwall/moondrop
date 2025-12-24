@@ -40,13 +40,14 @@ func determine_sell_prices(item_list: Array[Node2D]):
 		
 		total_sell_price += sell_price
 	
-	return total_sell_price	
+	return total_sell_price
 
 func interact():
 	if not player_ref.interacting:
 		var items_to_sell = get_items_to_sell()
 		player_ref.interacting = true
 		player_ref.anim.play("idle_west")
+		player_ref.show_shells()
 		
 		if items_to_sell.size() > 0:
 			var item_names = get_item_names(items_to_sell)
@@ -78,6 +79,7 @@ func interact():
 			await player_ref.custom_dialog(dialogs)
 			player_ref.reset_dialog_ui()
 			
+		player_ref.hide_shells()
 		# Await .1 seconds before setting interacting to false so we don't get stuck in an interaction loop.
 		await get_tree().create_timer(0.1, false, false, true).timeout
 		player_ref.interacting = false
