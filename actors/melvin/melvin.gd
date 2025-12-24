@@ -55,7 +55,7 @@ func interact():
 			var sell_dialog2 = "Looks like you got: 1x "
 			sell_dialog2 += ", 1x ".join(item_names)
 			sell_dialog2 += " to sell."
-			var sell_dialog3 = "The total sell price comes out to %s shells. How does that sound?" % [total_sell_price]
+			var sell_dialog3 = "The total sell price comes out to %s shells. Does that work for you?" % [total_sell_price]
 			var sell_dialogs: Array[String] = [sell_dialog1, sell_dialog2, sell_dialog3]
 			await player_ref.custom_dialog(sell_dialogs)
 			var yes = await player_ref.yes_no_dialog()
@@ -64,19 +64,19 @@ func interact():
 				print("Gain %s shells." % [total_sell_price])
 				for item in items_to_sell:
 					item.queue_free()
-				var yes_dialog: Array[String] = ["Pleasure doing business with you! Come back anytime!"]
+				var yes_dialog: Array[String] = ["Thank you sir! Pleasure doing business with you. Come back anytime!"]
 				await player_ref.custom_dialog(yes_dialog)
 			else:
 				var no_dialog: Array[String] = ["No problem. Come back and see me if ya change yer mind!"]
 				await player_ref.custom_dialog(no_dialog)
 
-			player_ref.on_reset_ui()
+			player_ref.reset_dialog_ui()
 		else:
 			var dialog1 = "Hey there, thanks for coming into my shop. Check out the back of the store to see my wares."
 			var dialog2 = "If you're looking to sell, drop your items on the carpet and I'll get you a tally of the total sales price."
 			var dialogs: Array[String] = [dialog1, dialog2]
 			await player_ref.custom_dialog(dialogs)
-			player_ref.on_reset_ui()
+			player_ref.reset_dialog_ui()
 			
 		# Await .1 seconds before setting interacting to false so we don't get stuck in an interaction loop.
 		await get_tree().create_timer(0.1, false, false, true).timeout

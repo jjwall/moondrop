@@ -140,10 +140,11 @@ func dialog_say(s: String) -> void:
 	#dialog_button.disabled = true
 	await tween.finished
 	dialog_confirm.visible = true
+	#dialog_confirm.modulate.a = 0
 	var tw = create_tween()
 	tw.set_loops()
-	tw.tween_property(dialog_confirm, "self_modulate:a", 0, 0.5)
 	tw.tween_property(dialog_confirm, "self_modulate:a", 1, 0.5)
+	tw.tween_property(dialog_confirm, "self_modulate:a", 0, 0.5)
 	#dialog_button.disabled = false
 	#await dialog_button.pressed
 	await pressedConfirm
@@ -171,7 +172,7 @@ func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float, pocket_s
 		
 	in_caught_fish_dialog = false
 	
-func on_reset_ui():
+func reset_dialog_ui():
 	dialog_panel.visible = false
 
 func wait_for_lure_to_return():
@@ -473,7 +474,7 @@ func _state_get_item_process(_delta):
 		caught_fish_to_display = null
 		radial_highlight_to_display.queue_free()
 		radial_highlight_to_display = null
-		on_reset_ui()
+		reset_dialog_ui()
 		on_reset_camera()
 		_goto("idle")
 
