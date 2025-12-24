@@ -29,6 +29,8 @@ position = Vector2(337, 206)
 item_display_node = NodePath("BasicRod")
 item_name = "Basic Rod"
 item_type = 1
+buy_price = 250
+sell_price = 100
 
 [node name="BasicRod" parent="ItemDisplay1" unique_id=1020366477 instance=ExtResource("8_0sv7g")]
 
