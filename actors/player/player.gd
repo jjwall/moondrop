@@ -45,6 +45,7 @@ var interacting = false
 @onready var yes_button: Button = %YesButton
 @onready var no_button: Button = %NoButton
 @onready var shells_container = %ShellsContainer
+@onready var shells_amount_label = %ShellsAmountLabel
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():

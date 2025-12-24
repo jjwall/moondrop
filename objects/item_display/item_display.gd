@@ -33,6 +33,7 @@ func interact() -> void:
 			else:
 				print("not enough money.")
 				var not_enough_shells_dialog: Array[String] = ["Looks like your short on shells. Come back when you've saved up enough."]
+				player_ref.shells_amount_label.start_shake()
 				await player_ref.custom_dialog(not_enough_shells_dialog)
 		else:
 			var refuse_purchase_dialog: Array[String] = ["Still thinking about it? No problem, take your time."]
