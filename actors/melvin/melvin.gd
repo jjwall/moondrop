@@ -1,5 +1,11 @@
 extends Node2D
 
+#TODO: Clean up list of items. Rich text edits for coloring based on item type.
+#TODO (cont.) Next dialog page if list is > 5 items.
+#TODO (cont.) Add ", and" for last item.
+#TODO (cont.) Consolodate and add number of items so it's not hard coded to 1x value
+#TODO (cont.) Combine value items ex. 48x Boilies
+
 @export var item_drops_sales_area: Area2D
 
 var player_ref = null

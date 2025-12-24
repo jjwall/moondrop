@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bl7xocdssk0tu" path="res://scenes/main_gameplay/camera_controller.gd" id="3_6s45s"]
 [ext_resource type="PackedScene" uid="uid://bspqpkmjotgb3" path="res://actors/melvin/melvin.tscn" id="3_87pai"]
 [ext_resource type="Script" uid="uid://cwfn12h87mdvh" path="res://node_types/camera_shake.gd" id="4_87pai"]
+[ext_resource type="PackedScene" uid="uid://cg0dm6x0sscvv" path="res://objects/item_display/item_display.tscn" id="7_qd6e1"]
+[ext_resource type="PackedScene" uid="uid://d1odqklalrf8s" path="res://objects/rod_types/basic_rod/basic_rod.tscn" id="8_0sv7g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6s45s"]
 size = Vector2(60.333336, 60.66668)
@@ -21,6 +23,16 @@ position = Vector2(482.00003, 333)
 scale = Vector2(3, 3)
 
 [node name="ItemDropsContainer" type="Node2D" parent="." unique_id=1473219326]
+
+[node name="ItemDisplay1" parent="." unique_id=887371769 node_paths=PackedStringArray("item_display_node") instance=ExtResource("7_qd6e1")]
+position = Vector2(337, 206)
+item_display_node = NodePath("BasicRod")
+item_name = "Basic Rod"
+item_type = 1
+buy_price = 250
+sell_price = 100
+
+[node name="BasicRod" parent="ItemDisplay1" unique_id=1020366477 instance=ExtResource("8_0sv7g")]
 
 [node name="Melvin" parent="." unique_id=2101687232 node_paths=PackedStringArray("item_drops_sales_area") instance=ExtResource("3_87pai")]
 position = Vector2(312, 441)

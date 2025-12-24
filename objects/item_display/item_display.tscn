@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cg0dm6x0sscvv"]
+
+[ext_resource type="Script" uid="uid://d25ouiy1kll5e" path="res://objects/item_display/item_display.gd" id="1_1p666"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfrfe"]
+size = Vector2(22.5, 22.5)
+
+[node name="ItemDisplay" type="Node2D" unique_id=887371769]
+script = ExtResource("1_1p666")
+
+[node name="InteractableArea2D" type="Area2D" parent="." unique_id=562272245 groups=["interactable_zone"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea2D" unique_id=190044689]
+position = Vector2(0, 3.75)
+shape = SubResource("RectangleShape2D_yfrfe")

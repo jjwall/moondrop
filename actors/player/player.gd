@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #TODO Player script needs de-complication pass.
-#TODO buying items, handling not enough shells.
+#TODO buying items, handling not enough shells. <- this
 
 signal pressedConfirm
 signal yesNoConfirm(yes: bool)
@@ -45,6 +45,7 @@ var interacting = false
 @onready var yes_button: Button = %YesButton
 @onready var no_button: Button = %NoButton
 @onready var shells_container = %ShellsContainer
+@onready var shells_amount_label = %ShellsAmountLabel
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():

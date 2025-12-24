@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cbupaj0owytnj" path="res://objects/inventory/inventory.tscn" id="4_lsqbn"]
 [ext_resource type="Texture2D" uid="uid://ds44rb2tprps5" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Sea_and_Food.png" id="5_15y17"]
 [ext_resource type="Script" uid="uid://byp0kkdvhbah5" path="res://actors/player/shells_container.gd" id="5_bop6h"]
+[ext_resource type="Script" uid="uid://4chbehmrmdey" path="res://actors/player/shells_amount_label.gd" id="7_a744p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
 radius = 39.012817
@@ -1170,6 +1171,7 @@ offset_top = -13.0
 offset_right = 62.0
 offset_bottom = 18.0
 text = "0"
+script = ExtResource("7_a744p")
 
 [node name="Inventory" parent="." unique_id=725755749 instance=ExtResource("4_lsqbn")]
 
