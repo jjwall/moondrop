@@ -232,11 +232,9 @@ func _state_fish_enter():
 			anim.play("fish_south")
 			#anim.play("fish_north")
 		Vector2.RIGHT:
-			anim.play("fish_south")
-			#anim.play("fish_east")
+			anim.play("fish_east")
 		Vector2.LEFT:
-			anim.play("fish_south")
-			#anim.play("fish_west")
+			anim.play("fish_west")
 		Vector2(-1, 1):
 			anim.play("fish_southwest")
 		Vector2(1, 1):
@@ -258,11 +256,9 @@ func play_yank_animation():
 			anim.play("yank_south")
 			#anim.play("yank_north")
 		Vector2.RIGHT:
-			anim.play("yank_south")
-			#anim.play("yank_east")
+			anim.play("yank_east")
 		Vector2.LEFT:
-			anim.play("yank_south")
-			#anim.play("yank_west")
+			anim.play("yank_west")
 		Vector2(-1, 1):
 			anim.play("yank_southwest")
 		Vector2(1, 1):
@@ -311,11 +307,9 @@ func _state_reel_enter():
 			anim.play("reel_south")
 			#anim.play("reel_north")
 		Vector2.RIGHT:
-			anim.play("reel_south")
-			#anim.play("reel_east")
+			anim.play("reel_east")
 		Vector2.LEFT:
-			anim.play("reel_south")
-			#anim.play("reel_west")
+			anim.play("reel_west")
 		Vector2(-1, 1):
 			anim.play("reel_southwest")
 		Vector2(1, 1):
