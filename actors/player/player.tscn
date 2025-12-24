@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bfiyxief2332h" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Map_and_UI.png" id="4_6p1w3"]
 [ext_resource type="PackedScene" uid="uid://cbupaj0owytnj" path="res://objects/inventory/inventory.tscn" id="4_lsqbn"]
 [ext_resource type="Texture2D" uid="uid://ds44rb2tprps5" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Sea_and_Food.png" id="5_15y17"]
+[ext_resource type="Script" uid="uid://byp0kkdvhbah5" path="res://actors/player/shells_container.gd" id="5_bop6h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
 radius = 39.012817
@@ -1049,7 +1050,7 @@ anchor_top = 0.075268805
 anchor_right = 0.951282
 anchor_bottom = 0.79569894
 theme_override_fonts/normal_font = ExtResource("3_ax26v")
-theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/normal_font_size = 58
 bbcode_enabled = true
 text = "Test [color=darkred][font_size={76}]Wow!!![/font_size][/color] Hello this is a [shake rate=15.0 level=5 connected=1]test[/shake]. Only a test. I want to know something. [rainbow freq=0.5 sat=0.8 val=0.8 speed=1.0][wave amp=50.0 freq=5.0 connected=1]Wow![/wave][/rainbow] I'm gonna do some testing because that's why."
 scroll_active = false
@@ -1148,22 +1149,24 @@ anchor_top = 1.05
 anchor_right = 0.07604167
 anchor_bottom = 1.1055555
 offset_top = 6.1035156e-05
+script = ExtResource("5_bop6h")
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/ShellsContainer" unique_id=768510266]
+[node name="ShellsIcon" type="AnimatedSprite2D" parent="CanvasLayer/ShellsContainer" unique_id=768510266]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_n5lsw")
 
 [node name="Control" type="Control" parent="CanvasLayer/ShellsContainer" unique_id=1325377610]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/ShellsContainer/Control" unique_id=1370201198]
+[node name="ShellsAmountLabel" type="Label" parent="CanvasLayer/ShellsContainer/Control" unique_id=1370201198]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 29.0
 offset_top = -13.0
-offset_right = 61.0
-offset_bottom = 11.0
-text = "100"
+offset_right = 62.0
+offset_bottom = 18.0
+text = "0"
 
 [node name="Inventory" parent="." unique_id=725755749 instance=ExtResource("4_lsqbn")]
 

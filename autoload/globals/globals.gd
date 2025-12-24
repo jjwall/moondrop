@@ -10,6 +10,11 @@ extends Node
 ## Emitted when any variable changes.
 signal changed
 
+signal shells_changed()
+
+var shells: int = 0:
+	set(v): shells = v; changed.emit(); shells_changed.emit()
+
 enum ExitLocations {
 	GAME_START,
 	ISLAND_SHOP_ENTRANCE,

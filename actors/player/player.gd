@@ -401,8 +401,6 @@ func _state_idle_process(_delta):
 					interactable_zone.interact()
 				
 				return
-		
-		print("hello?")
 		if inventory.get_equipped_rod() != {}:
 			_goto("fish")
 			has_been_cast = true
@@ -415,9 +413,11 @@ func _state_idle_process(_delta):
 		inventory.render_backpack(0)
 		inventory_open = true
 		inventory.visible = true
+		show_shells()
 	elif Input.is_action_just_pressed("toggle_inventory") and not has_been_cast and inventory_open:
 		inventory_open = false
 		inventory.visible = false
+		hide_shells()
 
 func _state_idle_physics_process(_delta):
 	pass

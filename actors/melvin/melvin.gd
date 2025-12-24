@@ -63,6 +63,7 @@ func interact():
 			
 			if yes:
 				print("Gain %s shells." % [total_sell_price])
+				Globals.shells += total_sell_price
 				for item in items_to_sell:
 					item.queue_free()
 				var yes_dialog: Array[String] = ["Thank you sir! Pleasure doing business with you. Come back anytime!"]
