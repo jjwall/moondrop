@@ -13,7 +13,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		lure.add_child(fish_type)
 		
 		# Set recent caught fish data.
-		lure.player_ref.recent_caught_fish = actor.fish_type_data
+		lure.player_ref.recent_acquired_item = actor.fish_type_data
 	
 	actor.queue_free()
 	return SUCCESS

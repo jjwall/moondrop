@@ -15,10 +15,10 @@ var item_drop_scene = preload("res://objects/item_drop/item_drop.tscn")
 var lure_scene = preload("res://objects/lure/lure.tscn")
 
 var shells_container_starting_position: Vector2
-var caught_fish_to_display = null
+var aquired_item_to_display = null
 var radial_highlight_to_display = null
 var lure = null
-var recent_caught_fish = {}
+var recent_acquired_item = {}
 var yanking = false
 var in_caught_fish_dialog = false
 var has_been_cast = false
@@ -178,6 +178,15 @@ func custom_dialog(dialogs: Array[String]) -> void:
 	
 	for dialog in dialogs:
 		await dialog_say(dialog)
+
+func item_acquired_dialog(item_data: Dictionary, pocket_successful: bool) -> void:
+	dialog_panel.visible = true
+	in_caught_fish_dialog = true
+	await dialog_say("Hot diggitity! I got a %s!" % [item_data.name])
+	if not pocket_successful:
+		await dialog_say("Aww my pockets are full. I'll leave this on the ground for now.")
+		
+	in_caught_fish_dialog = false
 
 func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float, pocket_successful: bool) -> void:
 	dialog_panel.visible = true
@@ -469,26 +478,35 @@ func _state_walk_exit():
 
 #region State get item
 func _state_get_item_enter():
-	print(recent_caught_fish)
+	print(recent_acquired_item)
+	#if recent_acquired_item.item_type == RefData.item_types.FISH:
 	await get_tree().create_timer(0.5).timeout
 	anim.play("get_item")
-	caught_fish_to_display = recent_caught_fish.scene.instantiate()
-	caught_fish_to_display.position.y -= 75
-	render_radial_highlight(caught_fish_to_display.position)
-	self.add_child(caught_fish_to_display)
+	aquired_item_to_display = recent_acquired_item.scene.instantiate()
+	aquired_item_to_display.position.y -= 75
+	render_radial_highlight(aquired_item_to_display.position)
+	self.add_child(aquired_item_to_display)
+		
+	if recent_acquired_item.item_type == RefData.item_types.FISH:
+		var fish_measurement = determine_fish_measurement(recent_acquired_item)
+		var new_item_data = prep_fish_item_data(recent_acquired_item, fish_measurement)
+		var pocket_successful = inventory.pocket_item(new_item_data)
+		await caught_fish_dialog(recent_acquired_item, fish_measurement, pocket_successful)
 	
-	var fish_measurement = determine_fish_measurement(recent_caught_fish)
-	var new_item_data = prep_fish_item_data(recent_caught_fish, fish_measurement)
-	var pocket_successful = inventory.pocket_item(new_item_data)
-	await caught_fish_dialog(recent_caught_fish, fish_measurement, pocket_successful)
+		if not pocket_successful:
+			drop_item(new_item_data)
 	
-	if not pocket_successful:
-		drop_item(new_item_data)
+	else:
+		var pocket_successful = inventory.pocket_item(recent_acquired_item)
+		await item_acquired_dialog(recent_acquired_item, pocket_successful)
+		
+		if not pocket_successful:
+			drop_item(recent_acquired_item)
 
 func _state_get_item_process(_delta):
-	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display) and !in_caught_fish_dialog:
-		caught_fish_to_display.queue_free()
-		caught_fish_to_display = null
+	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(aquired_item_to_display) and !in_caught_fish_dialog:
+		aquired_item_to_display.queue_free()
+		aquired_item_to_display = null
 		radial_highlight_to_display.queue_free()
 		radial_highlight_to_display = null
 		reset_dialog_ui()

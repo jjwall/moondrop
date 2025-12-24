@@ -9,6 +9,7 @@ var commmon_fish_types := [
 		"max_weight": 7.55,
 		"buy_price": 100,
 		"sell_price": 60,
+		"item_type": item_types.FISH,
 	},
 	{
 		"name": "Crab",
@@ -18,6 +19,7 @@ var commmon_fish_types := [
 		"max_weight": 12.72,
 		"buy_price": 50,
 		"sell_price": 35,
+		"item_type": item_types.FISH,
 	},
 	{
 		"name": "Mackerel",
@@ -27,6 +29,7 @@ var commmon_fish_types := [
 		"max_weight": 4.89,
 		"buy_price": 40,
 		"sell_price": 30,
+		"item_type": item_types.FISH,
 	},
 ]
 

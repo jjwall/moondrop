@@ -3,6 +3,7 @@ extends Node2D
 @export var item_display_node: Node2D
 @export var item_name: String
 @export var item_type: RefData.item_types
+@export var description: String
 @export var value: int = 1
 @export var buy_price: int
 @export var sell_price: int
@@ -11,6 +12,16 @@ var player_ref = null
 
 func _ready() -> void:
 	player_ref = self.get_parent().get_node("%Player")
+
+func get_item_data() -> Dictionary:
+	return {
+		"scene": load(item_display_node.scene_file_path),
+		"name": item_name,
+		"item_type": item_type,
+		"description": description,
+		"buy_price": buy_price,
+		"sell_price": sell_price,
+	}
 
 func interact() -> void:
 	if not player_ref.interacting:
@@ -29,6 +40,8 @@ func interact() -> void:
 				print("successful purchase")
 				var confirm_purchase_dialog: Array[String] = ["Thanks for the purchase! I hope this serves you well."]
 				await player_ref.custom_dialog(confirm_purchase_dialog)
+				player_ref.recent_acquired_item = get_item_data()
+				player_ref._goto("get_item")
 				# goto get item state
 			else:
 				print("not enough money.")
