@@ -52,6 +52,7 @@ enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/debug
 player=""
 lure_ground_source="what the lure cares about"
 interactable_zone=""
+item_drop=""
 
 [gui]
 

@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bspqpkmjotgb3" path="res://actors/melvin/melvin.tscn" id="3_87pai"]
 [ext_resource type="Script" uid="uid://cwfn12h87mdvh" path="res://node_types/camera_shake.gd" id="4_87pai"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6s45s"]
+size = Vector2(60.333336, 60.66668)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iiklw"]
 size = Vector2(91.25, 46)
 
@@ -19,8 +22,16 @@ scale = Vector2(3, 3)
 
 [node name="ItemDropsContainer" type="Node2D" parent="." unique_id=1473219326]
 
-[node name="Melvin" parent="." unique_id=2101687232 instance=ExtResource("3_87pai")]
+[node name="Melvin" parent="." unique_id=2101687232 node_paths=PackedStringArray("item_drops_sales_area") instance=ExtResource("3_87pai")]
 position = Vector2(312, 441)
+item_drops_sales_area = NodePath("ItemDropSalesArea2D")
+
+[node name="ItemDropSalesArea2D" type="Area2D" parent="Melvin" unique_id=867031743]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Melvin/ItemDropSalesArea2D" unique_id=1208935651]
+position = Vector2(56.833344, 12)
+shape = SubResource("RectangleShape2D_6s45s")
+debug_color = Color(0.4393259, 0.5808223, 0.42402723, 0.41960785)
 
 [node name="Player" parent="." unique_id=85828012 node_paths=PackedStringArray("camera_controller", "camera", "item_drops_container") instance=ExtResource("2_iiklw")]
 unique_name_in_owner = true

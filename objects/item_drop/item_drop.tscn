@@ -8,7 +8,7 @@ radius = 31.0
 [node name="ItemDrop" type="Node2D" unique_id=1994412215]
 script = ExtResource("1_qid4b")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1588011899]
+[node name="Area2D" type="Area2D" parent="." unique_id=1588011899 groups=["item_drop"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1850892464]
 shape = SubResource("CircleShape2D_mh210")
