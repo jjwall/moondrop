@@ -16,7 +16,9 @@ func _ready() -> void:
 				"name": "Basic Rod",
 				"description": "A simple rod that will catch you all of your basic fish.",
 				"item_type": RefData.item_types.ROD,
-				"scene": basic_rod_scene
+				"scene": basic_rod_scene,
+				"buy_price": 250,
+				"sell_price": 100,
 			}
 		
 			player.drop_item(basic_rod_item_data, true)
@@ -27,7 +29,9 @@ func _ready() -> void:
 				"value": 50,
 				"max_value": 50,
 				"item_type": RefData.item_types.BAIT,
-				"scene": boilies_scene
+				"scene": boilies_scene,
+				"buy_price": 2,
+				"sell_price": 1,
 			}
 		
 			player.drop_item(boilies_item_data, true)

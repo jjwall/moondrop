@@ -69,6 +69,8 @@ func prep_fish_item_data(fish_data: Dictionary, fish_measurement: float) -> Dict
 		"name": fish_data.name,
 		"weight": fish_measurement,
 		"item_type": RefData.item_types.FISH,
+		"buy_price": fish_data.buy_price,
+		"sell_price": fish_data.sell_price,
 	}
 
 func pickup_item(item_data_ref: Dictionary) -> bool:
