@@ -7,36 +7,36 @@ var player_ref = null
 func _ready() -> void:
 	player_ref = self.get_parent().get_node("%Player")
 
-func get_items_to_sell() -> Array[Dictionary]:
-	var items_to_sell: Array[Dictionary] = []
+func get_items_to_sell() -> Array[Node2D]:
+	var items_to_sell: Array[Node2D] = []
 	var areas = item_drops_sales_area.get_overlapping_areas()
 	
 	for area: Area2D in areas:
 		if area.is_in_group("item_drop"):
 			var item_drop = area.get_parent()
-			var item_data = item_drop.item_data_ref
-			items_to_sell.push_back(item_data)
+			#var item_data = item_drop.item_data_ref
+			items_to_sell.push_back(item_drop)
 	
 	return items_to_sell
 
-func get_item_names(item_data_list: Array[Dictionary]) -> Array[String]:
+func get_item_names(item_list: Array[Node2D]) -> Array[String]:
 	var item_names: Array[String] = []
 	
-	for item_data: Dictionary in item_data_list:
-		item_names.push_back(item_data.name)
+	for item: Node2D in item_list:
+		item_names.push_back(item.item_data_ref.name)
 		
 	return item_names
 
-func determine_sell_prices(item_data_list: Array[Dictionary]):
+func determine_sell_prices(item_list: Array[Node2D]):
 	var total_sell_price = 0
 	
-	for item_data: Dictionary in item_data_list:
+	for item: Node2D in item_list:
 		var sell_price = 0
 		
-		if item_data.has("value"):
-			sell_price = item_data.value * item_data.sell_price
+		if item.item_data_ref.has("value"):
+			sell_price = item.item_data_ref.value * item.item_data_ref.sell_price
 		else:
-			sell_price = item_data.sell_price
+			sell_price = item.item_data_ref.sell_price
 		
 		total_sell_price += sell_price
 	
@@ -58,11 +58,25 @@ func interact():
 			var sell_dialog3 = "The total sell price comes out to %s shells. How does that sound?" % [total_sell_price]
 			var sell_dialogs: Array[String] = [sell_dialog1, sell_dialog2, sell_dialog3]
 			await player_ref.custom_dialog(sell_dialogs)
+			var yes = await player_ref.yes_no_dialog()
+			
+			if yes:
+				print("Gain %s shells." % [total_sell_price])
+				for item in items_to_sell:
+					item.queue_free()
+				var yes_dialog: Array[String] = ["Pleasure doing business with you! Come back anytime!"]
+				await player_ref.custom_dialog(yes_dialog)
+			else:
+				var no_dialog: Array[String] = ["No problem. Come back and see me if ya change yer mind!"]
+				await player_ref.custom_dialog(no_dialog)
+
+			player_ref.on_reset_ui()
 		else:
 			var dialog1 = "Hey there, thanks for coming into my shop. Check out the back of the store to see my wares."
 			var dialog2 = "If you're looking to sell, drop your items on the carpet and I'll get you a tally of the total sales price."
 			var dialogs: Array[String] = [dialog1, dialog2]
 			await player_ref.custom_dialog(dialogs)
+			player_ref.on_reset_ui()
 			
 		# Await .1 seconds before setting interacting to false so we don't get stuck in an interaction loop.
 		await get_tree().create_timer(0.1, false, false, true).timeout

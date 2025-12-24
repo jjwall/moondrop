@@ -1042,10 +1042,11 @@ metadata/_edit_use_anchors_ = true
 [node name="DialogConfirm" type="Label" parent="CanvasLayer/DialogPanel" unique_id=1980310554]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 746.0
-offset_top = 140.0
-offset_right = 771.0
-offset_bottom = 177.0
+offset_left = 402.0
+offset_top = 160.0
+offset_right = 427.0
+offset_bottom = 197.0
+rotation = 1.5707964
 theme_override_font_sizes/font_size = 58
 text = ">"
 
@@ -1058,6 +1059,30 @@ offset_top = 157.0
 offset_right = 769.0
 offset_bottom = 189.0
 text = "->"
+
+[node name="YesNoControl" type="Control" parent="CanvasLayer/DialogPanel" unique_id=893202601]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 358.0
+offset_top = 102.0
+offset_right = 398.0
+offset_bottom = 142.0
+
+[node name="YesButton" type="Button" parent="CanvasLayer/DialogPanel/YesNoControl" unique_id=151566628]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Yes"
+
+[node name="NoButton" type="Button" parent="CanvasLayer/DialogPanel/YesNoControl" unique_id=336069945]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 7.0
+offset_top = 45.0
+offset_right = 39.0
+offset_bottom = 77.0
+text = "No"
 
 [node name="NotificationPanel" type="Panel" parent="CanvasLayer" unique_id=1232311531]
 unique_name_in_owner = true

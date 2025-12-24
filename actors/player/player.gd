@@ -3,6 +3,7 @@ extends CharacterBody2D
 #TODO Player script needs de-complication pass.
 
 signal pressedConfirm
+signal yesNoConfirm(yes: bool)
 
 const SPEED = 150.0
 var direction := Vector2.ZERO
@@ -17,7 +18,7 @@ var radial_highlight_to_display = null
 var lure = null
 var recent_caught_fish = {}
 var yanking = false
-var in_dialog = false
+var in_caught_fish_dialog = false
 var has_been_cast = false
 var inventory_open = false
 var notification_displaying = false
@@ -38,6 +39,9 @@ var interacting = false
 @onready var notification_text_label: Label = %NotificationTextLabel
 @onready var notification_sprite: AnimatedSprite2D = %NotificationSprite
 @onready var notification_sprite_control: Control = %NotificationSpriteControl
+@onready var yes_no_control: Control = %YesNoControl
+@onready var yes_button: Button = %YesButton
+@onready var no_button: Button = %NoButton
 #@onready var dialog_button: Button = %DialogButton
 
 func _ready():
@@ -46,13 +50,21 @@ func _ready():
 	dialog_panel.visible = false
 	notification_panel.modulate.a = 0
 	dialog_confirm.visible = false
+	yes_no_control.visible = false
 	camera_controller.set_target(self)
 	_goto("idle")
 
 
 func _input(_event):
-	if Input.is_action_just_pressed("ui_accept"):
-		pressedConfirm.emit()
+	if not yes_no_control.visible:
+		if Input.is_action_just_pressed("ui_accept"):
+			pressedConfirm.emit()
+	else:
+		if yes_button.button_pressed:
+			yesNoConfirm.emit(true)
+		
+		if no_button.button_pressed:
+			yesNoConfirm.emit(false)
 
 func _on_inventory_item_dropped(item_data: Dictionary) -> void:
 	drop_item(item_data, true)
@@ -137,25 +149,27 @@ func dialog_say(s: String) -> void:
 	await pressedConfirm
 	dialog_confirm.visible = false
 
+func yes_no_dialog() -> bool:
+	yes_no_control.visible = true
+	var yes = await yesNoConfirm
+	yes_no_control.visible = false
+	return yes
+
 func custom_dialog(dialogs: Array[String]) -> void:
 	dialog_panel.visible = true
-	in_dialog = true
 	
 	for dialog in dialogs:
 		await dialog_say(dialog)
-	
-	in_dialog = false
-	on_reset_ui()
 
 func caught_fish_dialog(fish_data: Dictionary, fish_measurement: float, pocket_successful: bool) -> void:
 	dialog_panel.visible = true
-	in_dialog = true
+	in_caught_fish_dialog = true
 	await dialog_say(fish_data.message)
 	await dialog_say("I caught a %s weighing %.2f pounds!" % [fish_data.name, fish_measurement])
 	if not pocket_successful:
 		await dialog_say("Aww my pockets are full. I'll leave this on the ground for now.")
 		
-	in_dialog = false
+	in_caught_fish_dialog = false
 	
 func on_reset_ui():
 	dialog_panel.visible = false
@@ -454,7 +468,7 @@ func _state_get_item_enter():
 		drop_item(new_item_data)
 
 func _state_get_item_process(_delta):
-	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display) and !in_dialog:
+	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(caught_fish_to_display) and !in_caught_fish_dialog:
 		caught_fish_to_display.queue_free()
 		caught_fish_to_display = null
 		radial_highlight_to_display.queue_free()
