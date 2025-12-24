@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dvxjimgn5lrty"]
+
+[ext_resource type="Texture2D" uid="uid://dlbaewh4s3nrp" path="res://assets/textures/objects/silverrod.png" id="1_1resl"]
+[ext_resource type="Script" uid="uid://b4gkkyan36auk" path="res://assets/scripts/canvas_group.gd" id="1_nxgif"]
+
+[node name="SilverRod" type="Node2D" unique_id=2062719403]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1469269525]
+script = ExtResource("1_nxgif")
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="CanvasGroup" unique_id=1294239599]
+unique_name_in_owner = true
+scale = Vector2(3, 3)
+texture = ExtResource("1_1resl")

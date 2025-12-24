@@ -22,6 +22,8 @@ func _ready() -> void:
 			"name": "Test Clown Fish",
 			"weight": 55.55,
 			"item_type": RefData.item_types.FISH,
+			"buy_price": 100,
+			"sell_price": 60,
 		}
 		
 	var item = item_data_ref.scene.instantiate()
