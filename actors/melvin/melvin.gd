@@ -55,7 +55,7 @@ func interact():
 			var sell_dialog2 = "Looks like you got: 1x "
 			sell_dialog2 += ", 1x ".join(item_names)
 			sell_dialog2 += " to sell."
-			var sell_dialog3 = "The total sell price comes out to %s shells. Does that work for you?" % [total_sell_price]
+			var sell_dialog3 = "The total comes to [color=green]%s shells[/color]. Does that work for you?" % [total_sell_price]
 			var sell_dialogs: Array[String] = [sell_dialog1, sell_dialog2, sell_dialog3]
 			await player_ref.custom_dialog(sell_dialogs)
 			var yes = await player_ref.yes_no_dialog()
