@@ -1,10 +1,10 @@
 extends Node2D
 
-#TODO: Clean up list of items. Rich text edits for coloring based on item type.
-#TODO (cont.) Next dialog page if list is > 5 items.
-#TODO (cont.) Add ", and" for last item.
-#TODO (cont.) Consolodate and add number of items so it's not hard coded to 1x value
-#TODO (cont.) Combine value items ex. 48x Boilies
+#TODO: [Done] Clean up list of items. Rich text edits for coloring based on item type.
+#TODO (cont.) [Done] Next dialog page if list is > 6 items.
+#TODO (cont.) [Done] Add ", and" for last item.
+#TODO (cont.) [Done] Consolodate and add number of items so it's not hard coded to 1x value
+#TODO (cont.) [Done] Combine value items ex. 48x Boilies
 
 @export var item_drops_sales_area: Area2D
 
@@ -71,24 +71,35 @@ func interact():
 			var sell_dialog2 = "Looks like you got: "
 			var index = 0
 			var dict_size = item_names_and_values.size()
+			var items_per_dialog_page = 7
+			
+			var item_names_and_values_dialog: Array[String] = []
+			item_names_and_values_dialog.push_back(sell_dialog2)
+			var page_index = 0
 			for item_name_and_value in item_names_and_values:
 				if index > 0:
-					sell_dialog2 += ", "
+					item_names_and_values_dialog[page_index] += ", "
+					
+					if index % items_per_dialog_page == 0:
+						page_index += 1
+						item_names_and_values_dialog.push_back("")
 					
 					if index == dict_size - 1:
-						sell_dialog2 += "and "
+						item_names_and_values_dialog[page_index] += "and "
 					
-				sell_dialog2 += "[color=green]%sx %s[/color]" % [item_names_and_values[item_name_and_value], item_name_and_value]
+				item_names_and_values_dialog[page_index] += "[color=green]%sx %s[/color]" % [item_names_and_values[item_name_and_value], item_name_and_value]
 				index += 1
 			
-			sell_dialog2 += " to sell."
+			item_names_and_values_dialog[page_index] += " to sell."
+			
 			var sell_dialog3 = "The total comes to [color=green]%s shells[/color]. Does that work for you?" % [total_sell_price]
-			var sell_dialogs: Array[String] = [sell_dialog1, sell_dialog2, sell_dialog3]
+			var sell_dialogs: Array[String] = [sell_dialog1]
+			sell_dialogs.append_array(item_names_and_values_dialog)
+			sell_dialogs.push_back(sell_dialog3)
 			await player_ref.custom_dialog(sell_dialogs)
 			var yes = await player_ref.yes_no_dialog()
 			
 			if yes:
-				print("Gain %s shells." % [total_sell_price])
 				Globals.shells += total_sell_price
 				for item in items_to_sell:
 					item.queue_free()

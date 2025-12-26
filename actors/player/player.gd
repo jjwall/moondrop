@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #TODO Player script needs de-complication pass.
-#TODO buying items, handling not enough shells. <- this
+#TODO (Done) buying items, handling not enough shells. <- this
 
 signal pressedConfirm
 signal yesNoConfirm(yes: bool)
