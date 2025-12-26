@@ -182,7 +182,10 @@ func custom_dialog(dialogs: Array[String]) -> void:
 func item_acquired_dialog(item_data: Dictionary, pocket_successful: bool) -> void:
 	dialog_panel.visible = true
 	in_caught_fish_dialog = true
-	await dialog_say("Hot diggitity! I got a %s!" % [item_data.name])
+	if item_data.item_type == RefData.item_types.BAIT:
+		await dialog_say("Yippee! I got [color=green]x%s %s[/color]!" % [item_data.value, item_data.name])
+	else:
+		await dialog_say("Hot diggity! I got a [color=green]%s[/color]!" % [item_data.name])
 	if not pocket_successful:
 		await dialog_say("Aww my pockets are full. I'll leave this on the ground for now.")
 		

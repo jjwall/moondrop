@@ -4,6 +4,7 @@ extends Node2D
 @export var item_name: String
 @export var item_type: RefData.item_types
 @export var description: String
+@export var max_value: int
 @export var value: int = 1
 @export var buy_price: int
 @export var sell_price: int
@@ -14,7 +15,7 @@ func _ready() -> void:
 	player_ref = self.get_parent().get_node("%Player")
 
 func get_item_data() -> Dictionary:
-	return {
+	var item_data = {
 		"scene": load(item_display_node.scene_file_path),
 		"name": item_name,
 		"item_type": item_type,
@@ -22,6 +23,12 @@ func get_item_data() -> Dictionary:
 		"buy_price": buy_price,
 		"sell_price": sell_price,
 	}
+	
+	if value > 1:
+		item_data["value"] = value
+		item_data["max_value"] = max_value
+	
+	return item_data
 
 func interact() -> void:
 	if not player_ref.interacting:
@@ -29,20 +36,32 @@ func interact() -> void:
 		player_ref.anim.play("idle_north")
 		player_ref.show_shells()
 		
-		var buy_dialog = "That is a [color=green]%s[/color]. I'm selling it for %s shells. Would you like to purchase it?" % [item_name, buy_price]
+		var item_amount_dialog1 = ""
+		var item_amount_dialog2 = ""
+		var temp_buy_price = 0
+		if value > 1:
+			temp_buy_price = buy_price * value
+			item_amount_dialog1 = "Those are"
+			item_amount_dialog2 = "them"
+		else:
+			item_amount_dialog1 = "That is"
+			item_amount_dialog2 = "it"
+			temp_buy_price = buy_price
+		
+		var buy_dialog = "%s [color=green]%sx %s[/color]. I'm selling %s for %s shells. Would you like to purchase %s?" % [item_amount_dialog1, value, item_name, item_amount_dialog2, temp_buy_price, item_amount_dialog2]
 		var buy_dialogs: Array[String] = [buy_dialog]
 		await player_ref.custom_dialog(buy_dialogs)
 		var yes = await player_ref.yes_no_dialog()
 		
 		if yes: 
-			if Globals.shells >= buy_price:
-				Globals.shells -= buy_price
+			if Globals.shells >= temp_buy_price:
+				Globals.shells -= temp_buy_price
 				print("successful purchase")
 				var confirm_purchase_dialog: Array[String] = ["Thanks for the purchase! I hope this serves you well."]
 				await player_ref.custom_dialog(confirm_purchase_dialog)
 				player_ref.recent_acquired_item = get_item_data()
 				player_ref._goto("get_item")
-				# goto get item state
+				# TODO: if sold out item, show sold out
 			else:
 				print("not enough money.")
 				var not_enough_shells_dialog: Array[String] = ["Looks like your short on shells. Come back when you've saved up enough."]
