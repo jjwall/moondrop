@@ -48,7 +48,7 @@ func interact() -> void:
 			item_amount_dialog2 = "it"
 			temp_buy_price = buy_price
 		
-		var buy_dialog = "%s [color=green]%sx %s[/color]. I'm selling %s for %s shells. Would you like to purchase %s?" % [item_amount_dialog1, value, item_name, item_amount_dialog2, temp_buy_price, item_amount_dialog2]
+		var buy_dialog = "%s [color=green]%sx %s[/color]. I'm selling %s for [color=green]%s shells[/color]. Would you like to purchase %s?" % [item_amount_dialog1, value, item_name, item_amount_dialog2, temp_buy_price, item_amount_dialog2]
 		var buy_dialogs: Array[String] = [buy_dialog]
 		await player_ref.custom_dialog(buy_dialogs)
 		var yes = await player_ref.yes_no_dialog()

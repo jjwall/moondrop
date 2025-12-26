@@ -18,7 +18,7 @@ func _ready() -> void:
 				"item_type": RefData.item_types.ROD,
 				"scene": basic_rod_scene,
 				"buy_price": 250,
-				"sell_price": 100,
+				"sell_price": 1000,
 			}
 		
 			player.drop_item(basic_rod_item_data, true)

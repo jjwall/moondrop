@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bspqpkmjotgb3" path="res://actors/melvin/melvin.tscn" id="3_87pai"]
 [ext_resource type="PackedScene" uid="uid://bf4mf1uq48aco" path="res://objects/bait_types/boilies/boilies.tscn" id="4_0sv7g"]
 [ext_resource type="Script" uid="uid://cwfn12h87mdvh" path="res://node_types/camera_shake.gd" id="4_87pai"]
+[ext_resource type="PackedScene" uid="uid://dvxjimgn5lrty" path="res://objects/rod_types/silver_rod/silver_rod.tscn" id="6_d5ie5"]
 [ext_resource type="PackedScene" uid="uid://cg0dm6x0sscvv" path="res://objects/item_display/item_display.tscn" id="7_qd6e1"]
 [ext_resource type="PackedScene" uid="uid://d1odqklalrf8s" path="res://objects/rod_types/basic_rod/basic_rod.tscn" id="8_0sv7g"]
 
@@ -26,7 +27,7 @@ scale = Vector2(3, 3)
 [node name="ItemDropsContainer" type="Node2D" parent="." unique_id=1473219326]
 
 [node name="ItemDisplay1" parent="." unique_id=887371769 node_paths=PackedStringArray("item_display_node") instance=ExtResource("7_qd6e1")]
-position = Vector2(336, 205)
+position = Vector2(337, 204)
 item_display_node = NodePath("Boilies")
 item_name = "Boilies"
 item_type = 2
@@ -39,15 +40,27 @@ sell_price = 1
 [node name="Boilies" parent="ItemDisplay1" unique_id=1710285420 instance=ExtResource("4_0sv7g")]
 
 [node name="ItemDisplay2" parent="." unique_id=2119193338 node_paths=PackedStringArray("item_display_node") instance=ExtResource("7_qd6e1")]
-position = Vector2(485, 208)
+position = Vector2(484, 204)
 item_display_node = NodePath("BasicRod")
 item_name = "Basic Rod"
 item_type = 1
 description = "A simple rod that will catch you all of your basic fish."
-buy_price = 25
+buy_price = 250
 sell_price = 100
 
 [node name="BasicRod" parent="ItemDisplay2" unique_id=1020366477 instance=ExtResource("8_0sv7g")]
+
+[node name="ItemDisplay3" parent="." unique_id=384842562 node_paths=PackedStringArray("item_display_node") instance=ExtResource("7_qd6e1")]
+position = Vector2(627, 204)
+item_display_node = NodePath("SilverRod")
+item_name = "Silver Rod"
+item_type = 1
+description = "A sparkling silver rod. Perhaps I can catch even rarer fish with this!"
+buy_price = 1000
+sell_price = 500
+
+[node name="SilverRod" parent="ItemDisplay3" unique_id=2062719403 instance=ExtResource("6_d5ie5")]
+position = Vector2(5, -15)
 
 [node name="Melvin" parent="." unique_id=2101687232 node_paths=PackedStringArray("item_drops_sales_area") instance=ExtResource("3_87pai")]
 position = Vector2(312, 441)
