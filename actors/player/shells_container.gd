@@ -6,6 +6,7 @@ var amount: int: set = set_amount
 
 func _ready() -> void:
 	Globals.shells_changed.connect(_on_shells_changed)
+	set_amount(Globals.shells)
 
 func set_amount(v: int):
 	amount = v

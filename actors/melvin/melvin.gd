@@ -25,13 +25,22 @@ func get_items_to_sell() -> Array[Node2D]:
 	
 	return items_to_sell
 
-func get_item_names(item_list: Array[Node2D]) -> Array[String]:
-	var item_names: Array[String] = []
+func get_item_names_and_values(item_list: Array[Node2D]) -> Dictionary:
+	var item_names_and_values: Dictionary = {}
 	
 	for item: Node2D in item_list:
-		item_names.push_back(item.item_data_ref.name)
+		if item_names_and_values.has(item.item_data_ref.name):
+			if item.item_data_ref.has("value"):
+				item_names_and_values[item.item_data_ref.name] += item.item_data_ref.value
+			else:
+				item_names_and_values[item.item_data_ref.name] += 1
+		else:
+			if item.item_data_ref.has("value"):
+				item_names_and_values[item.item_data_ref.name] = item.item_data_ref.value
+			else:
+				item_names_and_values[item.item_data_ref.name] = 1
 		
-	return item_names
+	return item_names_and_values
 
 func determine_sell_prices(item_list: Array[Node2D]):
 	var total_sell_price = 0
@@ -56,11 +65,22 @@ func interact():
 		player_ref.show_shells()
 		
 		if items_to_sell.size() > 0:
-			var item_names = get_item_names(items_to_sell)
+			var item_names_and_values = get_item_names_and_values(items_to_sell)
 			var total_sell_price = determine_sell_prices(items_to_sell)
 			var sell_dialog1 = "Oh! You got some items to sell. Let's see here..."
-			var sell_dialog2 = "Looks like you got: 1x "
-			sell_dialog2 += ", 1x ".join(item_names)
+			var sell_dialog2 = "Looks like you got: "
+			var index = 0
+			var dict_size = item_names_and_values.size()
+			for item_name_and_value in item_names_and_values:
+				if index > 0:
+					sell_dialog2 += ", "
+					
+					if index == dict_size - 1:
+						sell_dialog2 += "and "
+					
+				sell_dialog2 += "[color=green]%sx %s[/color]" % [item_names_and_values[item_name_and_value], item_name_and_value]
+				index += 1
+			
 			sell_dialog2 += " to sell."
 			var sell_dialog3 = "The total comes to [color=green]%s shells[/color]. Does that work for you?" % [total_sell_price]
 			var sell_dialogs: Array[String] = [sell_dialog1, sell_dialog2, sell_dialog3]
