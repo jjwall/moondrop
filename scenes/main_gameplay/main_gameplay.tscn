@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cwfn12h87mdvh" path="res://node_types/camera_shake.gd" id="1_lrklj"]
 [ext_resource type="Script" uid="uid://5wamwc6fodk8" path="res://scenes/main_gameplay/main_gameplay.gd" id="1_wt4mr"]
 [ext_resource type="PackedScene" uid="uid://bje3v5otj2v6d" path="res://objects/maps/b_island/b_island.tscn" id="2_klphv"]
-[ext_resource type="PackedScene" uid="uid://c2bmfu7agagkx" path="res://objects/water/water.scn" id="2_up2o6"]
 [ext_resource type="PackedScene" uid="uid://cx45ltpnar43i" path="res://actors/player/player.tscn" id="3_j1nau"]
 [ext_resource type="Script" uid="uid://bl7xocdssk0tu" path="res://scenes/main_gameplay/camera_controller.gd" id="6_2ufyh"]
 [ext_resource type="PackedScene" uid="uid://b61i8e21b336" path="res://objects/pops_shop/pops_shop.tscn" id="6_vsax7"]
@@ -34,8 +33,6 @@ size = Vector2(109, 487)
 
 [node name="MainGameplay" type="Node2D" unique_id=44315712]
 script = ExtResource("1_wt4mr")
-
-[node name="Water" parent="." unique_id=1366665200 instance=ExtResource("2_up2o6")]
 
 [node name="Walls" type="StaticBody2D" parent="." unique_id=851327041]
 
