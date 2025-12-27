@@ -10,5 +10,6 @@ func _ready() -> void:
 	$CameraController.set_fixed_camera_position()
 
 func interact():
+	player.anim.play("idle_south")
 	Globals.recent_exit_location = Globals.ExitLocations.SHOP_EXIT
 	SceneGirl.change_scene("res://scenes/main_gameplay/main_gameplay.tscn")
