@@ -10,6 +10,7 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fenso"]
 normal = Vector2(1, 0)
+distance = -95.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vywn0"]
 normal = Vector2(-1, 0)

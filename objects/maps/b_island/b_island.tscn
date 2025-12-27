@@ -29,3 +29,8 @@ tile_set = ExtResource("1_ar7v6")
 [node name="BeachDetails2" type="TileMapLayer" parent="." unique_id=1762337357]
 tile_map_data = PackedByteArray("AAD3/wAAAAApAAIAAAD3//3/AAAnAAIAAAD2/wAAAAAnAAIAAAD1/wAAAAAnAAIAAAD2//3/AAAnAAIAAAD1//3/AAAnAAIAAAD0//3/AAAnAAIAAADz//3/AAAnAAIAAAD0/wAAAAAnAAIAAADz/wAAAAAnAAIAAAD4//3/AAAnAAIAAADy//3/AAAqAAEAAADy/wAAAAAnAAEAAADy//7/AAAoAAMAAADy////AAAoAAMAAAD5//3/AAAqAAIAAAD4/wAAAAAqAAIAAAD3////AAAkAAgAAAD3//7/AAAkAAgAAAD2////AAAlAAcAAAD1////AAAlAAcAAAD0////AAApAAcAAAA=")
 tile_set = ExtResource("1_ar7v6")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=214904611]
+position = Vector2(-9, -10)
+tile_map_data = PackedByteArray("AAD3//7/AAAnABAAAAA=")
+tile_set = ExtResource("1_ar7v6")
