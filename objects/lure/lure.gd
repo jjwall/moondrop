@@ -101,21 +101,35 @@ func _physics_process(delta):
 		if casting:
 			on_cast_end()
 			
-			# Test collision for lure hitting land.
+			# Get tilemaps that lure can interact with.
 			var tilemaps = get_tree().get_nodes_in_group("lure_ground_source")
+			var layer_index = 0
 			
 			for tilemap: TileMapLayer in tilemaps:
 				var tile_coords = tilemap.local_to_map(tilemap.to_local(self.global_position))
 				var atlas_coords = tilemap.get_cell_atlas_coords(tile_coords)
+				var collides_with_land = false
 				
-				if atlas_coords != Vector2i(-1, -1):
-					# If lure hits land, trigger automatic yank (see Player fishing state for ref)
+				# Need to test collision on tilemap layers above water layer 0.
+				if layer_index > 0:
+					# Test collision for lure hitting land.
+					var collision = move_and_collide(Vector2.ZERO * delta, true)
+					if collision and collision.get_collider().get_class() == "TileMapLayer":
+						collides_with_land = true
+				
+				# If lure hits land or is on something that's not the water tile (0, 0)...
+				if layer_index == 0 and atlas_coords != Vector2i(0, 0) or collides_with_land:
+					# Trigger automatic yank (see Player fishing state for ref).
 					player_ref.yanking = true
 					player_ref.yank_lure()
 					player_ref.play_yank_animation()
 					await player_ref.wait_for_lure_to_return()
 					yanking = false
 					player_ref._goto("idle")
+					
+				# else -> otherwise, lure will plop in water.
+				
+				layer_index += 1
 		else:
 			on_cancel_cast_end()
 		#ball.visible = false
