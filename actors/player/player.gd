@@ -84,7 +84,7 @@ func _on_inventory_close_inventory() -> void:
 	close_inventory()
 
 func open_inventory():
-	inventory.render_backpack(0)
+	inventory.open_backpack()
 	inventory_open = true
 	inventory.visible = true
 	show_shells()

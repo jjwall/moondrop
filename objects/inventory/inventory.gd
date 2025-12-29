@@ -10,6 +10,13 @@ signal close_inventory
 @onready var item_name_label: Label = %ItemNameLabel
 @onready var item_description_label: Label = %ItemDescriptionLabel
 
+@onready var backpack: Control = %Backpack
+@onready var quest_log: Control = %QuestLog
+@onready var fish_log: Control = %FishLog
+@onready var backpack_button: Button = %BackpackButton
+@onready var quest_log_button: Button = %QuestLogButton
+@onready var fish_log_button: Button = %FishLogButton
+
 #const outline_shader = preload("res://assets/shaders/outline.gdshader")
 const outline_material = preload("res://assets/materials/outline.tres")
 
@@ -33,13 +40,52 @@ var item_structure = {
 var rod_equip_index = 16
 var bait_equip_index = 17
 
-func _ready():		
-	render_backpack(0)
+func _ready():
+	open_backpack()
 
 func _process(_delta: float) -> void:
 	if dragging:
 		var mousepos = get_viewport().get_mouse_position()
 		item_being_dragged.global_position = Vector2(mousepos.x, mousepos.y)
+
+func _on_backpack_button_pressed() -> void:
+	open_backpack()
+
+func _on_quest_log_button_pressed() -> void:
+	open_quest_log()
+
+func _on_fish_log_button_pressed() -> void:
+	open_fish_log()
+
+func _on_close_button_pressed() -> void:
+	close_inventory.emit()
+
+func open_backpack():
+	backpack_button.disabled = true
+	quest_log_button.disabled = false
+	fish_log_button.disabled = false
+	backpack.visible = true
+	quest_log.visible = false
+	fish_log.visible = false
+	render_backpack(0)
+
+func open_quest_log():
+	backpack_button.disabled = false
+	quest_log_button.disabled = true
+	fish_log_button.disabled = false
+	backpack.visible = false
+	quest_log.visible = true
+	fish_log.visible = false
+	reset_item_details()
+
+func open_fish_log():
+	backpack_button.disabled = false
+	quest_log_button.disabled = false
+	fish_log_button.disabled = true
+	backpack.visible = false
+	quest_log.visible = false
+	fish_log.visible = true
+	reset_item_details()
 
 func get_equipped_rod() -> Dictionary:
 	if Globals.items_in_pockets[rod_equip_index] != null:
@@ -329,7 +375,3 @@ func render_pocket(pos: Vector2) -> Button: #(pos: Vector2, hat_index: int):
 	new_pocket.set_size(Vector2(item_length, item_height))
 	backpack_panel.add_child(new_pocket)
 	return new_pocket
-
-
-func _on_exit_button_pressed() -> void:
-	close_inventory.emit()
