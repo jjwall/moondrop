@@ -80,6 +80,20 @@ func _on_inventory_equip_failed() -> void:
 func _on_inventory_item_value_depleted(item_scene: PackedScene) -> void:
 	render_notification("Item Depleted", item_scene)
 
+func _on_inventory_close_inventory() -> void:
+	close_inventory()
+
+func open_inventory():
+	inventory.render_backpack(0)
+	inventory_open = true
+	inventory.visible = true
+	show_shells()
+
+func close_inventory():
+	inventory_open = false
+	inventory.visible = false
+	hide_shells()
+
 func show_shells() -> void:
 	var tween = create_tween()
 	var target_position = shells_container_starting_position
@@ -424,14 +438,9 @@ func _state_idle_process(_delta):
 		_goto("walk")
 	
 	if Input.is_action_just_pressed("toggle_inventory") and not has_been_cast and not inventory_open:
-		inventory.render_backpack(0)
-		inventory_open = true
-		inventory.visible = true
-		show_shells()
+		open_inventory()
 	elif Input.is_action_just_pressed("toggle_inventory") and not has_been_cast and inventory_open:
-		inventory_open = false
-		inventory.visible = false
-		hide_shells()
+		close_inventory()
 
 func _state_idle_physics_process(_delta):
 	pass

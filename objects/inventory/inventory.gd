@@ -3,6 +3,7 @@ extends CanvasLayer
 signal item_value_depleted(item_scene: PackedScene)
 signal item_dropped(item_data: Dictionary)
 signal equip_failed
+signal close_inventory
 
 @onready var backpack_panel: Panel = %BackpackPanel
 @onready var item_profile_panel: Panel = %ItemProfilePanel
@@ -328,3 +329,7 @@ func render_pocket(pos: Vector2) -> Button: #(pos: Vector2, hat_index: int):
 	new_pocket.set_size(Vector2(item_length, item_height))
 	backpack_panel.add_child(new_pocket)
 	return new_pocket
+
+
+func _on_exit_button_pressed() -> void:
+	close_inventory.emit()

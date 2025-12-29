@@ -2,6 +2,68 @@
 
 [ext_resource type="Script" uid="uid://b21h1fixivl4g" path="res://objects/inventory/inventory.gd" id="1_io2hh"]
 [ext_resource type="Texture2D" uid="uid://daa70t2eirnlr" path="res://assets/textures/quackie/quackiev2.png" id="2_4oi12"]
+[ext_resource type="Texture2D" uid="uid://bfiyxief2332h" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Map_and_UI.png" id="2_lpabo"]
+[ext_resource type="Texture2D" uid="uid://ds44rb2tprps5" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Sea_and_Food.png" id="3_ofb2g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofb2g"]
+atlas = ExtResource("2_lpabo")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rdtcp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofb2g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3osaq"]
+atlas = ExtResource("2_lpabo")
+region = Rect2(128, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_plj15"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3osaq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdtcp"]
+atlas = ExtResource("3_ofb2g")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3osaq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdtcp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plj15"]
+atlas = ExtResource("2_lpabo")
+region = Rect2(176, 128, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jf6rf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plj15")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lpabo"]
 atlas = ExtResource("2_4oi12")
@@ -20,6 +82,64 @@ animations = [{
 
 [node name="Inventory" type="CanvasLayer" unique_id=725755749]
 script = ExtResource("1_io2hh")
+
+[node name="TabsControl" type="Control" parent="." unique_id=377386781]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TabsPanel" type="Panel" parent="TabsControl" unique_id=832014348]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 82.0
+offset_right = 721.0
+offset_bottom = 113.0
+
+[node name="BackpackButton" type="Button" parent="TabsControl/TabsPanel" unique_id=113680820]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 26.0
+offset_bottom = 25.0
+disabled = true
+
+[node name="BackpackSprite2D" type="AnimatedSprite2D" parent="TabsControl/TabsPanel/BackpackButton" unique_id=1907470542]
+position = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_rdtcp")
+
+[node name="QuestsButton" type="Button" parent="TabsControl/TabsPanel" unique_id=734557672]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 5.0
+offset_right = 56.0
+offset_bottom = 25.0
+
+[node name="QuestsSprite2D" type="AnimatedSprite2D" parent="TabsControl/TabsPanel/QuestsButton" unique_id=171462959]
+position = Vector2(9, 10)
+sprite_frames = SubResource("SpriteFrames_plj15")
+
+[node name="FishButton" type="Button" parent="TabsControl/TabsPanel" unique_id=1899284613]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 5.0
+offset_right = 86.0
+offset_bottom = 25.0
+
+[node name="FishSprite2D" type="AnimatedSprite2D" parent="TabsControl/TabsPanel/FishButton" unique_id=1048256814]
+position = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_3osaq")
+
+[node name="ExitButton" type="Button" parent="TabsControl/TabsPanel" unique_id=2003065567]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 5.0
+offset_right = 475.0
+offset_bottom = 25.0
+
+[node name="ExitSprite2D" type="AnimatedSprite2D" parent="TabsControl/TabsPanel/ExitButton" unique_id=936365484]
+position = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_jf6rf")
 
 [node name="Backpack" type="Control" parent="." unique_id=1443908858]
 layout_mode = 3
@@ -105,3 +225,5 @@ offset_left = 239.0
 offset_top = 126.0
 offset_right = 544.0
 offset_bottom = 431.0
+
+[connection signal="pressed" from="TabsControl/TabsPanel/ExitButton" to="." method="_on_exit_button_pressed"]
