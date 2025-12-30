@@ -5,6 +5,7 @@ extends Control
 var quest_log_entry_scene = preload("res://objects/quest_log_entry/quest_log_entry.tscn")
 var green_checkmark_icon = preload("res://assets/textures/ui/green-checkmark.png")
 var red_exclamation_mark_icon = preload("res://assets/textures/ui/red-exclamation-mark.png")
+var yellow_question_mark_icon = preload("res://assets/textures/ui/yellow-question-mark.png")
 
 var quest_list = [
 	{

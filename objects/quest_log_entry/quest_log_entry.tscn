@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://u1qhqcrg1gcd" path="res://assets/textures/ui/red-exclamation-mark.png" id="1_k556v"]
 
 [node name="QuestLogEntry" type="Button" unique_id=1865944970]
-custom_minimum_size = Vector2(425, 48)
+custom_minimum_size = Vector2(432, 48)
 anchors_preset = -1
 anchor_right = 0.44300002
 anchor_bottom = 0.06944445
