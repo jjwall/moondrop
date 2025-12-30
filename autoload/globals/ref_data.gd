@@ -40,3 +40,9 @@ enum item_types {
 	# LURE,
 	# etc...
 }
+
+enum quest_statuses {
+	AVAILABLE,
+	ACTIVE,
+	COMPLETED,
+}
