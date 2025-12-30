@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://oef7hsmpqipt"]
 
-[ext_resource type="Texture2D" uid="uid://b88lqh08x3v3e" path="res://assets/textures/ui/exclamation-mark.png" id="1_k556v"]
+[ext_resource type="Texture2D" uid="uid://u1qhqcrg1gcd" path="res://assets/textures/ui/red-exclamation-mark.png" id="1_k556v"]
 
 [node name="QuestLogEntry" type="Button" unique_id=1865944970]
 custom_minimum_size = Vector2(425, 48)

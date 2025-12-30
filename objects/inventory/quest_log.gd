@@ -3,6 +3,8 @@ extends Control
 @onready var quest_log_container: VBoxContainer = %QuestLogContainer
 
 var quest_log_entry_scene = preload("res://objects/quest_log_entry/quest_log_entry.tscn")
+var green_checkmark_icon = preload("res://assets/textures/ui/green-checkmark.png")
+var red_exclamation_mark_icon = preload("res://assets/textures/ui/red-exclamation-mark.png")
 
 var quest_list = [
 	{
@@ -16,6 +18,8 @@ var quest_list = [
 
 func _ready():
 	for i in range(12):
+		var quest_log_entry: Button = quest_log_entry_scene.instantiate()
+		
 		if i == 0:
 			var new_label = Label.new()
 			new_label.text = "Active Quests:"
@@ -24,16 +28,21 @@ func _ready():
 			var new_label = Label.new()
 			new_label.text = "Completed Quests:"
 			quest_log_container.add_child(new_label)
-		render_quest_log_entry()
+		
+		if i > 4:
+			quest_log_entry.icon = green_checkmark_icon
+			
+		quest_log_container.add_child(quest_log_entry)
+		#render_quest_log_entry()
 
-func render_quest_log_entry():
-	var quest_log_entry = quest_log_entry_scene.instantiate()
-	print("hello?")
-	#var pos = quest_log_container.global_position
-	#pos.x += 48
-	#pos.y += 48
-	#quest_log_entry.position.y += 50
-	#item_profile.scale.x *= 1.5
-	#item_profile.scale.y *= 1.5
-	#quest_log_entry.set_position(pos)
-	quest_log_container.add_child(quest_log_entry)
+#func render_quest_log_entry():
+	#var quest_log_entry = quest_log_entry_scene.instantiate()
+	#print("hello?")
+	##var pos = quest_log_container.global_position
+	##pos.x += 48
+	##pos.y += 48
+	##quest_log_entry.position.y += 50
+	##item_profile.scale.x *= 1.5
+	##item_profile.scale.y *= 1.5
+	##quest_log_entry.set_position(pos)
+	#quest_log_container.add_child(quest_log_entry)
