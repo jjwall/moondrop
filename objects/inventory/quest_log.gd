@@ -2,6 +2,10 @@ extends Control
 
 @onready var quest_log_container: VBoxContainer = %QuestLogContainer
 
+@onready var item_profile_panel: Panel = %ItemProfilePanel
+@onready var item_name_label: Label = %ItemNameLabel
+@onready var item_description_label: Label = %ItemDescriptionLabel
+
 var quest_log_entry_scene = preload("res://objects/quest_log_entry/quest_log_entry.tscn")
 var green_checkmark_icon = preload("res://assets/textures/ui/green-checkmark.png")
 var red_exclamation_mark_icon = preload("res://assets/textures/ui/red-exclamation-mark.png")
@@ -42,6 +46,7 @@ var quest_data_list = [
 
 func _ready():
 	render_quest_log_entries()
+	print(item_description_label)
 
 func sort_by_quest_status(a, b):
 	return a["status"] < b["status"]
@@ -58,23 +63,14 @@ func render_quest_log_entries():
 				if not available_quests_label_rendered:
 					available_quests_label_rendered = true
 					render_quest_status_label("Available Quests:")
-					#var new_label = Label.new()
-					#new_label.text = "Available Quests:"
-					#quest_log_container.add_child(new_label)
 			RefData.quest_statuses.ACTIVE:
 				if not active_quests_label_rendered:
 					active_quests_label_rendered = true
 					render_quest_status_label("Active Quests:")
-					#var new_label = Label.new()
-					#new_label.text = "Active Quests:"
-					#quest_log_container.add_child(new_label)
 			RefData.quest_statuses.COMPLETED:
 				if not completed_quests_label_rendered:
 					completed_quests_label_rendered = true
 					render_quest_status_label("Completed Quests:")
-					#var new_label = Label.new()
-					#new_label.text = "Completed Quests:"
-					#quest_log_container.add_child(new_label)
 					
 		render_quest_log_entry(quest_data)
 
@@ -90,15 +86,7 @@ func render_quest_status_label(text: String):
 func render_quest_log_entry(quest_data: Dictionary):
 	var quest_log_entry: Button = quest_log_entry_scene.instantiate()
 	quest_log_entry.text = quest_data.name
-	
-	match quest_data.status:
-		RefData.quest_statuses.AVAILABLE:
-			quest_log_entry.icon = yellow_question_mark_icon
-		RefData.quest_statuses.ACTIVE:
-			quest_log_entry.icon = red_exclamation_mark_icon
-		RefData.quest_statuses.COMPLETED:
-			quest_log_entry.icon = green_checkmark_icon
-	
+	quest_log_entry.icon = determine_quest_icon(quest_data.status)
 	quest_log_entry.pressed.connect(on_quest_log_entry_pressed.bind(quest_log_entry, quest_data)) # button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
 	
 	var margin_container = MarginContainer.new()
@@ -108,6 +96,37 @@ func render_quest_log_entry(quest_data: Dictionary):
 	quest_log_container.add_child(margin_container)
 
 func on_quest_log_entry_pressed(quest_button: Button, quest_data: Dictionary):
-	#print(quest_button)
 	quest_button.grab_focus()
-	print(quest_data.name)
+	render_quest_details(quest_data)
+
+func render_quest_details(quest_data: Dictionary):
+	reset_item_details()
+	
+	item_name_label.text = quest_data.name
+	item_description_label.text = quest_data.description
+	
+	var quest_icon = determine_quest_icon(quest_data.status)
+	var quest_icon_sprite = Sprite2D.new()
+	quest_icon_sprite.scale.x = 4.5
+	quest_icon_sprite.scale.y = 4.5
+	quest_icon_sprite.position.x += 60
+	quest_icon_sprite.position.y += 60
+	quest_icon_sprite.texture = quest_icon
+	item_profile_panel.add_child(quest_icon_sprite)
+
+func determine_quest_icon(quest_status: RefData.quest_statuses):
+	match quest_status:
+		RefData.quest_statuses.AVAILABLE:
+			return yellow_question_mark_icon
+		RefData.quest_statuses.ACTIVE:
+			return red_exclamation_mark_icon
+		RefData.quest_statuses.COMPLETED:
+			return green_checkmark_icon
+
+func reset_item_details():
+	# Wipe previously rendered item profile.
+	for child in item_profile_panel.get_children():
+		child.queue_free()
+		
+	item_name_label.text = ""
+	item_description_label.text = ""
