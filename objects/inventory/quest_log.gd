@@ -10,25 +10,31 @@ var yellow_question_mark_icon = preload("res://assets/textures/ui/yellow-questio
 var quest_data_list = [
 	{
 		"name": "Catch 3 Big Crabs",
-		"icon": "",
 		"description": "Catch 3 big crabs for me.",
-		#"completed": false,
+		"value": 0,
+		"status": RefData.quest_statuses.COMPLETED,
+	},
+	{
+		"name": "Catch 3 Big Crabs",
+		"description": "Catch 3 big crabs for me.",
 		"value": 0,
 		"status": RefData.quest_statuses.COMPLETED,
 	},
 	{
 		"name": "Catch 3 Small Mackerel",
-		"icon": "",
 		"description": "Catch 3 sea bass for me.",
-		#"completed": false,
 		"value": 0,
 		"status": RefData.quest_statuses.AVAILABLE,
 	},
 	{
 		"name": "Catch 10 Clown Fish",
-		"icon": "",
 		"description": "Catch 3 clown fish for me.",
-		#"completed": false,
+		"value": 0,
+		"status": RefData.quest_statuses.ACTIVE,
+	},
+	{
+		"name": "Catch 10 Clown Fish",
+		"description": "Catch 3 clown fish for me.",
 		"value": 0,
 		"status": RefData.quest_statuses.ACTIVE,
 	},
@@ -36,6 +42,9 @@ var quest_data_list = [
 
 func _ready():
 	render_quest_log_entries()
+
+func sort_by_quest_status(a, b):
+	return a["status"] < b["status"]
 
 func render_quest_log_entries():
 	quest_data_list.sort_custom(sort_by_quest_status)
@@ -48,26 +57,35 @@ func render_quest_log_entries():
 			RefData.quest_statuses.AVAILABLE:
 				if not available_quests_label_rendered:
 					available_quests_label_rendered = true
-					var new_label = Label.new()
-					new_label.text = "Available Quests:"
-					quest_log_container.add_child(new_label)
+					render_quest_status_label("Available Quests:")
+					#var new_label = Label.new()
+					#new_label.text = "Available Quests:"
+					#quest_log_container.add_child(new_label)
 			RefData.quest_statuses.ACTIVE:
 				if not active_quests_label_rendered:
 					active_quests_label_rendered = true
-					var new_label = Label.new()
-					new_label.text = "Active Quests:"
-					quest_log_container.add_child(new_label)
+					render_quest_status_label("Active Quests:")
+					#var new_label = Label.new()
+					#new_label.text = "Active Quests:"
+					#quest_log_container.add_child(new_label)
 			RefData.quest_statuses.COMPLETED:
 				if not completed_quests_label_rendered:
 					completed_quests_label_rendered = true
-					var new_label = Label.new()
-					new_label.text = "Completed Quests:"
-					quest_log_container.add_child(new_label)
+					render_quest_status_label("Completed Quests:")
+					#var new_label = Label.new()
+					#new_label.text = "Completed Quests:"
+					#quest_log_container.add_child(new_label)
 					
 		render_quest_log_entry(quest_data)
 
-func sort_by_quest_status(a, b):
-	return a["status"] < b["status"]
+func render_quest_status_label(text: String):
+	var quest_status_label = Label.new()
+	quest_status_label.text = text
+	var margin_container = MarginContainer.new()
+	margin_container.add_child(quest_status_label)
+	#margin_container.add_theme_constant_override("margin_left", 5)
+	margin_container.add_theme_constant_override("margin_bottom", 12)
+	quest_log_container.add_child(margin_container)
 
 func render_quest_log_entry(quest_data: Dictionary):
 	var quest_log_entry: Button = quest_log_entry_scene.instantiate()
@@ -81,4 +99,15 @@ func render_quest_log_entry(quest_data: Dictionary):
 		RefData.quest_statuses.COMPLETED:
 			quest_log_entry.icon = green_checkmark_icon
 	
-	quest_log_container.add_child(quest_log_entry)
+	quest_log_entry.pressed.connect(on_quest_log_entry_pressed.bind(quest_log_entry, quest_data)) # button_down.connect(on_pocket_button_down.bind(item_in_pocket, pocket_index))
+	
+	var margin_container = MarginContainer.new()
+	margin_container.add_child(quest_log_entry)
+	margin_container.add_theme_constant_override("margin_left", 5)
+	margin_container.add_theme_constant_override("margin_bottom", 5)
+	quest_log_container.add_child(margin_container)
+
+func on_quest_log_entry_pressed(quest_button: Button, quest_data: Dictionary):
+	#print(quest_button)
+	quest_button.grab_focus()
+	print(quest_data.name)

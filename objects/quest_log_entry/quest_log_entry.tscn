@@ -5,9 +5,10 @@
 [node name="QuestLogEntry" type="Button" unique_id=1865944970]
 custom_minimum_size = Vector2(432, 48)
 anchors_preset = -1
-anchor_right = 0.44300002
+anchor_right = 0.45000002
 anchor_bottom = 0.06944445
-offset_right = -53.28003
+offset_right = -3.0517578e-05
+offset_bottom = -2.0000038
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Quest Name Goes Here"

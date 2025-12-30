@@ -220,6 +220,7 @@ offset_bottom = 293.0
 [node name="QuestLogContainer" type="VBoxContainer" parent="QuestLog/QuestLogPanel/ScrollContainer" unique_id=1114339514]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="FishLog" type="Control" parent="." unique_id=386658452]
 unique_name_in_owner = true
