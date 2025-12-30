@@ -17,6 +17,10 @@ signal close_inventory
 @onready var quest_log_button: Button = %QuestLogButton
 @onready var fish_log_button: Button = %FishLogButton
 
+var backpack_button_starting_position: Vector2
+var quest_log_button_starting_position: Vector2
+var fish_log_button_starting_position: Vector2
+
 #const outline_shader = preload("res://assets/shaders/outline.gdshader")
 const outline_material = preload("res://assets/materials/outline.tres")
 
@@ -41,6 +45,9 @@ var rod_equip_index = 16
 var bait_equip_index = 17
 
 func _ready():
+	backpack_button_starting_position = backpack_button.position
+	quest_log_button_starting_position = quest_log_button.position
+	fish_log_button_starting_position = fish_log_button.position
 	open_backpack()
 
 func _process(_delta: float) -> void:
@@ -61,6 +68,12 @@ func _on_close_button_pressed() -> void:
 	close_inventory.emit()
 
 func open_backpack():
+	var target_position = backpack_button_starting_position
+	target_position.y += 8
+	backpack_button.set_position(target_position)
+	quest_log_button.set_position(quest_log_button_starting_position)
+	fish_log_button.set_position(fish_log_button_starting_position)
+	
 	backpack_button.disabled = true
 	quest_log_button.disabled = false
 	fish_log_button.disabled = false
@@ -70,6 +83,12 @@ func open_backpack():
 	render_backpack(0)
 
 func open_quest_log():
+	backpack_button.set_position(backpack_button_starting_position)
+	var target_position = quest_log_button_starting_position
+	target_position.y += 8
+	quest_log_button.set_position(target_position)
+	fish_log_button.set_position(fish_log_button_starting_position)
+	
 	backpack_button.disabled = false
 	quest_log_button.disabled = true
 	fish_log_button.disabled = false
@@ -79,6 +98,12 @@ func open_quest_log():
 	reset_item_details()
 
 func open_fish_log():
+	backpack_button.set_position(backpack_button_starting_position)
+	quest_log_button.set_position(quest_log_button_starting_position)
+	var target_position = fish_log_button_starting_position
+	target_position.y += 8
+	fish_log_button.set_position(target_position)
+	
 	backpack_button.disabled = false
 	quest_log_button.disabled = false
 	fish_log_button.disabled = true
