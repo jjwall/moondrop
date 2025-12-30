@@ -8,6 +8,8 @@ extends Control
 # -> Perhaps he gives starter rod and 5x free starter bait if first time interacting?
 # TODO: Update quest mechanics (ex. catch fish, and shows in quest log progress of quest)
 # TODO: Turn in quest system (once quest is completed, how do we "turn it in"? -> at quest board I presume>)
+# TODO: Add quest completed notification using notification system.
+# -> Consider implementing notification "queue" system since we won't want to miss a notification
 
 @onready var quest_log_container: VBoxContainer = %QuestLogContainer
 
