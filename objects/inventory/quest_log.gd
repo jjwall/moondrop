@@ -1,5 +1,14 @@
 extends Control
 
+# TODO: Create accept available quest. Can we reuse dialog confirmation feature?
+# TODO: Make actual quests w/ solid dictionary data - abstract classes?
+# TODO: Quest Board -> interacting with it brings up quest log AND shows available quests at the top
+# TODO: Looking at Quest Log from inventory only shows Active and Completed Quests.
+# TODO: Add Melvin / Pop's NPC who stands near Quest Board and has dialog pertaining to quest completion information.
+# -> Perhaps he gives starter rod and 5x free starter bait if first time interacting?
+# TODO: Update quest mechanics (ex. catch fish, and shows in quest log progress of quest)
+# TODO: Turn in quest system (once quest is completed, how do we "turn it in"? -> at quest board I presume>)
+
 @onready var quest_log_container: VBoxContainer = %QuestLogContainer
 
 @onready var item_profile_panel: Panel = %ItemProfilePanel
