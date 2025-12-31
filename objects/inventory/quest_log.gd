@@ -1,6 +1,6 @@
 extends Control
 
-# TODO: Create accept available quest. Can we reuse dialog confirmation feature?
+# TODO: Create accept available quest. Can we reuse dialog confirmation feature? -> don't think it's necessary
 # TODO: Make actual quests w/ solid dictionary data - abstract classes?
 # TODO: Quest Board -> interacting with it brings up quest log AND shows available quests at the top
 # TODO: Looking at Quest Log from inventory only shows Active and Completed Quests.
