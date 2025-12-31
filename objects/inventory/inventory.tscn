@@ -6,6 +6,22 @@
 [ext_resource type="Texture2D" uid="uid://ds44rb2tprps5" path="res://assets/textures/tilesets/Raven_Fantasy_Icons_Sea_and_Food.png" id="3_ofb2g"]
 [ext_resource type="Script" uid="uid://bdishns62bfls" path="res://objects/inventory/quest_log.gd" id="5_rdtcp"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdtcp"]
+bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.30200002)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3osaq"]
+bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofb2g"]
 atlas = ExtResource("2_lpabo")
 region = Rect2(0, 16, 16, 16)
@@ -21,6 +37,22 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plj15"]
+bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf6rf"]
+bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3osaq"]
 atlas = ExtResource("2_lpabo")
 region = Rect2(128, 16, 16, 16)
@@ -35,6 +67,22 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eru6g"]
+bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2ihn"]
+bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rdtcp"]
 atlas = ExtResource("3_ofb2g")
@@ -97,6 +145,8 @@ offset_left = 245.0
 offset_top = 90.0
 offset_right = 273.0
 offset_bottom = 126.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_rdtcp")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_3osaq")
 
 [node name="BackpackSprite2D" type="AnimatedSprite2D" parent="TabsControl/BackpackButton" unique_id=1907470542]
 position = Vector2(14, 14)
@@ -110,6 +160,8 @@ offset_left = 278.0
 offset_top = 90.0
 offset_right = 306.0
 offset_bottom = 126.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_plj15")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jf6rf")
 
 [node name="QuestLogSprite2D" type="AnimatedSprite2D" parent="TabsControl/QuestLogButton" unique_id=171462959]
 position = Vector2(13, 14)
@@ -123,6 +175,8 @@ offset_left = 311.0
 offset_top = 90.0
 offset_right = 339.0
 offset_bottom = 126.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_eru6g")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_x2ihn")
 
 [node name="FishLogSprite2D" type="AnimatedSprite2D" parent="TabsControl/FishLogButton" unique_id=1048256814]
 position = Vector2(14, 14)
