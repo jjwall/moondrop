@@ -68,14 +68,18 @@ func _on_close_button_pressed() -> void:
 	close_inventory.emit()
 
 func open_backpack():
-	var target_position = backpack_button_starting_position
-	target_position.y += 8
-	backpack_button.set_position(target_position)
-	backpack_button.size.y = 28.0
-	quest_log_button.set_position(quest_log_button_starting_position)
-	quest_log_button.size.y = 36.0
-	fish_log_button.set_position(fish_log_button_starting_position)
-	fish_log_button.size.y = 36.0
+	#var target_position = backpack_button_starting_position
+	#target_position.y += 8
+	backpack_button.set_position(backpack_button_starting_position)
+	backpack_button.size.y = 36.0
+	var target_position1 = quest_log_button_starting_position
+	target_position1.y += 8
+	quest_log_button.set_position(target_position1)
+	quest_log_button.size.y = 28.0
+	var target_position2 = fish_log_button_starting_position
+	target_position2.y += 8
+	fish_log_button.set_position(target_position2)
+	fish_log_button.size.y = 28.0
 	
 	backpack_button.disabled = true
 	quest_log_button.disabled = false
@@ -86,14 +90,19 @@ func open_backpack():
 	render_backpack(0)
 
 func open_quest_log():
-	backpack_button.set_position(backpack_button_starting_position)
-	backpack_button.size.y = 36.0
+	var target_position1 = backpack_button_starting_position
+	target_position1.y += 8
+	backpack_button.set_position(target_position1)
+	backpack_button.size.y = 28.0
 	var target_position = quest_log_button_starting_position
 	target_position.y += 8
-	quest_log_button.set_position(target_position)
-	quest_log_button.size.y = 28.0
-	fish_log_button.set_position(fish_log_button_starting_position)
-	fish_log_button.size.y = 36.0
+	quest_log_button.set_position(quest_log_button_starting_position)
+	#quest_log_button.get_children()[0].position.y += 3
+	quest_log_button.size.y = 36.0
+	var target_position2 = fish_log_button_starting_position
+	target_position2.y += 8
+	fish_log_button.set_position(target_position2)
+	fish_log_button.size.y = 28.0
 	
 	backpack_button.disabled = false
 	quest_log_button.disabled = true
@@ -104,14 +113,16 @@ func open_quest_log():
 	reset_item_details()
 
 func open_fish_log():
-	backpack_button.set_position(backpack_button_starting_position)
-	backpack_button.size.y = 36.0
-	quest_log_button.set_position(quest_log_button_starting_position)
-	quest_log_button.size.y = 36.0
-	var target_position = fish_log_button_starting_position
-	target_position.y += 8
-	fish_log_button.set_position(target_position)
-	fish_log_button.size.y = 28.0
+	var target_position1 = backpack_button_starting_position
+	target_position1.y += 8
+	backpack_button.set_position(target_position1)
+	backpack_button.size.y = 28.0
+	var target_position2 = quest_log_button_starting_position
+	target_position2.y += 8
+	quest_log_button.set_position(target_position2)
+	quest_log_button.size.y = 28.0
+	fish_log_button.set_position(fish_log_button_starting_position)
+	fish_log_button.size.y = 36.0
 	
 	backpack_button.disabled = false
 	quest_log_button.disabled = false

@@ -10,16 +10,12 @@
 bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.30200002)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3osaq"]
 bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.6)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofb2g"]
@@ -41,16 +37,12 @@ animations = [{
 bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.3)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf6rf"]
 bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.6)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3osaq"]
@@ -72,16 +64,12 @@ animations = [{
 bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.3)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2ihn"]
 bg_color = Color(0.106126174, 0.106126174, 0.106126174, 0.6)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rdtcp"]
